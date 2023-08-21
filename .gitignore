@@ -1,0 +1,9 @@
+.DS_Store
+.Rhistory
+.Rproj.user
+.venv
+.vscode
+*.Rproj
+*.pyc
+*.pyx
+__pycache__
