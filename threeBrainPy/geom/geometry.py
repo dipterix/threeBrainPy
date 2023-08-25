@@ -3,6 +3,7 @@
 import numpy as np
 from .group import GeomWrapper
 from ..core.mat44 import Mat44
+from ..core.vec3 import Vec3
 from ..utils import CONSTANTS
 
 class GeometryTemplate:
@@ -13,7 +14,7 @@ class GeometryTemplate:
         self._brain = brain
         self.name = name
         self.render_order : float = 1.0
-        self._position = np.array([0, 0, 0], dtype=float)
+        self._position = Vec3([0, 0, 0], space = "ras_tkr")
         self._trans_mat = Mat44()
         self._disable_trans_mat = False
         self._layers = set()
@@ -34,19 +35,31 @@ class GeometryTemplate:
     @property
     def type(self):
         return "abstract"
-    @property
-    def position(self):
-        return self._position
-    def set_x(self, x : float):
-        self._position[0] = x
-    def set_y(self, y : float):
-        self._position[1] = y
-    def set_z(self, z : float):
-        self._position[2] = z
-    def set_position(self, x : float, y : float, z : float):
-        self._position[0] = x
-        self._position[1] = y
-        self._position[2] = z
+    def get_position(self, space = "ras", world = False):
+        '''
+        Get relative position of the geometry in the specified space
+        @param space: the space to get the position in
+        @param world: whether to get the position in world space
+            if True, the position will be transformed by the affine matrix of the parent group
+            if False, the position will be local (relative to the parent group)
+        '''
+        re = self._position.copy()
+        if space != re.space:
+            transform = self._brain.get_transform(space_from = re.space, space_to = space)
+            re.applyMat44( transform )
+        if world:
+            if self._group is not None:
+                transform = self._brain.set_transform_space(
+                    transform = self._group.trans_mat,
+                    space_from = space,
+                    space_to = space
+                )
+                re.applyMat44( transform )
+        return re
+    def set_position(self, position : Vec3):
+        if not isinstance(position, Vec3):
+            raise ValueError("set_position: Invalid position type, must be Vec3.")
+        self._position.copyFrom(position)
     @property
     def affine(self) -> Mat44:
         if self._disable_trans_mat:
@@ -131,7 +144,7 @@ class GeometryTemplate:
             'type': self.type,
             'render_order': self.render_order,
             'subject_code': self.subject_code,
-            'position': self.position.tolist(),
+            'position': self.get_position(space = "ras_tkr", world = False),
             'trans_mat': self._brain.set_transform_space(transform = affine, space_from = "ras_tkr" if affine.modality_from == "T1" else affine.space_from, space_to = "ras_tkr"),
             'disable_trans_mat': self._disable_trans_mat,
             'layer': list(self.layers),

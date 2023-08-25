@@ -1,13 +1,18 @@
 import os
 import re
 import tempfile
+import numpy as np
 from copy import deepcopy
 from .mat44 import Mat44
+from .vec3 import Vec3
+from .keyframe import SimpleKeyframe
+from .colormap import ElectrodeColormap
 from ..geom.group import GeomWrapper
 from ..geom.geometry import GeometryTemplate
 from ..geom.datacube import VolumeSlice, VolumeCube
 from ..geom.blank import BlankPlaceholder
 from ..geom.surface import CorticalSurface
+from ..geom.sphere import ElectrodeSphere
 from ..templates import init_skeleton, template_path
 from ..utils import CONSTANTS, VolumeWrapper, read_xfm
 from ..utils.serializer import GeomEncoder
@@ -63,6 +68,8 @@ class Brain(object):
         self._slices = {}
         self._surfaces = {}
         self._volumes = {}
+        self._electrode_contacts = {}
+        self._electrode_cmaps = {}
         # set up global data, this must run prior to _update_matrices
         self._initialize_global_data()
         # Basic information 
@@ -317,6 +324,7 @@ class Brain(object):
         self._volumes[name] = volume_cube
         return volume_cube
     # endregion
+    
     # region <Surfaces>
     def _surface_morph_paths(self, hemesphere : str = "both", morph_types : tuple[str] | list[str] | str | None = None) -> dict | None:
         if hemesphere.lower()[0] not in ['l', 'r', 'b']:
@@ -391,6 +399,210 @@ class Brain(object):
         return surface_type in self._surfaces
     # endregion
     
+    # region <Electrode contacts>
+    def add_electrode_contact(
+            self, number : int, label : str, 
+            position : Vec3 | list | None = None, 
+            is_surface : bool = False, 
+            radius : float | None = None,
+            mni_position : Vec3 | list | None = None, 
+            sphere_position : Vec3 | list | None = None,
+            **kwargs) -> ElectrodeSphere:
+        is_surface = True if is_surface else False
+        if radius is None:
+            radius = 2.0 if is_surface else 1.0
+        contact = ElectrodeSphere(
+            brain = self,
+            number = number, 
+            label = label, 
+            position = position, 
+            radius = radius,
+            is_surface = is_surface,
+            **kwargs)
+        if mni_position is not None:
+            contact.set_mni_position(mni_position)
+        if sphere_position is not None:
+            contact.set_sphere_position(sphere_position)
+        self._electrode_contacts[ contact.number ] = contact
+        return contact
+    def set_electrode_keyframe(self, number : int, value, time = None, name : str = "value") -> ElectrodeSphere | None:
+        contact = self._electrode_contacts.get(int(number), None)
+        if contact is None:
+            return None
+        contact.set_keyframe(value = value, time = time, name = name)
+        return contact
+    def get_electrode_contact(self, number : int) -> ElectrodeSphere | None:
+        return self._electrode_contacts.get(int(number), None)
+    @property
+    def electrode_contacts(self) -> dict[int, ElectrodeSphere]:
+        return self._electrode_contacts
+    def clean_electrodes(self):
+        contact_names = [contact.name for _, contact in self._electrode_contacts.items()]
+        for contact_name in contact_names:
+            self._geoms.pop(contact_name, None)
+            self._electrode_contacts.pop(contact_name, None)
+    def add_electrodes(self, table, space : str | None = None) -> int:
+        '''
+        Add electrodes to the brain.
+        @param table: The table containing the electrode information, or the path to the table.
+            The table must contains at least the following columns (case-sensitive):
+            * `Electrode` (int, mandatory): electrode contact number, starting from 1
+            * `Label` (str, mandatory): electrode label string, must not be empty string
+            * `x`, `y`, `z` (float): the coordinates of the electrode contact in the space specified by `space`.
+                If `space` is not specified, then the coordinates are assumed to be in the T1 space ("ras").
+                If `x`, `y`, `z` is not specified, then the following columns will be used in order:
+                    `Coord_x`, `Coord_y`, `Coord_z`: electrode coordinates in tkrRAS space (FreeSurfer space)
+                    `T1R`, `T1A`, `T1S`: electrode coordinates in T1 RAS space (scanner space)
+                    `MNI305_x`, `MNI305_y`, `MNI305_z`: electrode coordinates in MNI305 space
+                    `MNI152_x`, `MNI152_y`, `MNI152_z`: electrode coordinates in MNI152 space
+                The order will be Coord_* > T1* > MNI305_* > MNI152_* to be consistent with R package threeBrain.
+                xyz in native (subject brain) space and MNI space can co-exist in the same table. In this case,
+                the native space coordinates will be used to show the electrodes in the native brain,
+                    and the MNI space coordinates will be used to show the electrodes on the template brain.
+                *** If x=y=z=0, then the electrode will be hidden. *** (This is the default behavior of R package threeBrain)
+            The following columns are optional:
+            * `Radius` (float): the radius of the electrode contact, default is 1.0 for sEEG and 2.0 for ECoG
+            * `Hemisphere` (str, ["auto", "left", "right"]): the hemisphere of the electrode contact, default is "auto"
+                If "auto", then the hemisphere will be determined by the `FSLabel` column.
+            * `Sphere_x`, `Sphere_y`, `Sphere_z` (float): the coordinates of the electrode contact in the sphere space (surface electrodes only)
+            * `SurfaceElectrode` (bool): whether the electrode is a surface electrode, default is False
+            * `FSLabel` (str): the FreeSurfer label of the electrode contact.
+        '''
+        if space is None:
+            space = "ras"
+        elif not space in CONSTANTS.SUPPORTED_SPACES:
+            raise ValueError(f"Invalid space: {space}, supported spaces are: {CONSTANTS.SUPPORTED_SPACES}")
+        # table = "/Users/dipterix/Dropbox (PennNeurosurgery)/RAVE/Samples/data/demo/PAV006/rave/meta/electrodes.csv"
+        if isinstance(table, str):
+            import pandas as pd
+            table = pd.read_csv(table, sep = ",")
+        # assume table is pandas since we don't want to import pandas here
+        nrows = table.shape[0]
+        valid_length = lambda l: np.isfinite(l) and l > 0 and l < 500
+        for ii in range(nrows):
+            row = table.iloc[ii].to_dict()
+            electrode = row["Electrode"]
+            label = row.get("Label", "").strip()
+            if label == "":
+                label = f"NoLabel{ electrode }"
+            x = row.get("x", None)
+            y = row.get("y", None)
+            z = row.get("z", None)
+            xyz = Vec3(x, y, z, space=space)
+            tkr_x = row.get("Coord_x", None)
+            tkr_y = row.get("Coord_y", None)
+            tkr_z = row.get("Coord_z", None)
+            tkr_ras = Vec3(tkr_x, tkr_y, tkr_z, space="ras_tkr")
+            t1_x = row.get("T1R", None)
+            t1_y = row.get("T1A", None)
+            t1_z = row.get("T1S", None)
+            ras = Vec3(t1_x, t1_y, t1_z, space="ras")
+            mni305_x = row.get("MNI305_x", None)
+            mni305_y = row.get("MNI305_y", None)
+            mni305_z = row.get("MNI305_z", None)
+            mni305 = Vec3(mni305_x, mni305_y, mni305_z, space="mni305")
+            mni152_x = row.get("MNI152_x", None)
+            mni152_y = row.get("MNI152_y", None)
+            mni152_z = row.get("MNI152_z", None)
+            mni152 = Vec3(mni152_x, mni152_y, mni152_z, space="mni152")
+            mni_position = mni305
+            if valid_length( xyz.length() ):
+                position = xyz
+            elif valid_length( tkr_ras.length() ):
+                position = tkr_ras
+            elif valid_length( ras.length() ):
+                position = ras
+            elif valid_length( mni305.length() ):
+                position = mni305
+            elif valid_length( mni152.length() ):
+                position = mni152
+            else:
+                position = None
+            if not valid_length( mni_position.length() ):
+                mni_position = mni152
+            if not valid_length( mni_position.length() ):
+                mni_position = None
+            sphere_x = row.get("Sphere_x", None)
+            sphere_y = row.get("Sphere_y", None)
+            sphere_z = row.get("Sphere_z", None)
+            sphere_position = Vec3(sphere_x, sphere_y, sphere_z, space="sphere")
+            if not valid_length( sphere_position.length() ):
+                sphere_position = None
+            radius = row.get("Radius", None)
+            is_surface = row.get("SurfaceElectrode", False)
+            fs_label = row.get("FSLabel", "Unknown")
+            hemisphere = row.get("Hemisphere", "auto").lower()
+            if len(hemisphere) == 0 or hemisphere[0] not in ["l", "r"]:
+                hemisphere = "auto"
+                # also guess the hemisphere from the FSLabel
+                if re.match(r"^(left|(ctx|wm)[_-]lh)", fs_label, re.IGNORECASE):
+                    hemisphere = "left"
+                elif re.match(r"^(right|(ctx|wm)[_-]rh)", fs_label, re.IGNORECASE):
+                    hemisphere = "right"
+            else:
+                if hemisphere[0] == "l":
+                    hemisphere = "left"
+                elif hemisphere[0] == "r":
+                    hemisphere = "right"
+            self.add_electrode_contact(
+                number = electrode, label = label, position = position,
+                is_surface = is_surface, radius = radius,
+                mni_position = mni_position, sphere_position = sphere_position,
+                hemisphere = hemisphere)
+        return len(self._electrode_contacts)
+    def set_electrode_value(self, number : int, name : str, value : list[float] | list[str] | dict | float | str, 
+                            time : list[float] | float | None = None) -> SimpleKeyframe | None:
+        '''
+        Set value to a electrode contact.
+        @param number: The electrode contact number.
+        @param name: The data name of the value.
+        @param value: The value to set, can be a list of values or a single value.
+        @param time: The time of the value, can be a list of times (in seconds) or a single time.
+        @return: The keyframe object or None if the electrode contact is not found.
+        '''
+        contact = self._electrode_contacts.get(int(number), None)
+        if contact is None:
+            return None
+        return contact.set_keyframe(value = value, time = time, name = name)
+    def set_electrode_values(self, table):
+        '''
+        Set single or multiple values to multiple electrode contacts.
+        @param table: 
+        '''
+        if isinstance(table, str):
+            # table = "/Users/dipterix/rave_data/data_dir/demo/DemoSubject/rave/meta/electrodes.csv"
+            import pandas as pd
+            table = pd.read_csv(table, sep = ",")
+        # assume table is pandas since we don't want to import pandas here
+        if "Electrode" not in table.columns:
+            raise LookupError(f"Invalid table, must contain column 'Electrode'.")
+        time = table.get("Time", None)
+        subjects = table.get("Subject", None)
+        electrodes = table["Electrode"]
+        electrode_numbers = electrodes.unique()
+        var_names = [x for x in table.columns if x not in ["Electrode", "Time"]]
+        if subjects is not None:
+            subjects = subjects == self.subject_code
+        else:
+            subjects = True
+        for electrode in electrode_numbers:
+            sel = (electrodes == electrode) & subjects
+            if sel.size > 0 and sel.sum() > 0:
+                for name in var_names:
+                    keyframe = self.set_electrode_value(
+                        number = electrode, name = name, value = table[name][sel].tolist(), 
+                        time = None if time is None else time[sel])
+                    if isinstance(keyframe, SimpleKeyframe):
+                        # get colormap
+                        colormap = self._electrode_cmaps.get(name, None)
+                        if colormap is None:
+                            colormap = ElectrodeColormap(keyframe_name = keyframe, value_type = "continuous" if keyframe.is_continuous else "discrete")
+                            self._electrode_cmaps[name] = colormap
+                        colormap.update_from_keyframe( keyframe = keyframe )
+        return 
+    def get_electrode_colormap(self, name : str) -> ElectrodeColormap | None:
+        return self._electrode_cmaps.get(name, None)
+    # endregion
     
     def to_dict(self):
         '''
@@ -441,6 +653,14 @@ class Brain(object):
         config['groups'].insert(0, build_group)
         build_group.set_group_data(name = '__global_data__.subject_codes', value = [self.subject_code], is_cache = False)
 
+        # Construct colormaps
+        cmaps = {}
+        for _, colormap in self._electrode_cmaps.items():
+            cmap_data = colormap.to_dict()
+            if isinstance(cmap_data, dict):
+                cmaps[ colormap.name ] = cmap_data
+        default_cmap = list(cmaps.keys())[0] if len(cmaps) > 0 else None
+
         # Hard-code for now
         build_group.set_group_data(
             name = '__global_data__.SurfaceColorLUT', 
@@ -464,8 +684,8 @@ class Brain(object):
         settings['side_canvas_zoom'] = 1
         settings['side_canvas_width'] = 250
         settings['side_canvas_shift'] = [0, 0]
-        settings['color_maps'] = []
-        settings['default_colormap'] = None
+        settings['color_maps'] = cmaps
+        settings['default_colormap'] = default_cmap
         settings['hide_controls'] = False
         settings['control_center'] = [0, 0, 0]
         settings['camera_pos'] = [500, 0, 0]

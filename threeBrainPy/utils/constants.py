@@ -95,6 +95,23 @@ CONSTANTS.MAX_RENDER_ORDER = 9999999;
     @property
     def SURFACE_BASE_TEXTURE_TYPES(self):
         return ["sulc", "curv", "thickness", "volume"]
+    
+    @property
+    def KEYFRAME_RESERVED_NAMES(self):
+        return ("[None]", "None", "", ".",)
+    
+    @property
+    def COLORMAP_BlueWhiteRed(self):
+        return ["#053061", "#2166ac", "#4393c3", "#92c5de", "#d1e5f0", "#ffffff", "#fddbc7", "#f4a582", "#d6604d", "#b2182b", "#67001f"]
+    @property
+    def COLORMAP_RAVEGroups(self):
+        return ["#FFA500", "#1874CD", "#006400", "#FF4500", "#A52A2A", "#7D26CD"]
+    @property
+    def COLORMAP_DEFAULT_CONTINUOUS(self):
+        return self.COLORMAP_BlueWhiteRed
+    @property
+    def COLORMAP_DEFAULT_DISCRETE(self):
+        return self.COLORMAP_RAVEGroups
 
     
 
