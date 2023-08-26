@@ -9,7 +9,7 @@ from ..utils import CONSTANTS
 class GeometryTemplate:
     def __init__(self, brain, name : str, group_name : str | None = None, auto_register : bool = True) -> None:
         if brain is None:
-            raise ValueError(f"Brain must be <threeBrainPy.core.Brain> instance.")
+            raise ValueError(f"Brain must be <threebrainpy.core.Brain> instance.")
         # TODO: check name
         self._brain = brain
         self.name = name

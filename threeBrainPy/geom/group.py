@@ -10,7 +10,7 @@ class GeomWrapper:
         if len(position) != 3:
             raise ValueError(f"Invalid position: {position}, length must be 3.")
         if brain is None:
-            raise ValueError(f"Brain must be <threeBrainPy.core.Brain> instance.")
+            raise ValueError(f"Brain must be <threebrainpy.core.Brain> instance.")
         self._brain = brain
         self._subject_code = brain.subject_code
         self._name = name
@@ -143,7 +143,7 @@ class GeomWrapper:
                             shutil.copyfile(s_path, d_path)
     def __repr__(self) -> str:
         return "\n".join([
-            f"<threeBrainPy.geom.GeomWrapper ({ self.name })>",
+            f"<threebrainpy.geom.GeomWrapper ({ self.name })>",
             f"  subject_code: { self.subject_code }",
             f"  path: { self.cache_name }",
             f"  data: { list(self._group_data.keys()) }",

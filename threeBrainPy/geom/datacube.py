@@ -1,4 +1,4 @@
-from threeBrainPy.geom.group import GeomWrapper
+from threebrainpy.geom.group import GeomWrapper
 from .geometry import GeometryTemplate
 from ..utils import VolumeWrapper, CONSTANTS
 from ..core.mat44 import Mat44
@@ -12,7 +12,7 @@ class VolumeSlice( GeometryTemplate ):
         '''
         Creates a volume (MRI) slice geometry.
         @param brain: The brain instance.
-        @param volume: The volume data. Can be a numpy array or a <threeBrainPy.utils.VolumeWrapper> instance,
+        @param volume: The volume data. Can be a numpy array or a <threebrainpy.utils.VolumeWrapper> instance,
             or a path to a nifti/mgz file.
         @param name: The name of the geometry.
         @param group_name: The name of the group to which this geometry belongs;
@@ -74,7 +74,7 @@ class VolumeCube( GeometryTemplate ):
         '''
         Creates a volume (atlas, CT) cube geometry.
         @param brain: The brain instance.
-        @param volume: The volume data. Can be a numpy array or a <threeBrainPy.utils.VolumeWrapper> instance,
+        @param volume: The volume data. Can be a numpy array or a <threebrainpy.utils.VolumeWrapper> instance,
             or a path to a nifti/mgz file.
         @param name: The name of the geometry.
         @param color_format: The color format of the volume data. Can be either "RedFormat" for continuous values

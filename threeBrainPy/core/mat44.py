@@ -13,7 +13,7 @@ class Mat44(object):
             * "ras_tkr": FreeSurfer RAS space, this is the space used internally by the viewer engine in JavaScript
             * "mni305": MNI305 template space
             * "mni152": MNI152 template space
-            threeBrainPy does not limit the choices, but the viewer only supports these spaces.
+            threebrainpy does not limit the choices, but the viewer only supports these spaces.
         @param space_to: The space to which the matrix is defined, choices are the same as `space_from`.
         @param modality_from: The imaging modality from which the matrix is defined, choices are "T1" or "CT" other modalities may be 
             added in the future, default is "T1".

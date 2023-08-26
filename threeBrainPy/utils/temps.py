@@ -18,7 +18,7 @@ def ensure_directory(path, delete_file = False, check_writable = False):
     return os.path.abspath(path)
 
 def ensure_default_temporary_directory():
-    return ensure_directory(os.path.join(tempfile.gettempdir(), "threeBrainPy"), delete_file = True, check_writable = True)
+    return ensure_directory(os.path.join(tempfile.gettempdir(), "threebrainpy"), delete_file = True, check_writable = True)
 
 def ensure_temporary_directory(path = None):
     if path is None:

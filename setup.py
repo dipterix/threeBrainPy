@@ -18,27 +18,48 @@ def get_version(rel_path: str) -> str:
       raise RuntimeError("Unable to find version string.")
 
 setup(
-      name='threeBrainPy',
-      version=get_version("threeBrainPy/__init__.py"),
-      author='Zhengjia Wang',
-      author_email='dipterix.wang@gmail.com',
-      description='WebGL-base Brain Viewer for Python',
+      name='threebrainpy',
+      version=get_version("threebrainpy/__init__.py"),
+      description='Your Advanced Electrode Localizer Viewer for Python',
       long_description=long_description,
       long_description_content_type="text/markdown; charset=UTF-8; variant=GFM",
       url='https://github.com/dipterix/threeBrainPy',
+      author='Zhengjia Wang',
+      author_email='dipterix.wang@gmail.com',
+      classifiers=[
+            # How mature is this project? Common values are
+            #   3 - Alpha
+            #   4 - Beta
+            #   5 - Production/Stable
+            'Development Status :: 1 - Planning',
+
+            # Indicate who your project is intended for
+            'Intended Audience :: Science/Research',
+            'Topic :: Multimedia :: Graphics :: 3D Rendering',
+            'Topic :: Scientific/Engineering :: Human Machine Interfaces',
+            'Topic :: Scientific/Engineering :: Visualization',
+
+            # Pick your license as you wish (should match "license" above)
+            'License :: OSI Approved :: Mozilla Public License 2.0 (MPL 2.0)',
+
+            # Specify the Python versions you support here. In particular, ensure
+            # that you indicate whether you support Python 2, Python 3 or both.
+            'Programming Language :: Python :: 3',
+
+            # Prevent upload to PyPI for now
+            'Private :: Do Not Upload',
+      ],
+      keywords='iEEG, DBS, Visualization, Neuroscience, Electrophysiology, Electrode, Localizer',
+      project_urls={
+            'Project Website': 'https://yael.wiki/',
+            'Source': 'https://github.com/dipterix/threeBrainPy/',
+            'Bug Reports': 'https://github.com/dipterix/threeBrainPy/issues',
+      },
       packages=find_packages(),  # Automatically find all packages in the project
       package_data={
-            'threeBrainPy': ['templates/*'],
+            'threebrainpy': ['templates/*'],
       },
-      classifiers=[
-            'Development Status :: 0 - Alpha',
-            'Intended Audience :: Developers',
-            'License :: OSI Approved :: MPL 2.0 License',
-            'Programming Language :: Python :: 3',
-            'Topic :: Software Development :: Libraries :: Python Modules',
-      ],
-      keywords='your, keywords, here',
-      python_requires='>=3.8',
+      python_requires='>=3',
       install_requires=[
             'numpy',
             'nibabel',

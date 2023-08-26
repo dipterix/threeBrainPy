@@ -735,7 +735,7 @@ class Brain(object):
         else:
             with open(template_path("index.html"), "r") as f:
                 index_content = "\n".join(f.readlines())
-            index_content = index_content.replace("WIDGET_ID", "threeBrainPy-viewer")
+            index_content = index_content.replace("WIDGET_ID", "threebrainpy-viewer")
             widget_data = json.dumps({
                 'x' : {
                     'data_filename' : 'config.json',
