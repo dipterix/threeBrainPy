@@ -1,7 +1,7 @@
-from threebrainpy.geom.group import GeomWrapper
 from .geometry import GeometryTemplate
-from ..utils import VolumeWrapper, CONSTANTS
+from ..utils import VolumeWrapper
 from ..core.mat44 import Mat44
+from ..core.constants import CONSTANTS
 
 
 class VolumeSlice( GeometryTemplate ):
@@ -133,9 +133,9 @@ class VolumeCube( GeometryTemplate ):
         '''
         if not isinstance(m, Mat44):
             raise ValueError(f"[VolumeCube.set_affine] must be a Mat44 instance. Current type: {type(m)}")
-        if m.modality_to is not "T1":
+        if m.modality_to != "T1":
             raise ValueError(f"[VolumeCube.set_affine] `transform.modality_to` must be T1 when transform is not None. Current `modality_to`: {m.modality_to}")
-        if m.space_from is not "ras":
+        if m.space_from != "ras":
             raise ValueError(f"[VolumeCube.set_affine] `transform.space_from` must be ras when transform is not None. Current `space_from`: {m.space_from}")
         if m.space_to not in CONSTANTS.SUPPORTED_SPACES:
             raise ValueError(f"[VolumeCube.set_affine] `transform.space_to` must be one of {CONSTANTS.SUPPORTED_SPACES}. Current `space_to`: {m.space_to}")

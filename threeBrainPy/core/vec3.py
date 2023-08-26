@@ -3,17 +3,20 @@ import json
 from .mat44 import Mat44
 
 class Vec3:
+    '''
+    Creates a 3D vector with given coordinate space.
+    Args:
+        x: x coordinate or a Vec3, or a list/tuple/array of 3 numbers.
+        y: y coordinate or None if x is a Vec3 or a list/tuple/array of 3 numbers.
+        z: z coordinate or None if x is a Vec3 or a list/tuple/array of 3 numbers.
+        space: The space of the vector, either "ras", "ras_tkr", "mni305", "mni152" or "voxel". 
+        
+            > This is ignored if x is a Vec3 since the space will be the same as x.
+            > In other situations, if space is None, the space will be "ras".
+
+    '''
     def __init__(self, x : list | tuple | np.ndarray | float | None = None, 
                  y : float | None = None, z : float | None = None, space : str | None = None):
-        '''
-        Creates a 3D vector.
-        @param x: x coordinate or a Vec3, or a list/tuple/array of 3 numbers.
-        @param y: y coordinate or None if x is a Vec3 or a list/tuple/array of 3 numbers.
-        @param z: z coordinate or None if x is a Vec3 or a list/tuple/array of 3 numbers.
-        @param space: The space of the vector, either "ras", "ras_tkr", "mni305", "mni152" or "voxel". 
-            This is ignored if x is a Vec3 since the space will be the same as x.
-            In other situations, if space is None, the space will be "ras".
-        '''
         self.space = "ras" if space is None else space
         if y is None or z is None or isinstance(x, Vec3):
             if x is None:
@@ -37,6 +40,9 @@ class Vec3:
     
     @property
     def x(self):
+        '''
+        Get x coordinate.
+        '''
         return self._xyz[0]
     @x.setter
     def x(self, value):
@@ -44,6 +50,9 @@ class Vec3:
 
     @property
     def y(self):
+        '''
+        Get y coordinate.
+        '''
         return self._xyz[1]
     @y.setter
     def y(self, value):
@@ -51,6 +60,9 @@ class Vec3:
 
     @property
     def z(self):
+        '''
+        Get z coordinate.
+        '''
         return self._xyz[2]
     @z.setter
     def z(self, value):
@@ -123,14 +135,27 @@ class Vec3:
                 raise ValueError(f"Vec3 floordiv: other must be a Vec3 or can be converted into Vec3, but got {other}")
     
     def to_list(self):
+        '''
+        Convert this vector into a list of 3 numbers.
+        When the point is invalid, a list of 3 `9999.0` will be returned. 
+        Points that far will be be rendered in the viewer
+        '''
         if not np.isfinite(self.length()):
             return [9999.0, 9999.0, 9999.0]
         return [self.x, self.y, self.z]
     
     def to_tuple(self):
+        '''
+        Convert this vector into a tuple of 3 numbers.
+        '''
         return tuple(self._xyz[:3])
     
     def copyFrom(self, other):
+        '''
+        Copy (in-place) the value of this vector from another vector or a list/tuple/array of 3 numbers.
+        Args:
+            other Vec3 | list | tuple | np.ndarray : The other vector or a list/tuple/array of 3 numbers.
+        '''
         if isinstance(other, Vec3):
             self.space = other.space
             other = other._xyz
@@ -143,7 +168,12 @@ class Vec3:
         self._xyz[2] = other[2]
         return self
 
-    def applyMat44(self, mat44):
+    def applyMat44(self, mat44 : Mat44):
+        '''
+        Apply a 4x4 matrix to this vector in-place.
+        Args:
+            mat44: A 4x4 matrix 
+        '''
         if isinstance(mat44, Mat44):
             if self.space != mat44.space_from:
                 raise ValueError(f"Vec3 applyMatrix44: spaces must match, but got {self.space} and {mat44.space_from}")
@@ -154,6 +184,11 @@ class Vec3:
         return self
     
     def add(self, vec3):
+        '''
+        Add another vector to this vector in-place.
+        Args:
+            vec3 Vec3: Another vector.
+        '''
         if isinstance(vec3, Vec3):
             if self.space != vec3.space:
                 raise ValueError(f"Vec3 add: spaces must match, but got {self.space} and {vec3.space}")
@@ -165,6 +200,11 @@ class Vec3:
         return self
     
     def sub(self, vec3):
+        '''
+        Subtract another vector to this vector in-place.
+        Args:
+            vec3 Vec3: Another vector.
+        '''
         if isinstance(vec3, Vec3):
             if self.space != vec3.space:
                 raise ValueError(f"Vec3 sub: spaces must match, but got {self.space} and {vec3.space}")
@@ -175,7 +215,14 @@ class Vec3:
             raise ValueError(f"Vec3 sub: vec3 must be a Vec3, but got {vec3}")
         return self
     
-    def dot(self, vec3):
+    def dot(self, vec3) -> float:
+        '''
+        Dot-product another vector to this vector.
+        Args:
+            vec3 Vec3: Another vector.
+        Returns:
+            float: The dot product of this vector and the other vector.
+        '''
         if isinstance(vec3, Vec3):
             if self.space != vec3.space:
                 raise ValueError(f"Vec3 dot: spaces must match, but got {self.space} and {vec3.space}")
@@ -184,6 +231,11 @@ class Vec3:
             raise ValueError(f"Vec3 dot: vec3 must be a Vec3, but got {vec3}")
     
     def multiplyScalar(self, scalar):
+        '''
+        Multiply this vector by a scalar in-place.
+        Args:
+            scalar float: A scalar.
+        '''
         self._xyz[0] *= scalar
         self._xyz[1] *= scalar
         self._xyz[2] *= scalar
@@ -203,17 +255,34 @@ class Vec3:
     #         raise ValueError(f"Vec3 cross: vec3 must be a Vec3, but got {vec3}")
     #     return self
     
-    def length(self):
+    def length(self) -> float:
+        '''
+        Get the length of this vector.
+        Returns:
+            float: The length of this vector.
+        '''
         return np.sqrt(self._xyz[0] * self._xyz[0] + self._xyz[1] * self._xyz[1] + self._xyz[2] * self._xyz[2])
     
     def normalize(self):
+        '''
+        Normalize this vector in-place.
+        '''
         l = self.length()
+        if l == 0.0:
+            return self
         self._xyz[0] /= l
         self._xyz[1] /= l
         self._xyz[2] /= l
         return self
 
-    def distanceTo(self, vec3):
+    def distanceTo(self, vec3) -> float:
+        '''
+        Calculate the distance to another vector.
+        Args:
+            vec3 Vec3: Another vector.
+        Returns:
+            float: The L2 distance to the other vector.
+        '''
         if isinstance(vec3, Vec3):
             if self.space != vec3.space:
                 raise ValueError(f"Vec3 distanceTo: spaces must match, but got {self.space} and {vec3.space}")
@@ -225,7 +294,14 @@ class Vec3:
         else:
             raise ValueError(f"Vec3 distanceTo: vec3 must be a Vec3, but got {vec3}")
         
-    def distanceToSquared(self, vec3):
+    def distanceToSquared(self, vec3) -> float:
+        '''
+        Calculate the squared distance to another vector.
+        Args:
+            vec3 Vec3: Another vector.
+        Returns:
+            float: The squared L2 distance to the other vector.
+        '''
         if isinstance(vec3, Vec3):
             if self.space != vec3.space:
                 raise ValueError(f"Vec3 distanceToSquared: spaces must match, but got {self.space} and {vec3.space}")
@@ -237,7 +313,14 @@ class Vec3:
         else:
             raise ValueError(f"Vec3 distanceToSquared: vec3 must be a Vec3, but got {vec3}")
     
-    def set(self, x, y, z):
+    def set(self, x : float, y : float, z : float):
+        '''
+        Set the value of this vector in-place.
+        Args:
+            x: x coordinate.
+            y: y coordinate.
+            z: z coordinate.
+        '''
         self._xyz[0] = x
         self._xyz[1] = y
         self._xyz[2] = z
@@ -247,6 +330,9 @@ class Vec3:
         return Vec3(self._xyz[0], self._xyz[1], self._xyz[2], space = self.space)
     
     def copy(self):
+        '''
+        A deep copy this vector.
+        '''
         return self.__copy__()
     
 

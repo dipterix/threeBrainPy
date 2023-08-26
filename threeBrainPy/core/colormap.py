@@ -1,7 +1,7 @@
 import numpy as np
 from .keyframe import SimpleKeyframe
+from .constants import CONSTANTS
 from ..utils.color import hex_to_rgb, interpolate_colors, arrays_to_rgb
-from ..utils.constants import CONSTANTS
 
 class ElectrodeColormap:
     def __init__(self, keyframe_name : str, value_type : str, alias : str = None) -> None:

@@ -1,6 +1,6 @@
 import re
 import numpy as np
-from ..utils.constants import CONSTANTS
+from .constants import CONSTANTS
 
 class SimpleKeyframe:
     def __init__(self, name, value, time = None, dtype = 'continuous', target = '.material.color', **kwargs) -> None:

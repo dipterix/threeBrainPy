@@ -1,6 +1,6 @@
 import numpy as np
 from .geometry import GeometryTemplate
-from ..utils import CONSTANTS
+from ..core.constants import CONSTANTS
 from ..core.vec3 import Vec3
 from ..core.keyframe import SimpleKeyframe
 

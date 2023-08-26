@@ -1,5 +1,5 @@
 from .geometry import GeometryTemplate
-from ..utils import CONSTANTS
+from ..core.constants import CONSTANTS
 import os
 
 class Surface(GeometryTemplate):

@@ -1,0 +1,33 @@
+{
+  "name": "threebrainpy",
+  "version": "0.1.0",
+  "description": "Your Advanced Electrode Localizer Viewer for Python",
+  "directories": {
+    "doc": "docs",
+    "test": "tests"
+  },
+  "scripts": {
+    "test": "echo not yet implemented",
+    "docs": "mkdocs build",
+    "docs-serve": "mkdocs serve -w threebrainpy"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/dipterix/threeBrainPy.git"
+  },
+  "keywords": [
+    "iEEG",
+    "DBS",
+    "Visualization",
+    "Neuroscience",
+    "Electrophysiology",
+    "Electrode",
+    "Localizer"
+  ],
+  "author": "Zhengjia Wang",
+  "license": "MPL-2.0",
+  "bugs": {
+    "url": "https://github.com/dipterix/threeBrainPy/issues"
+  },
+  "homepage": "https://github.com/dipterix/threeBrainPy#readme"
+}

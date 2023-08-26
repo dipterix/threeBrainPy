@@ -2,24 +2,51 @@ import numpy as np
 import json
 
 class Mat44(object):
-    def __init__(self, mat = None, byrow = True, space_from = 'ras', space_to = 'ras', modality_from = "T1", modality_to = "T1"):
-        '''
-        Creates a 4x4 matrix.
-        @param mat: The matrix, can be a 1D array of length 12 or 16, or a 2D array of shape (3,4) or (4,4).
-        @param byrow: Whether the matrix is in row-major order (default) or column-major order.
-        @param space_from: The space from which the matrix is defined, choices are "ras", "voxel", "ras_tkr", "mni305", "mni152".
+    '''
+    A 4x4 matrix for 3D affine transformation.
+    Args:
+        mat: The matrix, can be a 1D array of length 12 or 16, or a 2D array of shape (3,4) or (4,4).
+        byrow: Whether the matrix is in row-major order (default) or column-major order.
+        space_from: The space from which the matrix is defined, choices are "ras", "voxel", "ras_tkr", "mni305", "mni152".
+
             * "ras": scanner-RAS space
             * "voxel": voxel indexing space (or IJK space)
             * "ras_tkr": FreeSurfer RAS space, this is the space used internally by the viewer engine in JavaScript
             * "mni305": MNI305 template space
             * "mni152": MNI152 template space
-            threebrainpy does not limit the choices, but the viewer only supports these spaces.
-        @param space_to: The space to which the matrix is defined, choices are the same as `space_from`.
-        @param modality_from: The imaging modality from which the matrix is defined, choices are "T1" or "CT" other modalities may be 
+
+            > threebrainpy does not limit the choices, but the viewer only supports these spaces.
+        
+        space_to: The space to which the matrix is defined, choices are the same as `space_from`.
+        modality_from: The imaging modality from which the matrix is defined, choices are "T1" or "CT" other modalities may be 
             added in the future, default is "T1".
-        @param modality_to: The imaging modality to which the matrix is defined. If set to `None`, then it will be set
+        modality_to: The imaging modality to which the matrix is defined. If set to `None`, then it will be set
             with the same value as `modality_from` automatically; default choice is `None`.
-        '''
+        
+    Examples:
+    
+        >>> Mat44([1,2,3,4,5,6,7,8,9,10,11,12])
+        Mat44 (T1.ras -> T1.ras): 
+        array([[ 1.,  2.,  3.,  4.],
+            [ 5.,  6.,  7.,  8.],
+            [ 9., 10., 11., 12.],
+            [ 0.,  0.,  0.,  1.]])
+        >>> Mat44([1,2,3,4,5,6,7,8,9,10,11,12], byrow=False)
+        Mat44 (T1.ras -> T1.ras): 
+        array([[ 1.,  4.,  7., 10.],
+            [ 2.,  5.,  8., 11.],
+            [ 3.,  6.,  9., 12.],
+            [ 0.,  0.,  0.,  1.]])
+        >>> Mat44([-1,0,0,128,0,0,1,-128,0,-1,0,128], space_from="voxel", space_to="ras_tkr")
+        Mat44 (T1.voxel -> T1.ras_tkr): 
+        array([[  -1.,    0.,    0.,  128.],
+            [   0.,    0.,    1., -128.],
+            [   0.,   -1.,    0.,  128.],
+            [   0.,    0.,    0.,    1.]])
+    '''
+    def __init__(self, mat : np.ndarray | list | tuple | None = None, byrow : bool = True, 
+                 space_from : str = 'ras', space_to : str = 'ras', 
+                 modality_from : str = "T1", modality_to : str = "T1"):
         if mat is None:
             self.mat = np.eye(4)
         else:

@@ -1,0 +1,20 @@
+site_name: Your Advanced Electrode Localizer Viewer for Python
+
+theme:
+  name: "material"
+
+plugins:
+  - mkdocstrings
+  - search
+
+
+nav:
+  - Home: index.md
+  - "Examples": examples.md
+  - "Getting Started": getting_started.md
+  - "API Reference": 
+    - "<code>threebrainpy.core</code>": 
+      - "<code>&lt;Class Brain&gt;</code>": api-core-brain.md
+      - "<code>&lt;Class Vec3&gt;</code>": api-core-vec3.md
+      - "<code>&lt;Class Mat44&gt;</code>": api-core-mat44.md
+    - "Module utils": api-utils.md

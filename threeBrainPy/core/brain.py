@@ -1,12 +1,12 @@
 import os
 import re
-import tempfile
 import numpy as np
 from copy import deepcopy
 from .mat44 import Mat44
 from .vec3 import Vec3
 from .keyframe import SimpleKeyframe
 from .colormap import ElectrodeColormap
+from .constants import CONSTANTS
 from ..geom.group import GeomWrapper
 from ..geom.geometry import GeometryTemplate
 from ..geom.datacube import VolumeSlice, VolumeCube
@@ -14,20 +14,40 @@ from ..geom.blank import BlankPlaceholder
 from ..geom.surface import CorticalSurface
 from ..geom.sphere import ElectrodeSphere
 from ..templates import init_skeleton, template_path
-from ..utils import CONSTANTS, VolumeWrapper, read_xfm
+from ..utils import VolumeWrapper, read_xfm
 from ..utils.serializer import GeomEncoder
+from ..utils.temps import temporary_directory
+try:
+    from pandas import DataFrame
+except:
+    DataFrame = None
 
 MNI305_TO_MNI152 = Mat44(CONSTANTS.MNI305_TO_MNI152, space_from="mni305", space_to="mni152")
 
+
 class Brain(object):
+    '''
+    Class definition for storing brain data and rendering information.
+    Examples:
+        This example loads `fsaverage` brain from FreeSurfer (if you have installed) and renders it.
+        >>> import os
+        >>> from threebrainpy.core import Brain
+        >>> fs_home = os.environ.get("FREESURFER_HOME", None)
+        >>> if fs_home is not None:
+        >>>     brain = Brain("fsaverage", os.path.join(fs_home, "subjects", "fsaverage"))
+        >>>     print(brain)
+        >>>     brain.build()
+    '''
     def _update_matrices(self, volume_files = [], update = 1):
         '''
-        Update voxel-to-ras and voxel-to-tkrRAS matrices.
-        @param volume_files: A list of volume files to be used to update the matrices.
-        @param update: 
-            0: do not update, but will initialize if not exists; 
-            1: update if there is a better one;
-            2: force update.
+        Internal method to update voxel-to-ras and voxel-to-tkrRAS matrices.
+        Args:
+            volume_files: A list of volume files to be used to update the matrices.
+                Each volume file must be a path to a volume file (nii, nii.gz, mgz).
+            update: update policy, see below.
+                - 0: do not update, but will initialize if not exists;
+                - 1: update if there is a better one;
+                - 2: force update.
         '''
         if len(volume_files) == 0:
             return None
@@ -53,7 +73,13 @@ class Brain(object):
                     # this means the matrices are all up-to-date and need no further update
                     return None
 
-    def __init__(self, subject_code, path, work_dir = None):
+    def __init__(self, subject_code : str, path : str, work_dir : str | None = None):
+        '''Constructor for Brain.
+        Args:
+            subject_code: The subject code of the brain.
+            path: The path to the FreeSurfer or FreeSurfer-like folder (with MRI stored at `mri` and surfaces at `surf`).
+            work_dir: The path to the working directory. If not specified, a temporary directory will be created.
+        '''
         if not os.path.exists(path):
             raise FileNotFoundError(f"Brain path {path} not found.")
         if re.match(r"^[a-zA-Z][a-zA-Z0-9_-]{0,}$", subject_code) is None:
@@ -61,7 +87,7 @@ class Brain(object):
         self._path = os.path.abspath(path)
         self._subject_code = subject_code
         self._template_subject = "N27"
-        self._storage = tempfile.TemporaryDirectory(prefix = subject_code, dir = work_dir)
+        self._storage = temporary_directory(prefix = subject_code, dir = work_dir)
         # set up geoms
         self._groups = {}
         self._geoms = {}
@@ -98,25 +124,43 @@ class Brain(object):
         return f"Brain({self._subject_code} @ {self._path})"
     @property
     def subject_code(self):
+        '''
+        Subject code string.
+        '''
         return self._subject_code
     # region <paths>
     @property
     def path(self):
+        '''
+        The root path to the imaging files.
+        '''
         return self._path
     @property
     def path_mri(self):
+        '''
+        The path to the MRI and atlas files.
+        '''
         return os.path.join(self._path, "mri")
     @property
     def path_surf(self):
+        '''
+        The path to the surface mesh files.
+        '''
         return os.path.join(self._path, "surf")
     @property
     def storage(self):
+        '''
+        The path to a temporary directory for storing intermediate files and viewers.
+        '''
         return self._storage
     # endregion
     
     # region <transforms>
     @property
     def vox2ras(self) -> Mat44:
+        '''
+        A `4x4` voxel (indexing) to T1 scanner RAS (right-anterior-superior coordinate) transform matrix.
+        '''
         if isinstance(self._vox2ras, Mat44):
             return self._vox2ras
         m = Mat44(space_from="voxel", space_to="ras")
@@ -124,6 +168,9 @@ class Brain(object):
         return m
     @property
     def vox2ras_tkr(self) -> Mat44:
+        '''
+        A `4x4` voxel (indexing) to viewer (or FreeSurfer) tkrRAS (tk-registered right-anterior-superior coordinate) transform matrix.
+        '''
         if isinstance(self._vox2ras_tkr, Mat44):
             return self._vox2ras_tkr
         m = Mat44(space_from="voxel", space_to="ras_tkr")
@@ -131,9 +178,15 @@ class Brain(object):
         return m
     @property
     def ras2ras_tkr(self) -> Mat44:
+        '''
+        A `4x4` T1 scanner RAS (right-anterior-superior coordinate) to viewer (or FreeSurfer tk-registered) tkrRAS transform matrix.
+        '''
         return self.vox2ras_tkr * (~self.vox2ras)
     @property
     def ras2mni_305(self) -> Mat44:
+        '''
+        A `4x4` transform matrix from T1 scanner RAS (right-anterior-superior coordinate) to MNI305 template space using FreeSurfer affine transform (generated during `recon-all`).
+        '''
         if isinstance(self._ras2mni_305, Mat44):
             return self._ras2mni_305
         m = Mat44(space_from="ras", space_to="mni305")
@@ -141,14 +194,38 @@ class Brain(object):
         return m
     @property
     def ras2mni_152(self) -> Mat44:
+        '''
+        A `4x4` transform matrix from T1 scanner RAS (right-anterior-superior coordinate) to MNI152 template space using FreeSurfer affine transform (generated during `recon-all`).
+        '''
         return MNI305_TO_MNI152 * self.ras2mni_305
     @property
     def ras_tkr2mni_305(self) -> Mat44:
+        '''
+        A `4x4` transform matrix from tkrRAS to MNI305 template space using FreeSurfer affine transform (generated during `recon-all`).
+        '''
         return self.ras2mni_305 * self.vox2ras * (~self.vox2ras_tkr)
     @property
     def ras_tkr2mni_152(self) -> Mat44:
+        '''
+        A `4x4` transform matrix from tkrRAS to MNI152 template space using FreeSurfer affine transform (generated during `recon-all`).
+        '''
         return MNI305_TO_MNI152 * self.ras_tkr2mni_305
     def get_transform(self, space_from : str, space_to : str) -> Mat44:
+        '''
+        Get transform matrix from `space_from` to `space_to`. 
+        Args:
+            space_from: The space from which the transform matrix is defined.
+                choices are `voxel`, `ras`, `ras_tkr`, `mni305`, `mni152`.
+            space_to: The space to which the transform matrix is defined.
+                see `space_from` for choices.
+        Examples:
+            >>> brain.get_transform(space_from = "voxel", space_to = "ras_tkr")
+            Mat44 (T1.voxel -> T1.ras_tkr): 
+            array([[  -1.,    0.,    0.,  128.],
+                [   0.,    0.,    1., -128.],
+                [   0.,   -1.,    0.,  128.],
+                [   0.,    0.,    0.,    1.]])
+        '''
         if space_from not in CONSTANTS.SUPPORTED_SPACES:
             raise ValueError(f"Invalid space_from: {space_from}, supported spaces are: {CONSTANTS.SUPPORTED_SPACES}")
         if space_to not in CONSTANTS.SUPPORTED_SPACES:
@@ -178,11 +255,39 @@ class Brain(object):
 
     def set_transform_space(self, transform : Mat44, space_from : str, space_to : str) -> Mat44:
         '''
-        Get a transform matrix from `space_from` to `space_to`.
-        @param space_from: The space from which the transform matrix is defined.
-        @param space_to: The space to which the transform matrix is defined.
-        @param transform: The transform matrix. If `transform` is not specified, then the transform matrix will be identity matrix
-        @return: The transform matrix.
+        Returns a copy of `transform`, but with space transformed. 
+        Args:
+            transform: The transform matrix of class `Mat44`. If `transform` is not specified, then the transform will be identity matrix.
+            space_from: The space from which the transform matrix will be defined.
+                choices are `voxel`, `ras`, `ras_tkr`, `mni305`, `mni152`.
+            space_to: The space to which the transform matrix will be defined.
+        Returns:
+            The new transform matrix with given spaces and inherited modalities.
+        Examples:
+            If you have a matrix that switch the column and row indexes in the voxel space,
+                what's the matrix in the ras space?
+            >>> from threebrainpy.core import Mat44
+            >>> idx_transform = Mat44([0,1,0,0,1,0,0,0,0,0,1,0], space_from = "voxel", space_to = "voxel")
+            >>> idx_transform
+            Mat44 (T1.voxel -> T1.voxel): 
+            array([[0., 1., 0., 0.],
+                [1., 0., 0., 0.],
+                [0., 0., 1., 0.],
+                [0., 0., 0., 1.]])
+            >>> # Applies idx_transform first then vox-to-ras
+            >>> brain.set_transform_space(transform = idx_transform, space_from = "voxel", space_to = "ras")
+            Mat44 (T1.voxel -> T1.ras): 
+            array([[   0.        ,   -1.        ,    0.        ,  131.61447144],
+                [   0.        ,    0.        ,    1.        , -127.5       ],
+                [  -1.        ,    0.        ,    0.        ,  127.5       ],
+                [   0.        ,    0.        ,    0.        ,    1.        ]])
+            >>> # To validate the transform
+            >>> brain.vox2ras * idx_transform
+            Mat44 (T1.voxel -> T1.ras): 
+            array([[   0.        ,   -1.        ,    0.        ,  131.61447144],
+                [   0.        ,    0.        ,    1.        , -127.5       ],
+                [  -1.        ,    0.        ,    0.        ,  127.5       ],
+                [   0.        ,    0.        ,    0.        ,    1.        ]])
         '''
         if not isinstance(transform, Mat44):
             raise TypeError(f"Invalid transform matrix: {transform}")
@@ -207,30 +312,84 @@ class Brain(object):
     def _initialize_global_data(self):
         global_placeholder = BlankPlaceholder(brain = self)
         self._globals = global_placeholder.group
-    def add_global_data(self, name, value, is_cache = False, absolute_path = None):
+    def add_global_data(self, name : str, value : any | str, is_cache : bool = False, absolute_path : str = None):
+        '''
+        Internal method to add global data to the brain.
+        Args:
+            name: The name of the global data.
+            value: If `is_cache=False`, the value of the global data, can be any JSON-serializable object.
+                If `is_cache=True`, the path to, or the file name of the cached JSON file.
+            is_cache: Whether the `value` is a cached JSON file.
+            absolute_path: The absolute path to the cached JSON file.
+        '''
         self._globals.set_group_data(name = name, value = value, is_cache = is_cache, absolute_path = absolute_path)
     def get_global_data(self, name):
+        '''
+        Get global data from the brain instance.
+        Args:
+            name: The name of the global data.
+        Returns:
+            The value of the global data.
+        '''
         return self._globals.get_group_data(name = name)
-    def add_group(self, name, position = [0,0,0], layers = [CONSTANTS.LAYER_USER_MAIN_CAMERA_0], exists_ok = True) -> GeomWrapper:
+    def add_group(self, name : str, exists_ok : bool = True) -> GeomWrapper:
+        '''
+        Internal method to add a geometry groups to the brain.
+        Args:
+            name: The name of the group.
+            exists_ok: Whether to overwrite the existing group if the group already exists.
+        Returns:
+            The group instance.
+        '''
         group = self._groups.get(name, None)
         if group is None:
-            group = GeomWrapper(self, name = name, position = position, layers = layers)
+            group = GeomWrapper(self, name = name, position = [0,0,0], layers = [CONSTANTS.LAYER_USER_MAIN_CAMERA_0])
             self._groups[name] = group
         elif not exists_ok:
             raise ValueError(f"Group {name} already exists.")
-        else:
-            group.set_position(position)
-            group.set_layers(layers)
         return group
-    def get_group(self, name):
+    def get_group(self, name : str) -> GeomWrapper | None:
+        '''
+        Get a geometry group from the brain.
+        Args:
+            name: The name of the group.
+        Returns:
+            The group instance or `None` if the group does not exist.
+        '''
         return self._groups.get(name, None)
-    def has_group(self, name):
+    def has_group(self, name : str) -> bool:
+        '''
+        Check if the brain has a geometry group.
+        Args:
+            name: The name of the group.
+        Returns:
+            `True` if the group exists, `False` otherwise.
+        '''
         return name in self._groups
-    def ensure_group(self, name, **kwargs):
+    def ensure_group(self, name : str, **kwargs : dict) -> GeomWrapper:
+        '''
+        Ensure that a geometry group exists, if not, create one.
+        Args:
+            name: The name of the group.
+            kwargs: Other arguments to be passed to `add_group`.
+        Returns:
+            The group instance.
+        '''
         if self.has_group(name):
             return self.get_group(name)
         return self.add_group(name = name, exists_ok = True, **kwargs)
-    def set_group_data(self, name, value, is_cache = False, absolute_path = None, auto_create = True) -> None:
+    def set_group_data(self, name : str, value : any | str, is_cache : bool = False, absolute_path : str | None = None, auto_create : bool = True) -> None:
+        '''
+        Set group data to the brain so the JavaScript engine will have access to the data. 
+            This method is a low-level function
+        Args:
+            name: The name of the group data.
+            value: If `is_cache=False`, the value of the group data, can be any JSON-serializable object.
+                If `is_cache=True`, the path to, or the file name of the cached JSON file.
+            is_cache: Whether the `value` is a cached JSON file.
+            absolute_path: The absolute path to the cached JSON file.
+            auto_create: Whether to create a group if the group does not exist.
+        '''
         if auto_create:
             self.ensure_group(name = name)
         group = self.get_group(name)
@@ -238,7 +397,16 @@ class Brain(object):
             raise ValueError(f"Group {name} not found.")
         group.set_group_data(name = name, value = value, is_cache = is_cache, absolute_path = absolute_path)
         return None
-    def get_global_data(self, name, force_reload = False, ifnotfound = None):
+    def get_global_data(self, name : str, force_reload : bool = False, ifnotfound : any | None = None) -> any:
+        '''
+        Get group data from the brain instance.
+        Args:
+            name: The name of the group data.
+            force_reload: Whether to force reload the group data.
+            ifnotfound: If the group data is not found, return this value.
+        Returns:
+            The value of the group data, or `ifnotfound`.
+        '''
         group = self.get_group(name)
         if group is None:
             return ifnotfound
@@ -246,21 +414,36 @@ class Brain(object):
     # endregion
     
     # region <Geometries>
-    def get_geometry(self, name):
+    def get_geometry(self, name : str) -> GeometryTemplate | None:
+        '''
+        Get a geometry instance from the brain.
+        Args:
+            name: The name of the geometry template.
+        Returns:
+            The geometry instance or `None` if the geometry instance does not exist.
+        '''
         return self._geoms.get(name, None)
-    def has_geometry(self, name):
+    def has_geometry(self, name : str) -> bool:
+        '''
+        Check if the brain has a geometry instance.
+        Args:
+            name: The name of the geometry template.
+        Returns:
+            `True` if the geometry instance exists, `False` otherwise.
+        '''
         return name in self._geoms
     # endregion
     
     # region <MRI slices>
     def add_slice(self, slice_prefix : str = "brain.finalsurfs", name : str = "T1"):
         '''
-        Add a (MRI) volume slice to the brain. The slices will be rendered in side canvas using datacube (JS).
-        @param slice_prefix: The prefix of the slice file. 
-        @param name: The name of the slice, currently only "T1" is supported.
-        @example:
-            # Adds brain.finalsurfs.mgz or brain.finalsurfs.nii[.gz] to the brain slices
-            brain.add_slice(slice_prefix = "brain.finalsurfs", name = "T1")
+        Add a (MRI) volume slice to the brain. The slices will be rendered in side canvas using datacube (JavaScript class).
+        Args:
+            slice_prefix: The prefix of the slice file in the `mri` folder. (default: "brain.finalsurfs")
+            name: The name of the slice, currently only "T1" is supported. (default: "T1")
+        Examples:
+            Adds `brain.finalsurfs.mgz` or `brain.finalsurfs.nii[.gz]` to the brain slices
+            >>> brain.add_slice(slice_prefix = "brain.finalsurfs", name = "T1")
         '''
         # In geoms, the name needs to be appended with the subject code
         # possible file names
@@ -279,28 +462,45 @@ class Brain(object):
         self._slices[name] = slice
         self._update_matrices(volume_files = [slice_path])
         return slice
-    def get_slice(self, name):
+    def get_slice(self, name : str) -> VolumeSlice | None:
+        '''
+        Get MRI slices from the brain.
+        Args:
+            name: The name of the slice.
+        Returns:
+            The slice instance or `None` if the slice does not exist.
+        '''
         return self._slices.get(name, None)
-    def get_slices(self):
+    def get_slices(self) -> list[VolumeSlice]:
+        '''
+        Get all MRI slices from the brain.
+        '''
         return self._slices
-    def has_slice(self, name):
+    def has_slice(self, name : str) -> bool:
+        '''
+        Check if the brain has MRI slices with given name.
+        '''
         return name in self._slices
     # endregion
     
     # region <Atlases/CT/3D voxels>
     def add_volume(self, volume_prefix : str, is_continuous : bool, name : str = None) -> dict | None:
         '''
-        Add a (Atlas/CT/3D voxel) volume cube to the brain. The VolumeCube will be rendered in main canvas using datacube2 (JS).
-        @param volume_prefix: The prefix of the volume file. 
-        @param is_continuous: Whether the volume is continuous or discrete. 
-            The color map for continuous and discrete values are set separately.
-            For continuous values, the volume will be rendered using RedFormat (single-channel shader). 
-                The color will be assgined according to the volume value (density).
-            For discrete values, the volume will be rendered using RGBAFormat (four-channel shader). 
-                The volume data will be used as the color index, and the color map will be set separately.
-                The color index must be integer, and the color map must be a list of RGBA colors.
-        @param name: The name of the volume, default is to automatically derived from the volume_prefix. 
-            Please set name to "CT" is the volume file is CT for localization
+        Add a (Atlas/CT/3D voxel) volume cube to the brain. The VolumeCube will be rendered in main canvas using datacube2 (JavaScript class).
+        Args:
+            volume_prefix: The prefix of the volume file in the `mri` folder. (e.g. "aparc+aseg", "CT_raw")
+            is_continuous: Whether the volume is continuous or discrete. 
+                The color map for continuous and discrete values are set separately.
+                For continuous values, the volume will be rendered using RedFormat (single-channel shader). 
+                    The color will be assgined according to the volume value (density).
+                For discrete values, the volume will be rendered using RGBAFormat (four-channel shader). 
+                    The volume data will be used as the color index, and the color map will be set separately.
+                    The color index must be integer, and the color map must be a list of RGBA colors.
+            name: The name of the volume, default is to automatically derived from the volume_prefix. 
+                Please set name to "CT" is the volume file is CT for localization
+        Examples:
+            Adds `aparc+aseg.mgz` or `aparc+aseg.nii[.gz]` to the brain volumes
+            >>> brain.add_volume(volume_prefix = "aparc+aseg", is_continuous = False)
         '''
         # In geoms, the name needs to be appended with the subject code
         # possible file names
@@ -350,6 +550,17 @@ class Brain(object):
         return None
 
     def add_surfaces(self, surface_type : str, hemesphere : str = "both") -> dict | None:
+        '''
+        Add a surface to the brain. The surface will be rendered in main canvas using surface (JavaScript class).
+        Args:
+            surface_type: The type of the surface, e.g. "pial", "white", "inflated", "sphere" (see `surf/` folder, usually `[lr]h.<surface_type>`).
+            hemesphere: The hemesphere of the surface, can be "l", "r", "b" (both). (default: "both")
+        Returns:
+            A dictionary of surface instances if exist, with keys being the hemesphere.
+        Examples:
+            Adds `lh.pial` and `rh.pial` to the brain surfaces
+            >>> brain.add_surfaces(surface_type = "pial", hemesphere = "both")
+        '''
         hemesphere_prefix = hemesphere.lower()[0]
         if hemesphere_prefix == "b":
             hemesphere_prefix = ["lh", "rh"]
@@ -394,8 +605,20 @@ class Brain(object):
                     value = base_vertex_colors[surface.hemesphere], is_cache = True)
         return surface_dict
     def get_surfaces(self, surface_type : str) -> dict | None:
+        '''
+        Get surfaces from the brain.
+        Args:
+            surface_type: The type of the surface, e.g. "pial", "white", "inflated", "sphere" (see `surf/` folder, usually `[lr]h.<surface_type>`).
+        Returns:
+            A dictionary of surface instances if exist, with keys being the hemesphere.
+        '''
         return self._surfaces.get(surface_type, None)
     def has_surface_type(self, surface_type : str) -> bool:
+        '''
+        Check if the brain has surfaces with given type.
+        Args:
+            surface_type: The type of the surface, e.g. "pial", "white", "inflated", "sphere" (see `surf/` folder, usually `[lr]h.<surface_type>`).
+        '''
         return surface_type in self._surfaces
     # endregion
     
@@ -407,7 +630,31 @@ class Brain(object):
             radius : float | None = None,
             mni_position : Vec3 | list | None = None, 
             sphere_position : Vec3 | list | None = None,
-            **kwargs) -> ElectrodeSphere:
+            **kwargs : dict) -> ElectrodeSphere:
+        '''
+        Add an electrode contact to the brain. The electrode contact will be rendered in main canvas using sphere (JavaScript class).
+        Args:
+            number: The integer number of the electrode contact, starting from 1.
+            label: The label of the electrode contact.
+            position: The position of the electrode contact in the native space of the brain, or a `Vec3` instance with given spaces.
+            is_surface: Whether the electrode contact is a surface electrode.
+            radius: The radius of the electrode contact, default is 2.0 for surface electrodes and 1.0 for depth electrodes.
+            mni_position: The position of the electrode contact in MNI space, overrides the default affine MNI calculation; 
+                often used if you have advanced/more accurate MNI estimation
+            sphere_position: The position of the electrode contact in the sphere space; surface electrodes only.
+            kwargs: Other arguments to be passed to `ElectrodeSphere`.
+        Returns:
+            The electrode contact instance.
+        Examples:
+            Adds an electrode contact to the brain
+            >>> e1 = brain.add_electrode_contact(number = 1, label = "LA1", position = [35,10,10], is_surface = False)
+            >>> e1.get_position("ras")
+            Vec3(35.0, 10.0, 10.0) [ras]
+            >>> e2 = brain.add_electrode_contact(number = 2, label = "LA2", position = Vec3([5,10,10], space = "voxel"), is_surface = False)
+            >>> # Automatically transform position to RAS space
+            >>> e2.get_position("ras")
+            Vec3(126.61447143554688, -117.5, 117.5) [ras]
+        '''
         is_surface = True if is_surface else False
         if radius is None:
             radius = 2.0 if is_surface else 1.0
@@ -425,42 +672,83 @@ class Brain(object):
             contact.set_sphere_position(sphere_position)
         self._electrode_contacts[ contact.number ] = contact
         return contact
-    def set_electrode_keyframe(self, number : int, value, time = None, name : str = "value") -> ElectrodeSphere | None:
+    def set_electrode_keyframe(self, number : int, value : np.ndarray | list[float] | list[int] | list[str] | float | int | str, 
+                               time : float | list[float] | tuple(float) | np.ndarray | None = None, 
+                               name : str = "value") -> SimpleKeyframe | None:
+        '''
+        Low-level method to set electrode contacts keyframe (values).
+        Args:
+            number: The integer number of the electrode contact, starting from 1.
+            value: The value of the keyframe, can be numerical or characters.
+            time: The time (second) of the keyframe, default is `None` which means 0.
+            name: The name of the keyframe, default is "value".
+        Returns:
+            The keyframe created
+        '''
         contact = self._electrode_contacts.get(int(number), None)
         if contact is None:
             return None
-        contact.set_keyframe(value = value, time = time, name = name)
-        return contact
+        return contact.set_keyframe(value = value, time = time, name = name)
     def get_electrode_contact(self, number : int) -> ElectrodeSphere | None:
+        '''
+        Get an electrode contact from the brain.
+        Args:
+            number: The integer number of the electrode contact, starting from 1.
+        Returns:
+            The electrode contact instance or `None` if the electrode contact does not exist.
+        '''
         return self._electrode_contacts.get(int(number), None)
     @property
     def electrode_contacts(self) -> dict[int, ElectrodeSphere]:
+        '''
+        Get all electrode contacts from the brain.
+        '''
         return self._electrode_contacts
     def clean_electrodes(self):
+        '''
+        Remove all electrode contacts from the brain.
+        '''
         contact_names = [contact.name for _, contact in self._electrode_contacts.items()]
         for contact_name in contact_names:
             self._geoms.pop(contact_name, None)
             self._electrode_contacts.pop(contact_name, None)
-    def add_electrodes(self, table, space : str | None = None) -> int:
+    def add_electrodes(self, table : str | DataFrame, space : str | None = 'ras') -> int:
         '''
         Add electrodes to the brain.
-        @param table: The table containing the electrode information, or the path to the table.
-            The table must contains at least the following columns (case-sensitive):
+        Args:
+            table: A pandas table containing the electrode information, or the path to the table. (See 'Details:')
+            space: The space of the electrode coordinates, default is "ras".
+        Returns:
+            The number of electrodes added.
+                    
+        Details:
+            The table (or table file) must contains at least the following columns (**case-sensitive**):
+                
             * `Electrode` (int, mandatory): electrode contact number, starting from 1
+                
             * `Label` (str, mandatory): electrode label string, must not be empty string
+                
             * `x`, `y`, `z` (float): the coordinates of the electrode contact in the space specified by `space`.
+                    
                 If `space` is not specified, then the coordinates are assumed to be in the T1 space ("ras").
+                    
+                > If x=y=z=0, then the electrode will be hidden. (This is the default behavior of R package threeBrain)
+
                 If `x`, `y`, `z` is not specified, then the following columns will be used in order:
-                    `Coord_x`, `Coord_y`, `Coord_z`: electrode coordinates in tkrRAS space (FreeSurfer space)
-                    `T1R`, `T1A`, `T1S`: electrode coordinates in T1 RAS space (scanner space)
-                    `MNI305_x`, `MNI305_y`, `MNI305_z`: electrode coordinates in MNI305 space
-                    `MNI152_x`, `MNI152_y`, `MNI152_z`: electrode coordinates in MNI152 space
+                    
+                * `Coord_x`, `Coord_y`, `Coord_z`: electrode coordinates in tkrRAS space (FreeSurfer space)
+                * `T1R`, `T1A`, `T1S`: electrode coordinates in T1 RAS space (scanner space)
+                * `MNI305_x`, `MNI305_y`, `MNI305_z`: electrode coordinates in MNI305 space
+                * `MNI152_x`, `MNI152_y`, `MNI152_z`: electrode coordinates in MNI152 space
+                    
                 The order will be Coord_* > T1* > MNI305_* > MNI152_* to be consistent with R package threeBrain.
-                xyz in native (subject brain) space and MNI space can co-exist in the same table. In this case,
-                the native space coordinates will be used to show the electrodes in the native brain,
-                    and the MNI space coordinates will be used to show the electrodes on the template brain.
-                *** If x=y=z=0, then the electrode will be hidden. *** (This is the default behavior of R package threeBrain)
+                
+                > xyz in native (subject brain) space and MNI space can co-exist in the same table. In this case,
+                > the native space coordinates will be used to show the electrodes in the native brain,
+                > and the MNI space coordinates will be used to show the electrodes on the template brain.
+
             The following columns are optional:
+
             * `Radius` (float): the radius of the electrode contact, default is 1.0 for sEEG and 2.0 for ECoG
             * `Hemisphere` (str, ["auto", "left", "right"]): the hemisphere of the electrode contact, default is "auto"
                 If "auto", then the hemisphere will be determined by the `FSLabel` column.
@@ -554,20 +842,50 @@ class Brain(object):
                             time : list[float] | float | None = None) -> SimpleKeyframe | None:
         '''
         Set value to a electrode contact.
-        @param number: The electrode contact number.
-        @param name: The data name of the value.
-        @param value: The value to set, can be a list of values or a single value.
-        @param time: The time of the value, can be a list of times (in seconds) or a single time.
-        @return: The keyframe object or None if the electrode contact is not found.
+        Args:
+            number: The electrode contact number.
+            name: The data name of the value.
+            value: The value to set, can be a list of values or a single value.
+            time: The time of the value, can be a list of times (in seconds) or a single time.
+        Returns: 
+            The keyframe object or None if the electrode contact is not found.
         '''
         contact = self._electrode_contacts.get(int(number), None)
         if contact is None:
             return None
         return contact.set_keyframe(value = value, time = time, name = name)
-    def set_electrode_values(self, table):
+    def set_electrode_values(self, table : str | DataFrame):
         '''
         Set single or multiple values to multiple electrode contacts.
-        @param table: 
+        Args: 
+            table: A pandas or a path to a csv file. The see 'Details' for table contents
+        Details:
+            The table (or table file) contains the following columns (**case-sensitive**):
+
+            * `Electrode` (mandatory): The electrode contact number, starting from 1
+            * `Subject` (optional): The subject code of the value, default is the current subject code
+            * `Time` (optional): The numeric time of the value, in seconds
+            * All other columns: The the column names are the data names of the values, can 
+                be combinations of letters `[a-zA-Z]`, numbers `[0-9]`, dots `.`, and underscores `_`
+        Examples:
+            The minimal table contains only the electrode contact number and the value:
+
+            | Electrode | brain.response |
+            |-----------|----------------|
+            | 1         | 0.1            |
+            | 2         | 0.2            |
+            | 3         | 0.3            |
+
+
+            Here's an example of the table with two variables `brain.response` and `classifier`, 
+            and two electrodes `1` and `2`. The time range is `0~1` seconds.
+
+            | Electrode | Time | brain.response | classifier |
+            |-----------|------|----------------|------------|
+            | 1         | 0    | 0.1            | A          |
+            | 1         | 1    | 0.2            | A          |
+            | 2         | 0    | 0.3            | A          |
+            | 2         | 1    | 0.4            | B          |
         '''
         if isinstance(table, str):
             # table = "/Users/dipterix/rave_data/data_dir/demo/DemoSubject/rave/meta/electrodes.csv"
@@ -601,13 +919,21 @@ class Brain(object):
                         colormap.update_from_keyframe( keyframe = keyframe )
         return 
     def get_electrode_colormap(self, name : str) -> ElectrodeColormap | None:
+        '''
+        Get the colormap of an electrode contact.
+        Args:
+            name: The name of the electrode keyframe (which is also the color-map name).
+        Returns:
+            The colormap instance or `None` if the colormap does not exist.
+        '''
         return self._electrode_cmaps.get(name, None)
     # endregion
     
-    def to_dict(self):
+    def to_dict(self) -> dict:
         '''
         Convert the brain to a dict.
-        @return: A dict containing the brain data.
+        Returns: 
+            A dict containing the brain data.
         '''
         # global_data needs to be rebuilt
         self._globals.set_group_data(
@@ -639,11 +965,12 @@ class Brain(object):
             "groups": group_list,
             "geoms": geom_list,
         }
-    def build(self, path = None, dry_run = False):
+    def build(self, path : str | None = None, dry_run : bool = False):
         '''
         Build the brain cache. If `path` is not specified, the cache will be built under the temporary directory.
-        @param path: The path to build the cache.
-        @param dry_run: If True, the cache will not be built, instead, the build process will be printed to the console.
+        Args:
+            path: The path to build the cache; default is using the `self._storage` path.
+            dry_run: If True, the cache will not be built, instead, the build process will be printed to the console.
         '''
         config = self.to_dict()
         # Needs to generate a global data dict to include all global data for compatibility

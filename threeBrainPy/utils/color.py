@@ -1,11 +1,16 @@
 import numpy as np
 
 def hexstr_to_rgb(hexstr, max_value = 1.0):
-    '''
-    Convert a hex string to a numpy (RGBA) array.
-    @param hexstr: The hex string.
-    @param max_value: The maximum value of the RGB channels. (default: 1.0)
-        Alpha channel is always maximized at 1.0
+    '''Convert a hex string to a numpy (RGBA) array.
+    Args:
+        hexstr: The hex string.
+        max_value: The maximum value of the RGB channels. (default: 1.0)
+            Alpha channel is always maximized at 1.0
+    Returns:
+        A numpy array of shape (4,) with dtype float.
+    Examples:
+        >>> hexstr_to_rgb("#ff0000")
+        array([1., 0., 0., 1.])
     '''
     if hexstr is None:
         return None
