@@ -41,13 +41,13 @@
   "homepage": "https://github.com/dipterix/threeBrainPy#readme",
   "devDependencies": {
     "@jupyterlab/builder": "^4.0.5",
-    "@rave-ieeg/three-brain": "^1.0.1",
     "rimraf": "^2.7.1",
     "webpack": "^5.88.2"
   },
   "dependencies": {
     "@jupyter-widgets/base": "^1.1 || ^2 || ^3 || ^4 || ^6",
     "@jupyterlab/services": "^7.0.5",
+    "@rave-ieeg/three-brain": "^1.0.1",
     "react": "^18.2.0"
   },
   "jupyterlab": {

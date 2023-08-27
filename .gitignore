@@ -15,3 +15,6 @@ dist
 .ipynb_checkpoints
 junk.*
 *.log
+build
+package-lock.json
+yarn.lock
