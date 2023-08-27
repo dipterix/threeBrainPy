@@ -94,6 +94,14 @@ def start_service(host : str = None, port : int = None):
     service.start(port=port)
     return service
 
+def stop_service():
+    if len(hosted_services) > 0:
+        service = hosted_services[0]
+        try:
+            service.stop()
+        except:
+            pass
+
 def stop_all_services():
     for service in hosted_services:
         try:

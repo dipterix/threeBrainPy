@@ -18,28 +18,33 @@ This will create a virtual environment to install all packages needed for develo
 
 Next, choose from the following cases, depending on which component you want to contribute.
 
-* Standard dependence
+#### Standard dependence
 
 ```sh
 # python -m pip install numpy nibabel pandas
 python -m pip install -r requirements.txt
+
+# If you want to install mkdocs for documentation
+python -m pip install -r docs/requirements.txt
 ```
 
-* Full dependence
+#### Full dependence
 
 ```sh
 # python -m pip install numpy nibabel pandas ipywidgets traitlets jupyter 
 # jupyter_packaging
 python -m pip install -r requirements-dev.txt
+
 # Install js dependence for the ipywidgets and three-brain
 npm install && cd node_modules/@rave-ieeg/three-brain && npm install && cd ../../..
-```
 
-To test installation
+# If you want to install mkdocs for documentation
+python -m pip install -r docs/requirements.txt
+```
 
 ## Test configuration
 
-First, run the following command to install local package as "dev" package
+#### Install local package as "dev" package
 
 ```sh
 python -m pip install -e . --no-deps
@@ -61,7 +66,17 @@ brain.render()
 
 You will know the module has been installed correctly. You will know if you fail as well.
 
-Finally, if you choose "Full dependence" above (insalled `ipywidgets`, `npm`, and `yarn`), you can run shell command:
+#### Documentation
+
+Run the following `mkdocs` command.
+
+```sh
+mkdocs gh-deploy
+```
+
+#### For `ipywidgets` contributors
+
+If you choose "Full dependence" above (insalled `ipywidgets`, `npm`, and `yarn`), you can run shell command:
 
 ```sh
 npm run rebuild
