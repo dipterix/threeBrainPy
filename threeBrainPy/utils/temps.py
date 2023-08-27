@@ -1,5 +1,7 @@
 import tempfile
 import os
+import re
+import random
 def ensure_directory(path, delete_file = False, check_writable = False):
     if os.path.exists(path):
         if os.path.isdir(path):
@@ -24,6 +26,8 @@ def ensure_temporary_directory(path = None):
     if path is None:
         path = ensure_default_temporary_directory()
     else:
+        paths = [x.strip() for x in re.split(r'[/\\]', path) if x.strip() not in ('', '.', '..', '~')]
+        path = os.path.join(ensure_default_temporary_directory(), *paths)
         path = ensure_directory(path, delete_file = False, check_writable = True)
     return os.path.abspath(path)
 
@@ -40,3 +44,7 @@ def temporary_file(prefix = None, suffix = None, dir = None, delete = True, name
         return tempfile.TemporaryFile(prefix = prefix, suffix = suffix, 
                                       dir = ensure_temporary_directory(dir), 
                                       delete = delete, **kwargs)
+
+
+def rand_string(n = 12, keys = "qwertyuiopasdfghjklzxcvbnm1234567890"):
+    return ''.join(random.choices(keys, k=n))

@@ -11,7 +11,7 @@ class ViewerService:
     def __init__(self, host = "localhost", directory = None):
         self.server = None
         self.thread = None
-        self.host = host
+        self.host = host if isinstance(host, str) else "localhost"
         self.port = None
         self._directory = directory
 
@@ -40,10 +40,14 @@ class ViewerService:
             self.port = server.getsockname()[1]
         
         if self._directory is None:
-            self._directory = ensure_temporary_directory("threebrainpy-viewers")
+            self._directory = ensure_temporary_directory("_threebrainpy-viewers")
         directory = self._directory
 
         class Handler(http.server.SimpleHTTPRequestHandler):
+            def end_headers (self):
+                self.send_header('Access-Control-Allow-Origin', '*')
+                super().end_headers()
+                # http.server.SimpleHTTPRequestHandler.end_headers(self)
             def __init__(self, *args, **kwargs):
                 super().__init__(*args, directory = directory, **kwargs)
             def log_message(self, format, *args):
@@ -67,6 +71,10 @@ class ViewerService:
         if self.thread is not None:
             self.thread.join()
 
+    @property
+    def url(self):
+        return f"{self.host}:{self.port}"
+    
     def browse(self):
         import webbrowser
         webbrowser.open(f"http://{self.host}:{self.port}")
@@ -76,7 +84,7 @@ hosted_services = []
 def start_service(host : str = None, port : int = None):
     if len(hosted_services) > 0:
         service = hosted_services[0]
-        if service.host != host:
+        if isinstance(host, str) and service.host != host:
             service.stop()
             service.host = host
     else:

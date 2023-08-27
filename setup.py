@@ -19,7 +19,7 @@ def get_version(rel_path: str) -> str:
 
 setup(
       name='threebrainpy',
-      version=get_version("threebrainpy/__init__.py"),
+      version=get_version("threebrainpy/_version.py"),
       description='Your Advanced Electrode Localizer Viewer for Python',
       long_description=long_description,
       long_description_content_type="text/markdown; charset=UTF-8; variant=GFM",

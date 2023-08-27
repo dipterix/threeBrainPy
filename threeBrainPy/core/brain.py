@@ -16,7 +16,7 @@ from .geom_sphere import ElectrodeSphere
 from ..templates import init_skeleton, template_path
 from ..utils import read_xfm
 from ..utils.serializer import GeomEncoder
-from ..utils.temps import temporary_directory, ensure_temporary_directory
+from ..utils.temps import temporary_directory, ensure_temporary_directory, rand_string
 from ..utils.service import start_service
 try:
     from pandas import DataFrame
@@ -88,7 +88,7 @@ class Brain(object):
         self._path = os.path.abspath(path)
         self._subject_code = subject_code
         self._template_subject = "N27"
-        self._storage = temporary_directory(prefix = subject_code, dir = work_dir)
+        self._storage = temporary_directory(prefix = subject_code)
         # set up geoms
         self._groups = {}
         self._geoms = {}
@@ -1046,17 +1046,24 @@ class Brain(object):
         for group in config['groups']:
             group.build(path = path, dry_run = dry_run)
         # construct config.json
+        config_fname = f"config_{rand_string(16)}.json"
         if dry_run:
-            print("Writing config.json...")
+            print(f"Writing {config_fname}...")
         else:
             import json
             s = json.dumps({
                 "groups": config['groups'],
                 "geoms": config['geoms'],
             }, cls = GeomEncoder)
-            with open(os.path.join(path, "lib", "threebrain_data-0", "config.json"), "w") as f:
+            with open(os.path.join(path, "lib", "threebrain_data-0", config_fname), "w") as f:
                 f.write(s)
         
+        widget_data = {
+            'data_filename' : config_fname,
+            "force_render":True,
+            'settings' : settings,
+        }
+
         # construct index.html
         if dry_run:
             print("Writing index.html...")
@@ -1064,22 +1071,20 @@ class Brain(object):
             with open(template_path("index.html"), "r") as f:
                 index_content = "\n".join(f.readlines())
             index_content = index_content.replace("WIDGET_ID", "threebrainpy-viewer")
-            widget_data = json.dumps({
-                'x' : {
-                    'data_filename' : 'config.json',
-                    "force_render":True,
-                    'settings' : settings,
-                },
-                "evals":[],"jsHooks":[]
-            }, cls = GeomEncoder)
-            index_content = index_content.replace("WIDGET_DATA", widget_data)
+            index_content = index_content.replace(
+                "WIDGET_DATA",
+                json.dumps({
+                    'x' : widget_data,
+                    "evals":[],"jsHooks":[]
+                }, cls = GeomEncoder)
+            )
             index_path = os.path.join(path, "index.html")
             with open(index_path, "w") as f:
                 f.write(index_content)
-
         # set global data
         # dict_keys(['__global_data__DemoSubject', '__global_data__.VolumeColorLUT', '__global_data__.FSColorLUT'])
         # config['groups'][0]['group_data']['__global_data__DemoSubject']
+        return widget_data
         
     def render(self, launch_browser = True, host = "localhost", port = None, **kwargs : dict):
         '''
@@ -1088,13 +1093,13 @@ class Brain(object):
             path: The path to render the cache; default is using the `self._storage` path.
             kwargs: Other arguments to be passed to `subprocess.call`.
         '''
-        self.build(dry_run = False, path=ensure_temporary_directory("threebrainpy-viewers"), **kwargs)
-        if kwargs.get("dry_run", False):
-            return
-        server = start_service(host = host, port = port)
-        print("[threebrainpy] viewer is running at: http://{}:{}".format(server.host, server.port))
-        if launch_browser:
-            server.browse()
+        self.build(dry_run = False, path=ensure_temporary_directory("_threebrainpy-viewers"), **kwargs)
+        if not kwargs.get("dry_run", False):
+            server = start_service(host = host, port = port)
+            print("[threebrainpy] viewer is running at: http://{}:{}".format(server.host, server.port))
+            if launch_browser:
+                server.browse()
+        
 
 
     

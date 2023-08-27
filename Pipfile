@@ -9,8 +9,11 @@ pandas = "*"
 matplotlib = "*"
 shiny = "*"
 nibabel = "*"
+ipywidgets = "*"
+shinywidgets = "*"
 
 [dev-packages]
+jupyter = "*"
 
 [requires]
 python_version = "3.10"

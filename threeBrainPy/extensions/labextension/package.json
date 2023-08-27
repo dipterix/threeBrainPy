@@ -1,0 +1,67 @@
+{
+  "name": "threebrainpy",
+  "version": "0.1.0",
+  "description": "Your Advanced Electrode Localizer Viewer for Python",
+  "main": "src/lib/index.js",
+  "files": [
+    "src/**/*.js",
+    "dist/*.js"
+  ],
+  "scripts": {
+    "clean": "rimraf dist/ && rimraf threebrainpy/extensions/labextension/ && rimraf threebrainpy/extensions/nbextension",
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "watch": "webpack --watch --mode=development",
+    "docs": "mkdocs build",
+    "docs-serve": "mkdocs serve -w threebrainpy",
+    "docs-deploy": "mkdocs gh-deploy",
+    "build": "webpack --mode=development && yarn run build:labextension:dev",
+    "build:prod": "webpack --mode=production && yarn run build:labextension",
+    "build:labextension": "jupyter labextension build .",
+    "build:labextension:dev": "jupyter labextension build --development True .",
+    "rebuild": "yarn run build && jupyter labextension develop . --overwrite"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/dipterix/threeBrainPy.git"
+  },
+  "keywords": [
+    "iEEG",
+    "DBS",
+    "Visualization",
+    "Neuroscience",
+    "Electrophysiology",
+    "Electrode",
+    "Localizer"
+  ],
+  "author": "Zhengjia Wang",
+  "license": "MPL-2.0",
+  "bugs": {
+    "url": "https://github.com/dipterix/threeBrainPy/issues"
+  },
+  "homepage": "https://github.com/dipterix/threeBrainPy#readme",
+  "devDependencies": {
+    "@jupyterlab/builder": "^4.0.5",
+    "@rave-ieeg/three-brain": "^1.0.1",
+    "rimraf": "^2.7.1",
+    "webpack": "^5.88.2"
+  },
+  "dependencies": {
+    "@jupyter-widgets/base": "^1.1 || ^2 || ^3 || ^4 || ^6",
+    "@jupyterlab/services": "^7.0.5",
+    "react": "^18.2.0"
+  },
+  "jupyterlab": {
+    "extension": "src/lib/labplugin",
+    "outputDir": "threebrainpy/extensions/labextension",
+    "sharedPackages": {
+      "@jupyter-widgets/base": {
+        "bundled": false,
+        "singleton": true
+      }
+    },
+    "_build": {
+      "load": "static/remoteEntry.0a7b4bcf2d563269259f.js",
+      "extension": "./extension"
+    }
+  }
+}
