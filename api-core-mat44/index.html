@@ -511,142 +511,45 @@
             Bases: <code>object</code></p>
 
   
-      <p>A 4x4 matrix for 3D affine transformation.</p>
+      <p>A 4x4 matrix for 3D affine transformation.
+Args:
+    mat: The matrix, can be a 1D array of length 12 or 16, or a 2D array of shape (3,4) or (4,4).
+    byrow: Whether the matrix is in row-major order (default) or column-major order.
+    space_from: The space from which the matrix is defined, choices are "ras", "voxel", "ras_tkr", "mni305", "mni152".</p>
+<pre><code>    * "ras": scanner-RAS space
+    * "voxel": voxel indexing space (or IJK space)
+    * "ras_tkr": FreeSurfer RAS space, this is the space used internally by the viewer engine in JavaScript
+    * "mni305": MNI305 template space
+    * "mni152": MNI152 template space
 
+    &gt; threebrainpy does not limit the choices, but the viewer only supports these spaces.
 
-
-  <p><strong>Parameters:</strong></p>
-  <table>
-    <thead>
-      <tr>
-        <th>Name</th>
-        <th>Type</th>
-        <th>Description</th>
-        <th>Default</th>
-      </tr>
-    </thead>
-    <tbody>
-        <tr>
-          <td><code>mat</code></td>
-          <td>
-                <code><span title="numpy.ndarray">ndarray</span> | list | tuple | None</code>
-          </td>
-          <td>
-            <div class="doc-md-description">
-              <p>The matrix, can be a 1D array of length 12 or 16, or a 2D array of shape (3,4) or (4,4).</p>
-            </div>
-          </td>
-          <td>
-                <code>None</code>
-          </td>
-        </tr>
-        <tr>
-          <td><code>byrow</code></td>
-          <td>
-                <code>bool</code>
-          </td>
-          <td>
-            <div class="doc-md-description">
-              <p>Whether the matrix is in row-major order (default) or column-major order.</p>
-            </div>
-          </td>
-          <td>
-                <code>True</code>
-          </td>
-        </tr>
-        <tr>
-          <td><code>space_from</code></td>
-          <td>
-                <code>str</code>
-          </td>
-          <td>
-            <div class="doc-md-description">
-              <p>The space from which the matrix is defined, choices are "ras", "voxel", "ras_tkr", "mni305", "mni152".</p>
-<ul>
-<li>"ras": scanner-RAS space</li>
-<li>"voxel": voxel indexing space (or IJK space)</li>
-<li>"ras_tkr": FreeSurfer RAS space, this is the space used internally by the viewer engine in JavaScript</li>
-<li>"mni305": MNI305 template space</li>
-<li>"mni152": MNI152 template space</li>
-</ul>
-<blockquote>
-<p>threebrainpy does not limit the choices, but the viewer only supports these spaces.</p>
-</blockquote>
-            </div>
-          </td>
-          <td>
-                <code>&#39;ras&#39;</code>
-          </td>
-        </tr>
-        <tr>
-          <td><code>space_to</code></td>
-          <td>
-                <code>str</code>
-          </td>
-          <td>
-            <div class="doc-md-description">
-              <p>The space to which the matrix is defined, choices are the same as <code>space_from</code>.</p>
-            </div>
-          </td>
-          <td>
-                <code>&#39;ras&#39;</code>
-          </td>
-        </tr>
-        <tr>
-          <td><code>modality_from</code></td>
-          <td>
-                <code>str</code>
-          </td>
-          <td>
-            <div class="doc-md-description">
-              <p>The imaging modality from which the matrix is defined, choices are "T1" or "CT" other modalities may be 
-added in the future, default is "T1".</p>
-            </div>
-          </td>
-          <td>
-                <code>&#39;T1&#39;</code>
-          </td>
-        </tr>
-        <tr>
-          <td><code>modality_to</code></td>
-          <td>
-                <code>str</code>
-          </td>
-          <td>
-            <div class="doc-md-description">
-              <p>The imaging modality to which the matrix is defined. If set to <code>None</code>, then it will be set
-with the same value as <code>modality_from</code> automatically; default choice is <code>None</code>.</p>
-            </div>
-          </td>
-          <td>
-                <code>&#39;T1&#39;</code>
-          </td>
-        </tr>
-    </tbody>
-  </table>
-
-
-
-<p><strong>Examples:</strong></p>
-    <div class="highlight"><pre><span></span><code><span class="gp">&gt;&gt;&gt; </span><span class="n">Mat44</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="mi">4</span><span class="p">,</span><span class="mi">5</span><span class="p">,</span><span class="mi">6</span><span class="p">,</span><span class="mi">7</span><span class="p">,</span><span class="mi">8</span><span class="p">,</span><span class="mi">9</span><span class="p">,</span><span class="mi">10</span><span class="p">,</span><span class="mi">11</span><span class="p">,</span><span class="mi">12</span><span class="p">])</span>
-<span class="go">Mat44 (T1.ras -&gt; T1.ras): </span>
-<span class="go">array([[ 1.,  2.,  3.,  4.],</span>
-<span class="go">    [ 5.,  6.,  7.,  8.],</span>
-<span class="go">    [ 9., 10., 11., 12.],</span>
-<span class="go">    [ 0.,  0.,  0.,  1.]])</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">Mat44</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="mi">4</span><span class="p">,</span><span class="mi">5</span><span class="p">,</span><span class="mi">6</span><span class="p">,</span><span class="mi">7</span><span class="p">,</span><span class="mi">8</span><span class="p">,</span><span class="mi">9</span><span class="p">,</span><span class="mi">10</span><span class="p">,</span><span class="mi">11</span><span class="p">,</span><span class="mi">12</span><span class="p">],</span> <span class="n">byrow</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
-<span class="go">Mat44 (T1.ras -&gt; T1.ras): </span>
-<span class="go">array([[ 1.,  4.,  7., 10.],</span>
-<span class="go">    [ 2.,  5.,  8., 11.],</span>
-<span class="go">    [ 3.,  6.,  9., 12.],</span>
-<span class="go">    [ 0.,  0.,  0.,  1.]])</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">Mat44</span><span class="p">([</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">128</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="o">-</span><span class="mi">128</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">128</span><span class="p">],</span> <span class="n">space_from</span><span class="o">=</span><span class="s2">&quot;voxel&quot;</span><span class="p">,</span> <span class="n">space_to</span><span class="o">=</span><span class="s2">&quot;ras_tkr&quot;</span><span class="p">)</span>
-<span class="go">Mat44 (T1.voxel -&gt; T1.ras_tkr): </span>
-<span class="go">array([[  -1.,    0.,    0.,  128.],</span>
-<span class="go">    [   0.,    0.,    1., -128.],</span>
-<span class="go">    [   0.,   -1.,    0.,  128.],</span>
-<span class="go">    [   0.,    0.,    0.,    1.]])</span>
-</code></pre></div>
+space_to: The space to which the matrix is defined, choices are the same as `space_from`.
+modality_from: The imaging modality from which the matrix is defined, choices are "T1" or "CT" other modalities may be 
+    added in the future, default is "T1".
+modality_to: The imaging modality to which the matrix is defined. If set to `None`, then it will be set
+    with the same value as `modality_from` automatically; default choice is `None`.
+</code></pre>
+<p>Examples:</p>
+<pre><code>&gt;&gt;&gt; Mat44([1,2,3,4,5,6,7,8,9,10,11,12])
+Mat44 (T1.ras -&gt; T1.ras): 
+array([[ 1.,  2.,  3.,  4.],
+    [ 5.,  6.,  7.,  8.],
+    [ 9., 10., 11., 12.],
+    [ 0.,  0.,  0.,  1.]])
+&gt;&gt;&gt; Mat44([1,2,3,4,5,6,7,8,9,10,11,12], byrow=False)
+Mat44 (T1.ras -&gt; T1.ras): 
+array([[ 1.,  4.,  7., 10.],
+    [ 2.,  5.,  8., 11.],
+    [ 3.,  6.,  9., 12.],
+    [ 0.,  0.,  0.,  1.]])
+&gt;&gt;&gt; Mat44([-1,0,0,128,0,0,1,-128,0,-1,0,128], space_from="voxel", space_to="ras_tkr")
+Mat44 (T1.voxel -&gt; T1.ras_tkr): 
+array([[  -1.,    0.,    0.,  128.],
+    [   0.,    0.,    1., -128.],
+    [   0.,   -1.,    0.,  128.],
+    [   0.,    0.,    0.,    1.]])
+</code></pre>
 
             <details class="quote">
               <summary>Source code in <code>threebrainpy/core/mat44.py</code></summary>
