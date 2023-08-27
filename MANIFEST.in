@@ -6,6 +6,7 @@ graft tests
 prune **/node_modules
 
 include threebrainpy.json
+include threebrainpy/*
 
 include LICENSE
 include setup.py
