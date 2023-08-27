@@ -1,6 +1,6 @@
 # Blank placeholder for geom to hold group data only
 
-from .geometry import GeometryTemplate
+from .geom_template import GeometryTemplate
 
 class BlankPlaceholder ( GeometryTemplate ):
     def __init__(self, brain, is_global : bool = False) -> None:

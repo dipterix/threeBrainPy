@@ -8,3 +8,10 @@
 *.pyx
 __pycache__
 *.egg-info
+site
+junk
+node_modules
+dist
+.ipynb_checkpoints
+junk.*
+*.log

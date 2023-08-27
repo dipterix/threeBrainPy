@@ -1,10 +1,9 @@
 # defines the abstract class Geometry
 
 import numpy as np
-from .group import GeomWrapper
-from ..core.mat44 import Mat44
-from ..core.vec3 import Vec3
-from ..core.constants import CONSTANTS
+from .mat44 import Mat44
+from .vec3 import Vec3
+from .constants import CONSTANTS
 
 class GeometryTemplate:
     def __init__(self, brain, name : str, group_name : str | None = None, auto_register : bool = True) -> None:

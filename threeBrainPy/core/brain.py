@@ -7,16 +7,17 @@ from .vec3 import Vec3
 from .keyframe import SimpleKeyframe
 from .colormap import ElectrodeColormap
 from .constants import CONSTANTS
-from ..geom.group import GeomWrapper
-from ..geom.geometry import GeometryTemplate
-from ..geom.datacube import VolumeSlice, VolumeCube
-from ..geom.blank import BlankPlaceholder
-from ..geom.surface import CorticalSurface
-from ..geom.sphere import ElectrodeSphere
+from .group import GeomWrapper
+from .geom_template import GeometryTemplate
+from .geom_datacube import VolumeWrapper, VolumeSlice, VolumeCube
+from .geom_placeholder import BlankPlaceholder
+from .geom_surface import CorticalSurface
+from .geom_sphere import ElectrodeSphere
 from ..templates import init_skeleton, template_path
-from ..utils import VolumeWrapper, read_xfm
+from ..utils import read_xfm
 from ..utils.serializer import GeomEncoder
-from ..utils.temps import temporary_directory
+from ..utils.temps import temporary_directory, ensure_temporary_directory
+from ..utils.service import start_service
 try:
     from pandas import DataFrame
 except:
@@ -60,7 +61,7 @@ class Brain(object):
                     vox2ras_needs_update = True
                 if not isinstance(self._vox2ras_tkr, Mat44):
                     vox2ras_tkr_needs_update = True
-                elif update == 1 and self._vox2ras_tkr.extra.get('source_format', None) is not "mgz" and volume_file.lower().endswith(".mgz"):
+                elif update == 1 and self._vox2ras_tkr.extra.get('source_format', None) != "mgz" and volume_file.lower().endswith(".mgz"):
                     vox2ras_tkr_needs_update = True
                 if vox2ras_needs_update or vox2ras_tkr_needs_update:
                     volume = VolumeWrapper(volume_file)
@@ -112,7 +113,7 @@ class Brain(object):
         xfm_file = os.path.join(self.path_mri, "transforms", "talairach.xfm")
         try:
             xfm = read_xfm(xfm_file)
-            self._ras2mni_305 = xfm['transform']
+            self._ras2mni_305 = Mat44(xfm['transform'], space_from=xfm['space_from'], space_to=xfm['space_to'])
         except:
             self._ras2mni_305 = Mat44(space_from="ras", space_to="mni305")
         
@@ -312,7 +313,7 @@ class Brain(object):
     def _initialize_global_data(self):
         global_placeholder = BlankPlaceholder(brain = self)
         self._globals = global_placeholder.group
-    def add_global_data(self, name : str, value : any | str, is_cache : bool = False, absolute_path : str = None):
+    def add_global_data(self, name : str, value : any, is_cache : bool = False, absolute_path : str = None):
         '''
         Internal method to add global data to the brain.
         Args:
@@ -378,7 +379,7 @@ class Brain(object):
         if self.has_group(name):
             return self.get_group(name)
         return self.add_group(name = name, exists_ok = True, **kwargs)
-    def set_group_data(self, name : str, value : any | str, is_cache : bool = False, absolute_path : str | None = None, auto_create : bool = True) -> None:
+    def set_group_data(self, name : str, value : any, is_cache : bool = False, absolute_path : str | None = None, auto_create : bool = True) -> None:
         '''
         Set group data to the brain so the JavaScript engine will have access to the data. 
             This method is a low-level function
@@ -397,7 +398,7 @@ class Brain(object):
             raise ValueError(f"Group {name} not found.")
         group.set_group_data(name = name, value = value, is_cache = is_cache, absolute_path = absolute_path)
         return None
-    def get_global_data(self, name : str, force_reload : bool = False, ifnotfound : any | None = None) -> any:
+    def get_global_data(self, name : str, force_reload : bool = False, ifnotfound : any = None) -> any:
         '''
         Get group data from the brain instance.
         Args:
@@ -673,7 +674,7 @@ class Brain(object):
         self._electrode_contacts[ contact.number ] = contact
         return contact
     def set_electrode_keyframe(self, number : int, value : np.ndarray | list[float] | list[int] | list[str] | float | int | str, 
-                               time : float | list[float] | tuple(float) | np.ndarray | None = None, 
+                               time : float | list[float] | tuple[float] | np.ndarray | None = None, 
                                name : str = "value") -> SimpleKeyframe | None:
         '''
         Low-level method to set electrode contacts keyframe (values).
@@ -1080,6 +1081,20 @@ class Brain(object):
         # dict_keys(['__global_data__DemoSubject', '__global_data__.VolumeColorLUT', '__global_data__.FSColorLUT'])
         # config['groups'][0]['group_data']['__global_data__DemoSubject']
         
+    def render(self, launch_browser = True, host = "localhost", port = None, **kwargs : dict):
+        '''
+        Render the brain cache. If `path` is not specified, the cache will be rendered under the temporary directory.
+        Args:
+            path: The path to render the cache; default is using the `self._storage` path.
+            kwargs: Other arguments to be passed to `subprocess.call`.
+        '''
+        self.build(dry_run = False, path=ensure_temporary_directory("threebrainpy-viewers"), **kwargs)
+        if kwargs.get("dry_run", False):
+            return
+        server = start_service(host = host, port = port)
+        print("[threebrainpy] viewer is running at: http://{}:{}".format(server.host, server.port))
+        if launch_browser:
+            server.browse()
 
 
     

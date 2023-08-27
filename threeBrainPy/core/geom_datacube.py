@@ -1,7 +1,93 @@
-from .geometry import GeometryTemplate
-from ..utils import VolumeWrapper
-from ..core.mat44 import Mat44
-from ..core.constants import CONSTANTS
+import os
+import nibabel
+from .geom_template import GeometryTemplate
+from ..utils.volume import read_volume
+from ..utils.temps import temporary_file
+from .mat44 import Mat44
+from .constants import CONSTANTS
+
+class VolumeWrapper():
+    def __init__(self, volume, **kwargs) -> None:
+        '''
+        Create a volume wrapper. The volume must be either NIFTI or FreeSurfer (mgh/mgz) format.
+        @param volume: The volume to be wrapped. It can be either a file path or one of the followings:
+            1. nibabel.Nifti1Image
+            2. nibabel.Nifti2Image
+            3. nibabel.MGHImage
+        '''
+        if isinstance(volume, str):
+            volume = read_volume(volume, **kwargs)
+        self._volume = volume
+        # make sure the volume is in the correct format
+        if isinstance(volume, (nibabel.Nifti1Image, nibabel.Nifti2Image)):
+            self._format = "nii"
+        elif isinstance(volume, (nibabel.MGHImage)):
+            self._format = "mgz"
+        else:
+            raise ValueError(f"Unsupported volume type: {type(volume)}. Please make sure this is a valid NIFTI or FreeSurfer volume.")
+        pass
+    @property
+    def volume(self):
+        return self._volume
+    @property
+    def format(self):
+        return self._format
+    @property
+    def header(self):
+        return self._volume.header
+    @property
+    def shape(self):
+        return self._volume.shape
+    @property
+    def ndim(self):
+        return self._volume.ndim
+    @property
+    def vox2ras(self) -> Mat44:
+        return self.get_vox2ras()
+    @property
+    def vox2ras_tkr(self) -> Mat44:
+        return self.get_vox2ras_tkr()
+    def get_vox2ras(self):
+        m = Mat44(self._volume.affine, space_from="voxel", space_to="ras")
+        return m
+    def get_vox2ras_tkr(self):
+        if self._format == "nii":
+            mat = self._volume.header.get_base_affine()
+        else:
+            mat = self._volume.header.get_vox2ras_tkr()
+        m = Mat44(mat, space_from="voxel", space_to="ras_tkr")
+        m.extra['source_format'] = self._format
+        return m
+    def get_fdata(self):
+        return self._volume.get_fdata()
+    def _get_filepath(self, alternative_path : str = None, normalize : bool = True) -> str:
+        path = self._volume.extra.get('file_path_original', None)
+        if path is None and alternative_path is not None:
+            path = os.path.abspath(alternative_path)
+            self._volume.to_filename(path)
+            self._volume.extra['file_path_original'] = path
+        if normalize:
+            path = os.path.abspath(path)
+        return path
+    def as_cache(self):
+        path = self._volume.extra.get('file_path_original', None)
+        if path is None:
+            if self._format == "nii":
+                suffix = ".nii.gz"
+            else:
+                suffix = ".mgz"
+            tfile = temporary_file(suffix = suffix, prefix = "volume_", delete = False)
+            tfile.close()
+            path = tfile.name
+        path = self._get_filepath(alternative_path = path, normalize = False)
+        return {
+            'path': path,
+            'absolute_path': os.path.abspath(path),
+            'file_name': os.path.basename(path),
+            'is_new_cache': False,
+            'is_cache': True,
+            'is_nifti': self._format == "nii",
+        }
 
 
 class VolumeSlice( GeometryTemplate ):

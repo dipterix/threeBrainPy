@@ -2,7 +2,7 @@ import os
 import re
 import numpy as np
 import shutil
-from ..core.mat44 import Mat44
+from .mat44 import Mat44
 
 class GeomWrapper:
     def __init__(self, brain, name : str, layers = [0], position = [0, 0, 0]):
