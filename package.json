@@ -22,7 +22,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/dipterix/threeBrainPy.git"
+    "url": "git+https://github.com/dipterix/threebrainpy.git"
   },
   "keywords": [
     "iEEG",
@@ -36,9 +36,9 @@
   "author": "Zhengjia Wang",
   "license": "MPL-2.0",
   "bugs": {
-    "url": "https://github.com/dipterix/threeBrainPy/issues"
+    "url": "https://github.com/dipterix/threebrainpy/issues"
   },
-  "homepage": "https://github.com/dipterix/threeBrainPy#readme",
+  "homepage": "https://github.com/dipterix/threebrainpy",
   "devDependencies": {
     "@jupyterlab/builder": "^4.0.5",
     "rimraf": "^2.7.1",

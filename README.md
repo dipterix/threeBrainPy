@@ -23,13 +23,13 @@ pip install threebrainpy pandas matplotlib ipywidgets traitlets
 ### Install from `Github`:
 
 ```sh
-pip install git+https://github.com/dipterix/threeBrainPy
+pip install git+https://github.com/dipterix/threebrainpy
 ```
 
 This command will bare-minimal install `threebrainpy` for maximum compatibility. You might want to install extra dependencies to fully uilize the features.
 
 ```sh
-pip install -r "https://raw.githubusercontent.com/dipterix/threeBrainPy/main/requirements-dev.txt"
+pip install -r "https://raw.githubusercontent.com/dipterix/threebrainpy/main/requirements-dev.txt"
 ```
 
 ### Test the installation
