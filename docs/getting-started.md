@@ -29,14 +29,53 @@ brain.render()
 
 ## Example: add electrodes
 
-Easiest way to add electrodes is via a `csv` table. Please see [documentation](/api-core-brain/#threebrainpy.core.brain.Brain.add_electrodes){:target="_blank"}. Here is [a toy-example table](/showcase-viewer/electrodes.csv){:target="_blank"}. A bare-minimal table should contain at lease 5 columns:
+Easiest way to add electrodes is via a `csv` table. Here is [a toy-example table](/showcase-viewer/electrodes.csv){:target="_blank"}. A bare-minimal table should contain at lease 5 columns:
 
 |     Electrode       |       T1R       |       T1A       |       T1S       |       Label       |
 |---------------------|-----------------|-----------------|-----------------|-------------------|
 | int (start from 1)  | float (T1 MRI R)| float (T1 MRI A)| float (T1 MRI S)| str               |
 
+Other coordinate systems are also supported. See [documentation](/api-core-brain/#threebrainpy.core.brain.Brain.add_electrodes){:target="_blank"} for details:
+
+* `Coord_x`, `Coord_y`, `Coord_z`: coordinates in `fsaverage` RAS space (tkrRAS)
+* `T1R`, `T1A`, `T1S`: coordinates in `T1` MRI space (scanner RAS)
+* `MNI305_x`, `MNI305_y`, `MNI305_z`: coordinates in `MNI305` space
+* `MNI152_x`, `MNI152_y`, `MNI152_z`: coordinates in `MNI152` space
+
 
 ```py
 # Read electrodes.csv from github
-brain.add_electrodes(table="electrodes.csv")
+electrode_path = "https://raw.githubusercontent.com/dipterix/threeBrainPy/main/docs/showcase-viewer/electrodes.csv"
+brain.add_electrodes(table=electrode_path)
 ```
+
+> You can pass the `pandas` dataframe to `brain.add_electrodes` as well. For example, 
+
+```py
+import pandas as pd
+table = pd.read_csv(electrode_path)
+brain.add_electrodes(table=table)
+```
+
+## Example: add iEEG data
+
+The easiest way to add iEEG data is via a `csv` table. Here is [a toy-example table](/showcase-viewer/electrodes.csv){:target="_blank"}. A bare-minimal table should contain at lease 2 columns:
+
+|     Electrode       |       Data (you can rename it)       |
+|---------------------|--------------------------------------|
+| str (electrode name)| float | str (data value)             |
+
+Other key-columns are:
+
+* Subject (used when you have multiple subjects)
+* Time (used when you have animation)
+
+> A complete [documentation is here](/api-core-brain/#threebrainpy.core.brain.Brain.set_electrode_values){:target="_blank"}
+
+```py
+value_path = "https://raw.githubusercontent.com/dipterix/threeBrainPy/main/docs/showcase-viewer/electrodes.csv"
+brain.set_electrode_values(value_path)
+brain.render()
+```
+
+> You must add electrodes first before setting contact values. Otherwise, the values will be dropped.
