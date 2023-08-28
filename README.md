@@ -67,7 +67,7 @@ Here is a comparison of the Python vs R packages:
 
 # Sponsor
 
-There has been no sponsor in this Python project yet. It is super hard and discouraging for software projects to apply for fundings. Your support will be greatly appreciated. Please email `help` at `rave.wiki` to join our slack channel if you want to:
+We are actively looking for grant fundings. It is super hard for software projects to apply for fundings. Your support will be greatly appreciated. Please email `help` at `rave.wiki` to join our slack channel if you want to:
 
 * Request a demos
 * Ask questions
