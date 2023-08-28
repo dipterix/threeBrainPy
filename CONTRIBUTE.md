@@ -1,7 +1,6 @@
 ## Prerequisites
 
 * Minimum: `python>=3.8`, `setuptools>=43.0.0`, `wheel`
-* For widgets: `npm`, `yarn`
 
 ## Set up development environment
 
@@ -18,28 +17,16 @@ This will create a virtual environment to install all packages needed for develo
 
 Next, choose from the following cases, depending on which component you want to contribute.
 
-#### Standard dependence
+* Standard dependence
 
 ```sh
-# python -m pip install numpy nibabel pandas
 python -m pip install -r requirements.txt
-
-# If you want to install mkdocs for documentation
-python -m pip install -r docs/requirements.txt
 ```
 
-#### Full dependence
+* Full dependence
 
 ```sh
-# python -m pip install numpy nibabel pandas ipywidgets traitlets jupyter 
-# jupyter_packaging
 python -m pip install -r requirements-dev.txt
-
-# Install js dependence for the ipywidgets and three-brain
-npm install && cd node_modules/@rave-ieeg/three-brain && npm install && cd ../../..
-
-# If you want to install mkdocs for documentation
-python -m pip install -r docs/requirements.txt
 ```
 
 ## Test configuration
@@ -72,14 +59,6 @@ Run the following `mkdocs` command.
 
 ```sh
 mkdocs gh-deploy
-```
-
-#### For `ipywidgets` contributors
-
-If you choose "Full dependence" above (insalled `ipywidgets`, `npm`, and `yarn`), you can run shell command:
-
-```sh
-npm run rebuild
 ```
 
 ## Why not `conda`
