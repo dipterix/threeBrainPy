@@ -26,18 +26,21 @@ setup(
       url='https://github.com/dipterix/threeBrainPy',
       author='Zhengjia Wang',
       author_email='dipterix.wang@gmail.com',
+      license='Mozilla Public License 2.0 (MPL 2.0)',
       classifiers=[
             # How mature is this project? Common values are
             #   3 - Alpha
             #   4 - Beta
             #   5 - Production/Stable
-            'Development Status :: 1 - Planning',
+            'Development Status :: 3 - Alpha',
 
             # Indicate who your project is intended for
+            'Intended Audience :: Developers',
             'Intended Audience :: Science/Research',
             'Topic :: Multimedia :: Graphics :: 3D Rendering',
             'Topic :: Scientific/Engineering :: Human Machine Interfaces',
             'Topic :: Scientific/Engineering :: Visualization',
+            "Operating System :: OS Independent",
 
             # Pick your license as you wish (should match "license" above)
             'License :: OSI Approved :: Mozilla Public License 2.0 (MPL 2.0)',
@@ -45,9 +48,6 @@ setup(
             # Specify the Python versions you support here. In particular, ensure
             # that you indicate whether you support Python 2, Python 3 or both.
             'Programming Language :: Python :: 3',
-
-            # Prevent upload to PyPI for now
-            'Private :: Do Not Upload',
       ],
       keywords='iEEG, DBS, Visualization, Neuroscience, Electrophysiology, Electrode, Localizer',
       project_urls={

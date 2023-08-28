@@ -49,11 +49,11 @@ Please check the documentation [here](https://dipterix.org/threeBrainPy/).
 
 ## Other implementations
 
-This Python implementation implements the core functionalities. More advanced features will come soon. 
+This Python package implements the core functionalities. More advanced features will come soon. 
 
-The core implementation is in [JavaScript](https://github.com/dipterix/three-brain-js). The R implementation [threeBrain](https://github.com/dipterix/threeBrain) is also available on [CRAN](https://cran.r-project.org/package=threeBrain).
+The core script is written in [JavaScript](https://github.com/dipterix/three-brain-js). The R implementation [threeBrain](https://github.com/dipterix/threeBrain) is available on [CRAN](https://cran.r-project.org/package=threeBrain).
 
-Here is a comparison of the Python vs R implementations:
+Here is a comparison of the Python vs R packages:
 
 | Feature | R | Python |
 |---------|--------|---|
