@@ -55,7 +55,7 @@ The core implementation is in [JavaScript](https://github.com/dipterix/three-bra
 
 Here is a comparison of the Python vs R implementations:
 
-| Feature | Python | R |
+| Feature | R | Python |
 |---------|--------|---|
 | 3D Brain | :white_check_mark: | :white_check_mark: |
 | 3D Electrodes | :white_check_mark: | :white_check_mark: |
