@@ -29,8 +29,10 @@ MNI305_TO_MNI152 = Mat44(CONSTANTS.MNI305_TO_MNI152, space_from="mni305", space_
 class Brain(object):
     '''
     Class definition for storing brain data and rendering information.
+    
     Examples:
         This example loads `fsaverage` brain from FreeSurfer (if you have installed) and renders it.
+
         >>> import os
         >>> from threebrainpy.core import Brain
         >>> fs_home = os.environ.get("FREESURFER_HOME", None)

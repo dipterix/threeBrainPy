@@ -66,5 +66,7 @@ setup(
       install_requires=[
             'numpy',
             'nibabel',
+            'pandas',
+            'matplotlib',
       ],
 )

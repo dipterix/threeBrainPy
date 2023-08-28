@@ -1,2 +1,0 @@
-from .widget import BrainWidget
-

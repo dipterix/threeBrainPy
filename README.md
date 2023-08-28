@@ -10,26 +10,18 @@ The script is under construction. See the [R package threeBrain](https://github.
 
 ```sh
 # Bare minimal
-pip install threebrainpy pandas matplotlib
-
-# or enable pandas and matplotlib support
-pip install threebrainpy pandas matplotlib
+pip install threebrainpy
 
 # to allow Jupyter support
-pip install threebrainpy pandas matplotlib ipywidgets traitlets
+pip install threebrainpy threebrainpywidget
 ```
 
 
 ### Install from `Github`:
 
 ```sh
+pip install pandas matplotlib
 pip install git+https://github.com/dipterix/threebrainpy
-```
-
-This command will bare-minimal install `threebrainpy` for maximum compatibility. You might want to install extra dependencies to fully uilize the features.
-
-```sh
-pip install -r "https://raw.githubusercontent.com/dipterix/threebrainpy/main/requirements-dev.txt"
 ```
 
 ### Test the installation
