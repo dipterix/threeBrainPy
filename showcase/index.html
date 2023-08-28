@@ -1,0 +1,467 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+      
+      
+      
+      
+      <link rel="icon" href="../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.5.2, mkdocs-material-9.2.3">
+    
+    
+      
+        <title>Showcase - Your Advanced Electrode Localizer Viewer for Python</title>
+      
+    
+    
+      <link rel="stylesheet" href="../assets/stylesheets/main.0e669242.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+      <link rel="stylesheet" href="../assets/_mkdocstrings.css">
+    
+    <script>__md_scope=new URL("..",location),__md_hash=e=>[...e].reduce((e,_)=>(e<<5)-e+_.charCodeAt(0),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+    
+  </head>
+  
+  
+    <body dir="ltr">
+  
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&"object"==typeof palette.color)for(var key of Object.keys(palette.color))document.body.setAttribute("data-md-color-"+key,palette.color[key])</script>
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href=".." title="Your Advanced Electrode Localizer Viewer for Python" class="md-header__button md-logo" aria-label="Your Advanced Electrode Localizer Viewer for Python" data-md-component="logo">
+      
+  <img src="../assets/images/favicon.png" alt="logo">
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3V6m0 5h18v2H3v-2m0 5h18v2H3v-2Z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            Your Advanced Electrode Localizer Viewer for Python
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              Showcase
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+    
+    
+      <label class="md-header__button md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5Z"/></svg>
+      </label>
+      <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5Z"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12Z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12 19 6.41Z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+
+<nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href=".." title="Your Advanced Electrode Localizer Viewer for Python" class="md-nav__button md-logo" aria-label="Your Advanced Electrode Localizer Viewer for Python" data-md-component="logo">
+      
+  <img src="../assets/images/favicon.png" alt="logo">
+
+    </a>
+    Your Advanced Electrode Localizer Viewer for Python
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+    <li class="md-nav__item">
+      <a href=".." class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Home
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../getting-started/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Getting Started
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3" >
+        
+          <label class="md-nav__link" for="__nav_3" id="__nav_3_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    API Reference
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3">
+            <span class="md-nav__icon md-icon"></span>
+            API Reference
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_1" >
+        
+          <label class="md-nav__link" for="__nav_3_1" id="__nav_3_1_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    <code>threebrainpy.core</code>
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_3_1_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3_1">
+            <span class="md-nav__icon md-icon"></span>
+            <code>threebrainpy.core</code>
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../api-core-brain/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    <code>&lt;Class Brain&gt;</code>
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../api-core-vec3/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    <code>&lt;Class Vec3&gt;</code>
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../api-core-mat44/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    <code>&lt;Class Mat44&gt;</code>
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../api-utils/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Module utils
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+  <h1>Showcase</h1>
+
+<script src="showcase-viewer/lib/htmlwidgets-1.6.2/htmlwidgets.js"></script>
+<script src="showcase-viewer/lib/three-brain-1.0.0/threebrain.js"></script>
+<script src="showcase-viewer/lib/threejs_brain-binding-1.0.1.9008/threejs_brain.js"></script>
+
+<div id="htmlwidget_container">
+    <div id="showcase-01" style="width:100%;height:100vh;" class="threejs_brain html-widget">
+    </div>
+</div>
+
+<script type="application/json" data-for="showcase-01">{"x":{"data_filename":"config_d827e4d78a8b3592b0d2eaf2de5b875e.json","settings":{"title":"","side_camera":true,"side_canvas_zoom":1,"side_canvas_width":250,"side_canvas_shift":[0,0],"color_maps":{"[Subject]":{"name":"[Subject]","time_range":[0,1],"value_range":[-1,1],"value_names":"N27","value_type":"discrete","color_keys":[1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16],"color_vals":["0x000000","0x000000","0x000000","0x000000","0x000000","0x000000","0x000000","0x000000","0x000000","0x000000","0x000000","0x000000","0x000000","0x000000","0x000000","0x000000"],"color_levels":1,"hard_range":[],"alias":[]},"Coord_x":{"name":"Coord_x","time_range":[0,1],"value_range":[-71.9334613,71.9334613],"value_names":null,"value_type":"continuous","color_keys":[-71.9334613,-69.64985935396825,-67.36625740793652,-65.08265546190476,-62.79905351587302,-60.51545156984128,-58.23184962380952,-55.94824767777778,-53.66464573174603,-51.38104378571429,-49.09744183968255,-46.81383989365079,-44.53023794761905,-42.24663600158731,-39.96303405555555,-37.67943210952381,-35.39583016349206,-33.11222821746032,-30.82862627142858,-28.54502432539682,-26.26142237936508,-23.97782043333333,-21.69421848730158,-19.41061654126984,-17.12701459523809,-14.84341264920635,-12.55981070317461,-10.27620875714285,-7.992606811111109,-5.709004865079365,-3.425402919047613,-1.141800973015876,1.141800973015876,3.425402919047627,5.709004865079365,7.992606811111116,10.27620875714285,12.55981070317461,14.84341264920636,17.12701459523809,19.41061654126985,21.6942184873016,23.97782043333333,26.26142237936509,28.54502432539684,30.82862627142858,33.11222821746033,35.39583016349206,37.67943210952382,39.96303405555557,42.24663600158731,44.53023794761906,46.81383989365079,49.09744183968255,51.3810437857143,53.66464573174603,55.94824767777779,58.23184962380952,60.51545156984128,62.79905351587303,65.08265546190478,67.36625740793653,69.64985935396825,71.9334613],"color_vals":["0x000080","0x070783","0x0E0E86","0x151589","0x1C1C8C","0x23238F","0x2B2B92","0x323295","0x393998","0x40409B","0x47479F","0x4E4EA2","0x5656A5","0x5D5DA8","0x6464AB","0x6B6BAE","0x7272B1","0x7979B4","0x8181B8","0x8888BB","0x8F8FBE","0x9696C1","0x9D9DC4","0xA5A5C7","0xACACCA","0xB3B3CD","0xBABAD0","0xC1C1D3","0xC8C8D7","0xD0D0DA","0xD7D7DD","0xDEDEE0","0xE2DEDE","0xE3D7D7","0xE4D0D0","0xE5C8C8","0xE6C1C1","0xE7BABA","0xE7B3B3","0xE8ACAC","0xE9A5A5","0xEA9D9D","0xEB9696","0xEC8F8F","0xED8888","0xEE8181","0xEF7979","0xF07272","0xF16B6B","0xF26464","0xF35D5D","0xF35656","0xF44E4E","0xF54747","0xF64040","0xF73939","0xF83232","0xF92B2B","0xFA2323","0xFB1C1C","0xFC1515","0xFD0E0E","0xFE0707","0xFF0000"],"color_levels":64,"hard_range":[],"alias":[]},"Coord_y":{"name":"Coord_y","time_range":[0,1],"value_range":[-81,81],"value_names":null,"value_type":"continuous","color_keys":[-81,-78.42857142857143,-75.85714285714286,-73.28571428571428,-70.71428571428571,-68.14285714285714,-65.57142857142857,-63,-60.42857142857143,-57.85714285714285,-55.28571428571428,-52.71428571428571,-50.14285714285714,-47.57142857142857,-45,-42.42857142857142,-39.85714285714285,-37.28571428571428,-34.71428571428571,-32.14285714285714,-29.57142857142857,-26.99999999999999,-24.42857142857142,-21.85714285714285,-19.28571428571428,-16.71428571428571,-14.14285714285714,-11.57142857142857,-9,-6.428571428571416,-3.857142857142847,-1.285714285714278,1.285714285714292,3.857142857142861,6.428571428571431,9,11.57142857142858,14.14285714285715,16.71428571428572,19.28571428571429,21.85714285714286,24.42857142857143,27.00000000000001,29.57142857142858,32.14285714285715,34.71428571428572,37.28571428571429,39.85714285714286,42.42857142857144,45.00000000000001,47.57142857142858,50.14285714285714,52.71428571428572,55.28571428571431,57.85714285714286,60.42857142857144,63,65.57142857142858,68.14285714285717,70.71428571428572,73.28571428571431,75.85714285714286,78.42857142857144,81],"color_vals":["0x000080","0x070783","0x0E0E86","0x151589","0x1C1C8C","0x23238F","0x2B2B92","0x323295","0x393998","0x40409B","0x47479F","0x4E4EA2","0x5656A5","0x5D5DA8","0x6464AB","0x6B6BAE","0x7272B1","0x7979B4","0x8181B8","0x8888BB","0x8F8FBE","0x9696C1","0x9D9DC4","0xA5A5C7","0xACACCA","0xB3B3CD","0xBABAD0","0xC1C1D3","0xC8C8D7","0xD0D0DA","0xD7D7DD","0xDEDEE0","0xE2DEDE","0xE3D7D7","0xE4D0D0","0xE5C8C8","0xE6C1C1","0xE7BABA","0xE7B3B3","0xE8ACAC","0xE9A5A5","0xEA9D9D","0xEB9696","0xEC8F8F","0xED8888","0xEE8181","0xEF7979","0xF07272","0xF16B6B","0xF26464","0xF35D5D","0xF35656","0xF44E4E","0xF54747","0xF64040","0xF73939","0xF83232","0xF92B2B","0xFA2323","0xFB1C1C","0xFC1515","0xFD0E0E","0xFE0707","0xFF0000"],"color_levels":64,"hard_range":[],"alias":[]},"Coord_z":{"name":"Coord_z","time_range":[0,1],"value_range":[-41,41],"value_names":null,"value_type":"continuous","color_keys":[-41,-39.6984126984127,-38.3968253968254,-37.09523809523809,-35.79365079365079,-34.49206349206349,-33.19047619047619,-31.88888888888889,-30.58730158730159,-29.28571428571428,-27.98412698412698,-26.68253968253968,-25.38095238095238,-24.07936507936508,-22.77777777777778,-21.47619047619047,-20.17460317460317,-18.87301587301587,-17.57142857142857,-16.26984126984127,-14.96825396825397,-13.66666666666666,-12.36507936507936,-11.06349206349206,-9.761904761904759,-8.460317460317462,-7.158730158730158,-5.857142857142854,-4.555555555555557,-3.253968253968253,-1.952380952380949,-0.650793650793652,0.650793650793652,1.952380952380956,3.253968253968253,4.555555555555557,5.857142857142861,7.158730158730158,8.460317460317462,9.761904761904766,11.06349206349206,12.36507936507937,13.66666666666667,14.96825396825397,16.26984126984127,17.57142857142858,18.87301587301587,20.17460317460318,21.47619047619048,22.77777777777778,24.07936507936508,25.38095238095238,26.68253968253968,27.98412698412699,29.28571428571429,30.5873015873016,31.88888888888889,33.19047619047619,34.49206349206349,35.7936507936508,37.0952380952381,38.39682539682541,39.6984126984127,41],"color_vals":["0x000080","0x070783","0x0E0E86","0x151589","0x1C1C8C","0x23238F","0x2B2B92","0x323295","0x393998","0x40409B","0x47479F","0x4E4EA2","0x5656A5","0x5D5DA8","0x6464AB","0x6B6BAE","0x7272B1","0x7979B4","0x8181B8","0x8888BB","0x8F8FBE","0x9696C1","0x9D9DC4","0xA5A5C7","0xACACCA","0xB3B3CD","0xBABAD0","0xC1C1D3","0xC8C8D7","0xD0D0DA","0xD7D7DD","0xDEDEE0","0xE2DEDE","0xE3D7D7","0xE4D0D0","0xE5C8C8","0xE6C1C1","0xE7BABA","0xE7B3B3","0xE8ACAC","0xE9A5A5","0xEA9D9D","0xEB9696","0xEC8F8F","0xED8888","0xEE8181","0xEF7979","0xF07272","0xF16B6B","0xF26464","0xF35D5D","0xF35656","0xF44E4E","0xF54747","0xF64040","0xF73939","0xF83232","0xF92B2B","0xFA2323","0xFB1C1C","0xFC1515","0xFD0E0E","0xFE0707","0xFF0000"],"color_levels":64,"hard_range":[],"alias":[]},"Label":{"name":"Label","time_range":[0,1],"value_range":[-1,1],"value_names":["A1","A10","A11","A12","A13","A14","A2","A3","A4","A5","A6","A7","A8","A9","B1","B10","B11","B12","B13","B14","B15","B16","B2","B3","B4","B5","B6","B7","B8","B9","C1","C10","C11","C12","C2","C3","C4","C5","C6","C7","C8","C9","D1","D10","D11","D12","D2","D3","D4","D5","D6","D7","D8","D9","E1","E10","E11","E12","E2","E3","E4","E5","E6","E7","E8","E9","F1","F10","F2","F3","F4","F5","F6","F7","F8","F9","G1","G10","G11","G12","G2","G3","G4","G5","G6","G7","G8","G9","H1","H10","H11","H12","H2","H3","H4","H5","H6","H7","H8","H9","I1","I10","I11","I12","I2","I3","I4","I5","I6","I7","I8","I9","J1","J10","J11","J12","J2","J3","J4","J5","J6","J7","J8","J9"],"value_type":"discrete","color_keys":[1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31,32,33,34,35,36,37,38,39,40,41,42,43,44,45,46,47,48,49,50,51,52,53,54,55,56,57,58,59,60,61,62,63,64,65,66,67,68,69,70,71,72,73,74,75,76,77,78,79,80,81,82,83,84,85,86,87,88,89,90,91,92,93,94,95,96,97,98,99,100,101,102,103,104,105,106,107,108,109,110,111,112,113,114,115,116,117,118,119,120,121,122,123,124,125,126,127,128],"color_vals":["0x000000","0x0B0305","0x18080B","0x240D11","0x301117","0x3C161D","0x491B22","0x551F28","0x61232E","0x6E2834","0x7A2D3A","0x86313F","0x933646","0x9F3A4C","0xAB3F52","0xB74458","0xC4485D","0xD04D63","0xD85268","0xD85869","0xD15F67","0xCA6666","0xC36D64","0xBD7362","0xB67A61","0xAE815F","0xA7885E","0xA08F5C","0x9A965A","0x939D59","0x8CA457","0x84AB56","0x7EB155","0x77B854","0x70BF52","0x69C650","0x62CD4F","0x5DCD54","0x5AC95C","0x56C664","0x53C36D","0x50C075","0x4CBD7E","0x49BA86","0x45B78E","0x42B497","0x3EB19F","0x3BADA7","0x38AAAF","0x34A7B8","0x30A4C0","0x2DA1C9","0x299DD1","0x269BD9","0x2398E0","0x2299E5","0x229CE5","0x22A1E5","0x23A5E5","0x23A9E5","0x23ADE5","0x24B1E5","0x24B6E5","0x24BAE5","0x24BDE5","0x25C1E5","0x25C6E5","0x25CAE5","0x26CEE5","0x26D2E5","0x26D6E5","0x27DBE5","0x27DEE5","0x2BDBE3","0x34D0E0","0x3DC4DE","0x46B8DC","0x4FADDA","0x58A1D7","0x6295D5","0x6B89D3","0x747DD1","0x7D71CF","0x8665CC","0x8F59CA","0x984EC8","0xA142C6","0xAA36C3","0xB42AC1","0xBC1EBF","0xC513BC","0xCD0DB8","0xCF18AF","0xD121A6","0xD42C9C","0xD63792","0xD74189","0xD94B7F","0xDC5676","0xDE606D","0xE06A63","0xE37559","0xE57F50","0xE78947","0xE9933D","0xEC9E34","0xEEA92A","0xF0B320","0xF2BD17","0xF2C314","0xEFC318","0xEAC120","0xE5BF27","0xE0BD2F","0xDBBA37","0xD7B840","0xD2B647","0xCDB44F","0xC8B257","0xC3AF5F","0xBEAD66","0xBAAA6E","0xB5A876","0xB0A67E","0xABA385","0xA6A18D","0xA19F95","0x9E9E9E"],"color_levels":124,"hard_range":[],"alias":[]},"LabelPrefix":{"name":"LabelPrefix","time_range":[0,1],"value_range":[-1,1],"value_names":["A","B","C","D","E","F","G","H","I","J"],"value_type":"discrete","color_keys":[1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16],"color_vals":["0x000000","0x672631","0xA95154","0x9D8659","0x7AA66A","0x4CBD81","0x32ABBD","0x23AAE5","0x26CDE5","0x53A3D9","0x9652C9","0xC15993","0xDE7162","0xE0AA3B","0xC6B05B","0x9E9E9E"],"color_levels":10,"hard_range":[],"alias":[]},"Dimension":{"name":"Dimension","time_range":[0,1],"value_range":[-16,16],"value_names":null,"value_type":"continuous","color_keys":[-16,-15.49206349206349,-14.98412698412698,-14.47619047619048,-13.96825396825397,-13.46031746031746,-12.95238095238095,-12.44444444444444,-11.93650793650794,-11.42857142857143,-10.92063492063492,-10.41269841269841,-9.904761904761905,-9.396825396825397,-8.888888888888889,-8.380952380952381,-7.873015873015873,-7.365079365079366,-6.857142857142858,-6.34920634920635,-5.841269841269842,-5.333333333333334,-4.825396825396826,-4.317460317460318,-3.80952380952381,-3.301587301587302,-2.793650793650794,-2.285714285714286,-1.777777777777779,-1.269841269841271,-0.7619047619047628,-0.2539682539682548,0.2539682539682531,0.7619047619047592,1.269841269841269,1.777777777777779,2.285714285714285,2.793650793650791,3.301587301587301,3.80952380952381,4.317460317460316,4.825396825396822,5.333333333333332,5.841269841269842,6.349206349206348,6.857142857142854,7.365079365079364,7.873015873015873,8.38095238095238,8.888888888888886,9.396825396825395,9.904761904761905,10.41269841269841,10.92063492063492,11.42857142857143,11.93650793650794,12.44444444444444,12.95238095238095,13.46031746031746,13.96825396825397,14.47619047619047,14.98412698412698,15.49206349206349,16],"color_vals":["0x000080","0x070783","0x0E0E86","0x151589","0x1C1C8C","0x23238F","0x2B2B92","0x323295","0x393998","0x40409B","0x47479F","0x4E4EA2","0x5656A5","0x5D5DA8","0x6464AB","0x6B6BAE","0x7272B1","0x7979B4","0x8181B8","0x8888BB","0x8F8FBE","0x9696C1","0x9D9DC4","0xA5A5C7","0xACACCA","0xB3B3CD","0xBABAD0","0xC1C1D3","0xC8C8D7","0xD0D0DA","0xD7D7DD","0xDEDEE0","0xE2DEDE","0xE3D7D7","0xE4D0D0","0xE5C8C8","0xE6C1C1","0xE7BABA","0xE7B3B3","0xE8ACAC","0xE9A5A5","0xEA9D9D","0xEB9696","0xEC8F8F","0xED8888","0xEE8181","0xEF7979","0xF07272","0xF16B6B","0xF26464","0xF35D5D","0xF35656","0xF44E4E","0xF54747","0xF64040","0xF73939","0xF83232","0xF92B2B","0xFA2323","0xFB1C1C","0xFC1515","0xFD0E0E","0xFE0707","0xFF0000"],"color_levels":64,"hard_range":[],"alias":[]},"LocationType":{"name":"LocationType","time_range":[0,1],"value_range":[-1,1],"value_names":["ECoG","iEEG"],"value_type":"discrete","color_keys":[1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16],"color_vals":["0x000000","0x0E0507","0x1D0B0E","0x2C1015","0x3B161C","0x4A1B23","0x59212A","0x682631","0x762C39","0x853140","0x943747","0xA33C4E","0xB24255","0xC1475C","0xD04D63","0xDF536B"],"color_levels":2,"hard_range":[],"alias":[]},"Radius":{"name":"Radius","time_range":[0,1],"value_range":[-2,2],"value_names":null,"value_type":"continuous","color_keys":[-2,-1.936507936507937,-1.873015873015873,-1.80952380952381,-1.746031746031746,-1.682539682539683,-1.619047619047619,-1.555555555555556,-1.492063492063492,-1.428571428571429,-1.365079365079365,-1.301587301587302,-1.238095238095238,-1.174603174603175,-1.111111111111111,-1.047619047619048,-0.9841269841269842,-0.9206349206349207,-0.8571428571428572,-0.7936507936507937,-0.7301587301587302,-0.6666666666666667,-0.6031746031746033,-0.5396825396825398,-0.4761904761904763,-0.4126984126984128,-0.3492063492063493,-0.2857142857142858,-0.2222222222222223,-0.1587301587301588,-0.09523809523809534,-0.03174603174603186,0.03174603174603163,0.0952380952380949,0.1587301587301586,0.2222222222222223,0.2857142857142856,0.3492063492063489,0.4126984126984126,0.4761904761904763,0.5396825396825395,0.6031746031746028,0.6666666666666665,0.7301587301587302,0.7936507936507935,0.8571428571428568,0.9206349206349205,0.9841269841269842,1.047619047619047,1.111111111111111,1.174603174603174,1.238095238095238,1.301587301587301,1.365079365079365,1.428571428571428,1.492063492063492,1.555555555555555,1.619047619047619,1.682539682539682,1.746031746031746,1.809523809523809,1.873015873015873,1.936507936507936,2],"color_vals":["0x000080","0x070783","0x0E0E86","0x151589","0x1C1C8C","0x23238F","0x2B2B92","0x323295","0x393998","0x40409B","0x47479F","0x4E4EA2","0x5656A5","0x5D5DA8","0x6464AB","0x6B6BAE","0x7272B1","0x7979B4","0x8181B8","0x8888BB","0x8F8FBE","0x9696C1","0x9D9DC4","0xA5A5C7","0xACACCA","0xB3B3CD","0xBABAD0","0xC1C1D3","0xC8C8D7","0xD0D0DA","0xD7D7DD","0xDEDEE0","0xE2DEDE","0xE3D7D7","0xE4D0D0","0xE5C8C8","0xE6C1C1","0xE7BABA","0xE7B3B3","0xE8ACAC","0xE9A5A5","0xEA9D9D","0xEB9696","0xEC8F8F","0xED8888","0xEE8181","0xEF7979","0xF07272","0xF16B6B","0xF26464","0xF35D5D","0xF35656","0xF44E4E","0xF54747","0xF64040","0xF73939","0xF83232","0xF92B2B","0xFA2323","0xFB1C1C","0xFC1515","0xFD0E0E","0xFE0707","0xFF0000"],"color_levels":64,"hard_range":[],"alias":[]},"Hemisphere":{"name":"Hemisphere","time_range":[0,1],"value_range":[-1,1],"value_names":["auto","left","right"],"value_type":"discrete","color_keys":[1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16],"color_vals":["0x000000","0x1D0B0E","0x3B161C","0x59212A","0x762C39","0x943747","0xB24255","0xD04D63","0xD65B69","0xC56C65","0xB57C61","0xA48D5D","0x939E5A","0x82AE56","0x71BF52","0x61D04F"],"color_levels":3,"hard_range":[],"alias":[]},"MNI305_x":{"name":"MNI305_x","time_range":[0,1],"value_range":[-69.36275157,69.36275157],"value_names":null,"value_type":"continuous","color_keys":[-69.36275157,-67.16075945666667,-64.95876734333334,-62.75677523,-60.55478311666667,-58.35279100333334,-56.15079889,-53.94880677666666,-51.74681466333333,-49.54482255,-47.34283043666667,-45.14083832333333,-42.93884620999999,-40.73685409666666,-38.53486198333333,-36.33286987,-34.13087775666666,-31.92888564333333,-29.72689353,-27.52490141666667,-25.32290930333333,-23.12091718999999,-20.91892507666666,-18.71693296333333,-16.51494085,-14.31294873666666,-12.11095662333333,-9.908964509999997,-7.706972396666657,-5.504980283333325,-3.302988169999992,-1.100996056666659,1.100996056666673,3.302988170000006,5.504980283333339,7.706972396666671,9.908964510000004,12.11095662333334,14.31294873666667,16.51494085,18.71693296333333,20.91892507666668,23.12091719000001,25.32290930333335,27.52490141666668,29.72689353000001,31.92888564333335,34.13087775666668,36.33286987000001,38.53486198333334,40.73685409666668,42.93884621000001,45.14083832333334,47.34283043666667,49.54482255000001,51.74681466333334,53.94880677666669,56.15079889000002,58.35279100333335,60.55478311666667,62.75677523000002,64.95876734333334,67.16075945666668,69.36275157],"color_vals":["0x000080","0x070783","0x0E0E86","0x151589","0x1C1C8C","0x23238F","0x2B2B92","0x323295","0x393998","0x40409B","0x47479F","0x4E4EA2","0x5656A5","0x5D5DA8","0x6464AB","0x6B6BAE","0x7272B1","0x7979B4","0x8181B8","0x8888BB","0x8F8FBE","0x9696C1","0x9D9DC4","0xA5A5C7","0xACACCA","0xB3B3CD","0xBABAD0","0xC1C1D3","0xC8C8D7","0xD0D0DA","0xD7D7DD","0xDEDEE0","0xE2DEDE","0xE3D7D7","0xE4D0D0","0xE5C8C8","0xE6C1C1","0xE7BABA","0xE7B3B3","0xE8ACAC","0xE9A5A5","0xEA9D9D","0xEB9696","0xEC8F8F","0xED8888","0xEE8181","0xEF7979","0xF07272","0xF16B6B","0xF26464","0xF35D5D","0xF35656","0xF44E4E","0xF54747","0xF64040","0xF73939","0xF83232","0xF92B2B","0xFA2323","0xFB1C1C","0xFC1515","0xFD0E0E","0xFE0707","0xFF0000"],"color_levels":64,"hard_range":[],"alias":[]},"MNI305_y":{"name":"MNI305_y","time_range":[0,1],"value_range":[-96.6481355,96.6481355],"value_names":null,"value_type":"continuous","color_keys":[-96.6481355,-93.57994072222222,-90.51174594444444,-87.44355116666667,-84.37535638888889,-81.3071616111111,-78.23896683333334,-75.17077205555555,-72.10257727777777,-69.03438249999999,-65.96618772222222,-62.89799294444444,-59.82979816666666,-56.76160338888889,-53.6934086111111,-50.62521383333333,-47.55701905555555,-44.48882427777777,-41.4206295,-38.35243472222221,-35.28423994444444,-32.21604516666666,-29.14785038888888,-26.07965561111111,-23.01146083333333,-19.94326605555555,-16.87507127777778,-13.80687649999999,-10.73868172222221,-7.670486944444434,-4.602292166666658,-1.534097388888881,1.534097388888895,4.602292166666672,7.670486944444448,10.73868172222222,13.8068765,16.87507127777778,19.94326605555557,23.01146083333335,26.07965561111112,29.1478503888889,32.21604516666667,35.28423994444447,38.35243472222223,41.42062950000002,44.48882427777778,47.55701905555557,50.62521383333333,53.69340861111112,56.76160338888889,59.82979816666668,62.89799294444444,65.96618772222223,69.03438250000002,72.10257727777778,75.17077205555557,78.23896683333334,81.30716161111113,84.37535638888889,87.44355116666668,90.51174594444444,93.57994072222223,96.6481355],"color_vals":["0x000080","0x070783","0x0E0E86","0x151589","0x1C1C8C","0x23238F","0x2B2B92","0x323295","0x393998","0x40409B","0x47479F","0x4E4EA2","0x5656A5","0x5D5DA8","0x6464AB","0x6B6BAE","0x7272B1","0x7979B4","0x8181B8","0x8888BB","0x8F8FBE","0x9696C1","0x9D9DC4","0xA5A5C7","0xACACCA","0xB3B3CD","0xBABAD0","0xC1C1D3","0xC8C8D7","0xD0D0DA","0xD7D7DD","0xDEDEE0","0xE2DEDE","0xE3D7D7","0xE4D0D0","0xE5C8C8","0xE6C1C1","0xE7BABA","0xE7B3B3","0xE8ACAC","0xE9A5A5","0xEA9D9D","0xEB9696","0xEC8F8F","0xED8888","0xEE8181","0xEF7979","0xF07272","0xF16B6B","0xF26464","0xF35D5D","0xF35656","0xF44E4E","0xF54747","0xF64040","0xF73939","0xF83232","0xF92B2B","0xFA2323","0xFB1C1C","0xFC1515","0xFD0E0E","0xFE0707","0xFF0000"],"color_levels":64,"hard_range":[],"alias":[]},"MNI305_z":{"name":"MNI305_z","time_range":[0,1],"value_range":[-47.146353,47.146353],"value_names":null,"value_type":"continuous","color_keys":[-47.146353,-45.64964338095238,-44.15293376190476,-42.65622414285714,-41.15951452380952,-39.6628049047619,-38.16609528571428,-36.66938566666666,-35.17267604761905,-33.67596642857143,-32.17925680952381,-30.68254719047619,-29.18583757142857,-27.68912795238095,-26.19241833333333,-24.69570871428571,-23.19899909523809,-21.70228947619048,-20.20557985714285,-18.70887023809524,-17.21216061904762,-15.715451,-14.21874138095238,-12.72203176190476,-11.22532214285715,-9.728612523809524,-8.231902904761903,-6.735193285714281,-5.238483666666667,-3.741774047619046,-2.245064428571425,-0.7483548095238106,0.7483548095238106,2.245064428571432,3.741774047619046,5.238483666666667,6.735193285714288,8.231902904761903,9.728612523809524,11.22532214285715,12.72203176190477,14.21874138095238,15.715451,17.21216061904762,18.70887023809524,20.20557985714286,21.70228947619048,23.1989990952381,24.69570871428571,26.19241833333333,27.68912795238095,29.18583757142857,30.68254719047619,32.17925680952381,33.67596642857144,35.17267604761904,36.66938566666666,38.16609528571428,39.66280490476191,41.15951452380953,42.65622414285715,44.15293376190476,45.64964338095238,47.146353],"color_vals":["0x000080","0x070783","0x0E0E86","0x151589","0x1C1C8C","0x23238F","0x2B2B92","0x323295","0x393998","0x40409B","0x47479F","0x4E4EA2","0x5656A5","0x5D5DA8","0x6464AB","0x6B6BAE","0x7272B1","0x7979B4","0x8181B8","0x8888BB","0x8F8FBE","0x9696C1","0x9D9DC4","0xA5A5C7","0xACACCA","0xB3B3CD","0xBABAD0","0xC1C1D3","0xC8C8D7","0xD0D0DA","0xD7D7DD","0xDEDEE0","0xE2DEDE","0xE3D7D7","0xE4D0D0","0xE5C8C8","0xE6C1C1","0xE7BABA","0xE7B3B3","0xE8ACAC","0xE9A5A5","0xEA9D9D","0xEB9696","0xEC8F8F","0xED8888","0xEE8181","0xEF7979","0xF07272","0xF16B6B","0xF26464","0xF35D5D","0xF35656","0xF44E4E","0xF54747","0xF64040","0xF73939","0xF83232","0xF92B2B","0xFA2323","0xFB1C1C","0xFC1515","0xFD0E0E","0xFE0707","0xFF0000"],"color_levels":64,"hard_range":[],"alias":[]},"FSIndex":{"name":"FSIndex","time_range":[0,1],"value_range":[-2035,2035],"value_names":null,"value_type":"continuous","color_keys":[-2035,-1970.396825396825,-1905.793650793651,-1841.190476190476,-1776.587301587302,-1711.984126984127,-1647.380952380952,-1582.777777777778,-1518.174603174603,-1453.571428571428,-1388.968253968254,-1324.365079365079,-1259.761904761905,-1195.15873015873,-1130.555555555555,-1065.952380952381,-1001.349206349206,-936.7460317460316,-872.1428571428571,-807.5396825396824,-742.936507936508,-678.3333333333333,-613.7301587301586,-549.1269841269841,-484.5238095238094,-419.9206349206347,-355.3174603174602,-290.7142857142856,-226.1111111111109,-161.5079365079364,-96.9047619047617,-32.30158730158723,32.30158730158746,96.90476190476193,161.5079365079368,226.1111111111113,290.7142857142858,355.3174603174607,419.9206349206352,484.5238095238096,549.1269841269841,613.730158730159,678.3333333333335,742.936507936508,807.5396825396829,872.1428571428573,936.7460317460318,1001.349206349207,1065.952380952381,1130.555555555556,1195.158730158731,1259.761904761905,1324.36507936508,1388.968253968254,1453.571428571429,1518.174603174603,1582.777777777778,1647.380952380953,1711.984126984127,1776.587301587302,1841.190476190477,1905.793650793651,1970.396825396826,2035],"color_vals":["0x000080","0x070783","0x0E0E86","0x151589","0x1C1C8C","0x23238F","0x2B2B92","0x323295","0x393998","0x40409B","0x47479F","0x4E4EA2","0x5656A5","0x5D5DA8","0x6464AB","0x6B6BAE","0x7272B1","0x7979B4","0x8181B8","0x8888BB","0x8F8FBE","0x9696C1","0x9D9DC4","0xA5A5C7","0xACACCA","0xB3B3CD","0xBABAD0","0xC1C1D3","0xC8C8D7","0xD0D0DA","0xD7D7DD","0xDEDEE0","0xE2DEDE","0xE3D7D7","0xE4D0D0","0xE5C8C8","0xE6C1C1","0xE7BABA","0xE7B3B3","0xE8ACAC","0xE9A5A5","0xEA9D9D","0xEB9696","0xEC8F8F","0xED8888","0xEE8181","0xEF7979","0xF07272","0xF16B6B","0xF26464","0xF35D5D","0xF35656","0xF44E4E","0xF54747","0xF64040","0xF73939","0xF83232","0xF92B2B","0xFA2323","0xFB1C1C","0xFC1515","0xFD0E0E","0xFE0707","0xFF0000"],"color_levels":64,"hard_range":[],"alias":[]},"FSLabel":{"name":"FSLabel","time_range":[0,1],"value_range":[-1,1],"value_names":["Unknown","Left-Cerebral-White-Matter","Left-Hippocampus","Left-Amygdala","Right-Cerebral-White-Matter","Right-Putamen","Right-Hippocampus","ctx-lh-bankssts","ctx-lh-caudalmiddlefrontal","ctx-lh-lateraloccipital","ctx-lh-lingual","ctx-lh-middletemporal","ctx-lh-parahippocampal","ctx-lh-parsopercularis","ctx-lh-pericalcarine","ctx-lh-postcentral","ctx-lh-posteriorcingulate","ctx-lh-precentral","ctx-lh-rostralmiddlefrontal","ctx-lh-superiorfrontal","ctx-lh-superiortemporal","ctx-lh-insula","ctx-rh-bankssts","ctx-rh-cuneus","ctx-rh-inferiorparietal","ctx-rh-middletemporal","ctx-rh-parsorbitalis","ctx-rh-parstriangularis","ctx-rh-precuneus","ctx-rh-superiortemporal","ctx-rh-supramarginal","ctx-rh-insula"],"value_type":"discrete","color_keys":[1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31,32],"color_vals":["0x000000","0xF5F5F5","0xDCD814","0x67FFFF","0xF5F5F5","0xEC0DB0","0xDCD814","0x196428","0x641900","0x141E8C","0xE18C8C","0xA06432","0x14DC3C","0xDCB48C","0x78643C","0xDC1414","0xDCB4DC","0x3C14DC","0x4B327D","0x14DCA0","0x8CDCDC","0xFFC020","0x196428","0xDC1464","0xDC3CDC","0xA06432","0x146432","0xDC3C14","0xA08CB4","0x8CDCDC","0x50A014","0xFFC020"],"color_levels":32,"hard_range":[],"alias":[]},"FSLabel_aparc_a2009s_aseg":{"name":"FSLabel_aparc_a2009s_aseg","time_range":[0,1],"value_range":[-1,1],"value_names":"Unknown","value_type":"discrete","color_keys":[1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16],"color_vals":["0x000000","0x000000","0x000000","0x000000","0x000000","0x000000","0x000000","0x000000","0x000000","0x000000","0x000000","0x000000","0x000000","0x000000","0x000000","0x000000"],"color_levels":1,"hard_range":[],"alias":[]},"FSLabel_aparc_aseg":{"name":"FSLabel_aparc_aseg","time_range":[0,1],"value_range":[-1,1],"value_names":["ctx-lh-bankssts","ctx-lh-caudalmiddlefrontal","ctx-lh-insula","ctx-lh-lateraloccipital","ctx-lh-lingual","ctx-lh-middletemporal","ctx-lh-parahippocampal","ctx-lh-parsopercularis","ctx-lh-pericalcarine","ctx-lh-postcentral","ctx-lh-posteriorcingulate","ctx-lh-precentral","ctx-lh-rostralmiddlefrontal","ctx-lh-superiorfrontal","ctx-lh-superiortemporal","ctx-rh-bankssts","ctx-rh-cuneus","ctx-rh-inferiorparietal","ctx-rh-insula","ctx-rh-middletemporal","ctx-rh-parsorbitalis","ctx-rh-parstriangularis","ctx-rh-precuneus","ctx-rh-superiortemporal","ctx-rh-supramarginal","Left-Amygdala","Left-Cerebral-White-Matter","Left-Hippocampus","Right-Cerebral-White-Matter","Right-Hippocampus","Right-Putamen","Unknown"],"value_type":"discrete","color_keys":[1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31,32],"color_vals":["0x000000","0x321218","0x642530","0x973848","0xC94A60","0xCE6367","0xB27F61","0x959B5A","0x79B754","0x5ECE53","0x50C175","0x42B498","0x34A7BA","0x269ADC","0x22A3E5","0x24B4E5","0x25C4E5","0x27D5E5","0x32D4E2","0x57A3D9","0x7D73CF","0xA242C6","0xC711BD","0xD42F9A","0xDD5973","0xE6844D","0xEFAE26","0xECC31D","0xD8B93D","0xC5B05D","0xB1A77D","0x9E9E9E"],"color_levels":32,"hard_range":[],"alias":[]},"FSLabel_aparc_DKTatlas_aseg":{"name":"FSLabel_aparc_DKTatlas_aseg","time_range":[0,1],"value_range":[-1,1],"value_names":"Unknown","value_type":"discrete","color_keys":[1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16],"color_vals":["0x000000","0x000000","0x000000","0x000000","0x000000","0x000000","0x000000","0x000000","0x000000","0x000000","0x000000","0x000000","0x000000","0x000000","0x000000","0x000000"],"color_levels":1,"hard_range":[],"alias":[]},"FSLabel_aseg":{"name":"FSLabel_aseg","time_range":[0,1],"value_range":[-1,1],"value_names":"Unknown","value_type":"discrete","color_keys":[1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16],"color_vals":["0x000000","0x000000","0x000000","0x000000","0x000000","0x000000","0x000000","0x000000","0x000000","0x000000","0x000000","0x000000","0x000000","0x000000","0x000000","0x000000"],"color_levels":1,"hard_range":[],"alias":[]},"OrigCoord_x":{"name":"OrigCoord_x","time_range":[0,1],"value_range":[-71.9334613,71.9334613],"value_names":null,"value_type":"continuous","color_keys":[-71.9334613,-69.64985935396825,-67.36625740793652,-65.08265546190476,-62.79905351587302,-60.51545156984128,-58.23184962380952,-55.94824767777778,-53.66464573174603,-51.38104378571429,-49.09744183968255,-46.81383989365079,-44.53023794761905,-42.24663600158731,-39.96303405555555,-37.67943210952381,-35.39583016349206,-33.11222821746032,-30.82862627142858,-28.54502432539682,-26.26142237936508,-23.97782043333333,-21.69421848730158,-19.41061654126984,-17.12701459523809,-14.84341264920635,-12.55981070317461,-10.27620875714285,-7.992606811111109,-5.709004865079365,-3.425402919047613,-1.141800973015876,1.141800973015876,3.425402919047627,5.709004865079365,7.992606811111116,10.27620875714285,12.55981070317461,14.84341264920636,17.12701459523809,19.41061654126985,21.6942184873016,23.97782043333333,26.26142237936509,28.54502432539684,30.82862627142858,33.11222821746033,35.39583016349206,37.67943210952382,39.96303405555557,42.24663600158731,44.53023794761906,46.81383989365079,49.09744183968255,51.3810437857143,53.66464573174603,55.94824767777779,58.23184962380952,60.51545156984128,62.79905351587303,65.08265546190478,67.36625740793653,69.64985935396825,71.9334613],"color_vals":["0x000080","0x070783","0x0E0E86","0x151589","0x1C1C8C","0x23238F","0x2B2B92","0x323295","0x393998","0x40409B","0x47479F","0x4E4EA2","0x5656A5","0x5D5DA8","0x6464AB","0x6B6BAE","0x7272B1","0x7979B4","0x8181B8","0x8888BB","0x8F8FBE","0x9696C1","0x9D9DC4","0xA5A5C7","0xACACCA","0xB3B3CD","0xBABAD0","0xC1C1D3","0xC8C8D7","0xD0D0DA","0xD7D7DD","0xDEDEE0","0xE2DEDE","0xE3D7D7","0xE4D0D0","0xE5C8C8","0xE6C1C1","0xE7BABA","0xE7B3B3","0xE8ACAC","0xE9A5A5","0xEA9D9D","0xEB9696","0xEC8F8F","0xED8888","0xEE8181","0xEF7979","0xF07272","0xF16B6B","0xF26464","0xF35D5D","0xF35656","0xF44E4E","0xF54747","0xF64040","0xF73939","0xF83232","0xF92B2B","0xFA2323","0xFB1C1C","0xFC1515","0xFD0E0E","0xFE0707","0xFF0000"],"color_levels":64,"hard_range":[],"alias":[]},"OrigCoord_y":{"name":"OrigCoord_y","time_range":[0,1],"value_range":[-81,81],"value_names":null,"value_type":"continuous","color_keys":[-81,-78.42857142857143,-75.85714285714286,-73.28571428571428,-70.71428571428571,-68.14285714285714,-65.57142857142857,-63,-60.42857142857143,-57.85714285714285,-55.28571428571428,-52.71428571428571,-50.14285714285714,-47.57142857142857,-45,-42.42857142857142,-39.85714285714285,-37.28571428571428,-34.71428571428571,-32.14285714285714,-29.57142857142857,-26.99999999999999,-24.42857142857142,-21.85714285714285,-19.28571428571428,-16.71428571428571,-14.14285714285714,-11.57142857142857,-9,-6.428571428571416,-3.857142857142847,-1.285714285714278,1.285714285714292,3.857142857142861,6.428571428571431,9,11.57142857142858,14.14285714285715,16.71428571428572,19.28571428571429,21.85714285714286,24.42857142857143,27.00000000000001,29.57142857142858,32.14285714285715,34.71428571428572,37.28571428571429,39.85714285714286,42.42857142857144,45.00000000000001,47.57142857142858,50.14285714285714,52.71428571428572,55.28571428571431,57.85714285714286,60.42857142857144,63,65.57142857142858,68.14285714285717,70.71428571428572,73.28571428571431,75.85714285714286,78.42857142857144,81],"color_vals":["0x000080","0x070783","0x0E0E86","0x151589","0x1C1C8C","0x23238F","0x2B2B92","0x323295","0x393998","0x40409B","0x47479F","0x4E4EA2","0x5656A5","0x5D5DA8","0x6464AB","0x6B6BAE","0x7272B1","0x7979B4","0x8181B8","0x8888BB","0x8F8FBE","0x9696C1","0x9D9DC4","0xA5A5C7","0xACACCA","0xB3B3CD","0xBABAD0","0xC1C1D3","0xC8C8D7","0xD0D0DA","0xD7D7DD","0xDEDEE0","0xE2DEDE","0xE3D7D7","0xE4D0D0","0xE5C8C8","0xE6C1C1","0xE7BABA","0xE7B3B3","0xE8ACAC","0xE9A5A5","0xEA9D9D","0xEB9696","0xEC8F8F","0xED8888","0xEE8181","0xEF7979","0xF07272","0xF16B6B","0xF26464","0xF35D5D","0xF35656","0xF44E4E","0xF54747","0xF64040","0xF73939","0xF83232","0xF92B2B","0xFA2323","0xFB1C1C","0xFC1515","0xFD0E0E","0xFE0707","0xFF0000"],"color_levels":64,"hard_range":[],"alias":[]},"OrigCoord_z":{"name":"OrigCoord_z","time_range":[0,1],"value_range":[-41,41],"value_names":null,"value_type":"continuous","color_keys":[-41,-39.6984126984127,-38.3968253968254,-37.09523809523809,-35.79365079365079,-34.49206349206349,-33.19047619047619,-31.88888888888889,-30.58730158730159,-29.28571428571428,-27.98412698412698,-26.68253968253968,-25.38095238095238,-24.07936507936508,-22.77777777777778,-21.47619047619047,-20.17460317460317,-18.87301587301587,-17.57142857142857,-16.26984126984127,-14.96825396825397,-13.66666666666666,-12.36507936507936,-11.06349206349206,-9.761904761904759,-8.460317460317462,-7.158730158730158,-5.857142857142854,-4.555555555555557,-3.253968253968253,-1.952380952380949,-0.650793650793652,0.650793650793652,1.952380952380956,3.253968253968253,4.555555555555557,5.857142857142861,7.158730158730158,8.460317460317462,9.761904761904766,11.06349206349206,12.36507936507937,13.66666666666667,14.96825396825397,16.26984126984127,17.57142857142858,18.87301587301587,20.17460317460318,21.47619047619048,22.77777777777778,24.07936507936508,25.38095238095238,26.68253968253968,27.98412698412699,29.28571428571429,30.5873015873016,31.88888888888889,33.19047619047619,34.49206349206349,35.7936507936508,37.0952380952381,38.39682539682541,39.6984126984127,41],"color_vals":["0x000080","0x070783","0x0E0E86","0x151589","0x1C1C8C","0x23238F","0x2B2B92","0x323295","0x393998","0x40409B","0x47479F","0x4E4EA2","0x5656A5","0x5D5DA8","0x6464AB","0x6B6BAE","0x7272B1","0x7979B4","0x8181B8","0x8888BB","0x8F8FBE","0x9696C1","0x9D9DC4","0xA5A5C7","0xACACCA","0xB3B3CD","0xBABAD0","0xC1C1D3","0xC8C8D7","0xD0D0DA","0xD7D7DD","0xDEDEE0","0xE2DEDE","0xE3D7D7","0xE4D0D0","0xE5C8C8","0xE6C1C1","0xE7BABA","0xE7B3B3","0xE8ACAC","0xE9A5A5","0xEA9D9D","0xEB9696","0xEC8F8F","0xED8888","0xEE8181","0xEF7979","0xF07272","0xF16B6B","0xF26464","0xF35D5D","0xF35656","0xF44E4E","0xF54747","0xF64040","0xF73939","0xF83232","0xF92B2B","0xFA2323","0xFB1C1C","0xFC1515","0xFD0E0E","0xFE0707","0xFF0000"],"color_levels":64,"hard_range":[],"alias":[]},"SurfaceElectrode":{"name":"SurfaceElectrode","time_range":[0,1],"value_range":[-1,1],"value_names":"FALSE","value_type":"discrete","color_keys":[1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16],"color_vals":["0x000000","0x000000","0x000000","0x000000","0x000000","0x000000","0x000000","0x000000","0x000000","0x000000","0x000000","0x000000","0x000000","0x000000","0x000000","0x000000"],"color_levels":1,"hard_range":[],"alias":[]},"DistanceShifted":{"name":"DistanceShifted","time_range":[0,1],"value_range":[0,0],"value_names":null,"value_type":"continuous","color_keys":[0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],"color_vals":["0x000080","0x070783","0x0E0E86","0x151589","0x1C1C8C","0x23238F","0x2B2B92","0x323295","0x393998","0x40409B","0x47479F","0x4E4EA2","0x5656A5","0x5D5DA8","0x6464AB","0x6B6BAE","0x7272B1","0x7979B4","0x8181B8","0x8888BB","0x8F8FBE","0x9696C1","0x9D9DC4","0xA5A5C7","0xACACCA","0xB3B3CD","0xBABAD0","0xC1C1D3","0xC8C8D7","0xD0D0DA","0xD7D7DD","0xDEDEE0","0xE2DEDE","0xE3D7D7","0xE4D0D0","0xE5C8C8","0xE6C1C1","0xE7BABA","0xE7B3B3","0xE8ACAC","0xE9A5A5","0xEA9D9D","0xEB9696","0xEC8F8F","0xED8888","0xEE8181","0xEF7979","0xF07272","0xF16B6B","0xF26464","0xF35D5D","0xF35656","0xF44E4E","0xF54747","0xF64040","0xF73939","0xF83232","0xF92B2B","0xFA2323","0xFB1C1C","0xFC1515","0xFD0E0E","0xFE0707","0xFF0000"],"color_levels":64,"hard_range":[],"alias":[]},"DistanceToPial":{"name":"DistanceToPial","time_range":[0,1],"value_range":[-31.65503984,31.65503984],"value_names":null,"value_type":"continuous","color_keys":[-31.65503984,-30.65011794031746,-29.64519604063492,-28.64027414095238,-27.63535224126984,-26.6304303415873,-25.62550844190476,-24.62058654222222,-23.61566464253968,-22.61074274285714,-21.60582084317461,-20.60089894349206,-19.59597704380952,-18.59105514412698,-17.58613324444444,-16.5812113447619,-15.57628944507936,-14.57136754539682,-13.56644564571429,-12.56152374603175,-11.55660184634921,-10.55167994666667,-9.546758046984127,-8.541836147301588,-7.536914247619045,-6.531992347936505,-5.527070448253966,-4.522148548571426,-3.517226648888887,-2.512304749206347,-1.507382849523808,-0.502460949841268,0.5024609498412715,1.507382849523815,2.512304749206351,3.517226648888894,4.52214854857143,5.527070448253973,6.531992347936509,7.536914247619052,8.541836147301588,9.546758046984131,10.55167994666667,11.55660184634921,12.56152374603175,13.56644564571429,14.57136754539682,15.57628944507937,16.58121134476191,17.58613324444445,18.59105514412699,19.59597704380953,20.60089894349207,21.60582084317461,22.61074274285715,23.61566464253968,24.62058654222223,25.62550844190476,26.63043034158731,27.63535224126984,28.64027414095239,29.64519604063492,30.65011794031746,31.65503984],"color_vals":["0x000080","0x070783","0x0E0E86","0x151589","0x1C1C8C","0x23238F","0x2B2B92","0x323295","0x393998","0x40409B","0x47479F","0x4E4EA2","0x5656A5","0x5D5DA8","0x6464AB","0x6B6BAE","0x7272B1","0x7979B4","0x8181B8","0x8888BB","0x8F8FBE","0x9696C1","0x9D9DC4","0xA5A5C7","0xACACCA","0xB3B3CD","0xBABAD0","0xC1C1D3","0xC8C8D7","0xD0D0DA","0xD7D7DD","0xDEDEE0","0xE2DEDE","0xE3D7D7","0xE4D0D0","0xE5C8C8","0xE6C1C1","0xE7BABA","0xE7B3B3","0xE8ACAC","0xE9A5A5","0xEA9D9D","0xEB9696","0xEC8F8F","0xED8888","0xEE8181","0xEF7979","0xF07272","0xF16B6B","0xF26464","0xF35D5D","0xF35656","0xF44E4E","0xF54747","0xF64040","0xF73939","0xF83232","0xF92B2B","0xFA2323","0xFB1C1C","0xFC1515","0xFD0E0E","0xFE0707","0xFF0000"],"color_levels":64,"hard_range":[],"alias":[]},"SurfaceType":{"name":"SurfaceType","time_range":[0,1],"value_range":[-1,1],"value_names":"pial","value_type":"discrete","color_keys":[1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16],"color_vals":["0x000000","0x000000","0x000000","0x000000","0x000000","0x000000","0x000000","0x000000","0x000000","0x000000","0x000000","0x000000","0x000000","0x000000","0x000000","0x000000"],"color_levels":1,"hard_range":[],"alias":[]},"VertexNumber":{"name":"VertexNumber","time_range":[0,1],"value_range":[-1,1],"value_names":null,"value_type":"continuous","color_keys":[-1,-0.9682539682539683,-0.9365079365079365,-0.9047619047619048,-0.873015873015873,-0.8412698412698413,-0.8095238095238095,-0.7777777777777778,-0.746031746031746,-0.7142857142857143,-0.6825396825396826,-0.6507936507936508,-0.6190476190476191,-0.5873015873015873,-0.5555555555555556,-0.5238095238095238,-0.4920634920634921,-0.4603174603174603,-0.4285714285714286,-0.3968253968253969,-0.3650793650793651,-0.3333333333333334,-0.3015873015873016,-0.2698412698412699,-0.2380952380952381,-0.2063492063492064,-0.1746031746031746,-0.1428571428571429,-0.1111111111111112,-0.07936507936507942,-0.04761904761904767,-0.01587301587301593,0.01587301587301582,0.04761904761904745,0.07936507936507931,0.1111111111111112,0.1428571428571428,0.1746031746031744,0.2063492063492063,0.2380952380952381,0.2698412698412698,0.3015873015873014,0.3333333333333333,0.3650793650793651,0.3968253968253967,0.4285714285714284,0.4603174603174602,0.4920634920634921,0.5238095238095237,0.5555555555555554,0.5873015873015872,0.6190476190476191,0.6507936507936507,0.6825396825396823,0.7142857142857142,0.746031746031746,0.7777777777777777,0.8095238095238093,0.8412698412698412,0.873015873015873,0.9047619047619047,0.9365079365079363,0.9682539682539681,1],"color_vals":["0x000080","0x070783","0x0E0E86","0x151589","0x1C1C8C","0x23238F","0x2B2B92","0x323295","0x393998","0x40409B","0x47479F","0x4E4EA2","0x5656A5","0x5D5DA8","0x6464AB","0x6B6BAE","0x7272B1","0x7979B4","0x8181B8","0x8888BB","0x8F8FBE","0x9696C1","0x9D9DC4","0xA5A5C7","0xACACCA","0xB3B3CD","0xBABAD0","0xC1C1D3","0xC8C8D7","0xD0D0DA","0xD7D7DD","0xDEDEE0","0xE2DEDE","0xE3D7D7","0xE4D0D0","0xE5C8C8","0xE6C1C1","0xE7BABA","0xE7B3B3","0xE8ACAC","0xE9A5A5","0xEA9D9D","0xEB9696","0xEC8F8F","0xED8888","0xEE8181","0xEF7979","0xF07272","0xF16B6B","0xF26464","0xF35D5D","0xF35656","0xF44E4E","0xF54747","0xF64040","0xF73939","0xF83232","0xF92B2B","0xFA2323","0xFB1C1C","0xFC1515","0xFD0E0E","0xFE0707","0xFF0000"],"color_levels":64,"hard_range":[],"alias":[]},"Sphere_x":{"name":"Sphere_x","time_range":[0,1],"value_range":[0,0],"value_names":null,"value_type":"continuous","color_keys":[0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],"color_vals":["0x000080","0x070783","0x0E0E86","0x151589","0x1C1C8C","0x23238F","0x2B2B92","0x323295","0x393998","0x40409B","0x47479F","0x4E4EA2","0x5656A5","0x5D5DA8","0x6464AB","0x6B6BAE","0x7272B1","0x7979B4","0x8181B8","0x8888BB","0x8F8FBE","0x9696C1","0x9D9DC4","0xA5A5C7","0xACACCA","0xB3B3CD","0xBABAD0","0xC1C1D3","0xC8C8D7","0xD0D0DA","0xD7D7DD","0xDEDEE0","0xE2DEDE","0xE3D7D7","0xE4D0D0","0xE5C8C8","0xE6C1C1","0xE7BABA","0xE7B3B3","0xE8ACAC","0xE9A5A5","0xEA9D9D","0xEB9696","0xEC8F8F","0xED8888","0xEE8181","0xEF7979","0xF07272","0xF16B6B","0xF26464","0xF35D5D","0xF35656","0xF44E4E","0xF54747","0xF64040","0xF73939","0xF83232","0xF92B2B","0xFA2323","0xFB1C1C","0xFC1515","0xFD0E0E","0xFE0707","0xFF0000"],"color_levels":64,"hard_range":[],"alias":[]},"Sphere_y":{"name":"Sphere_y","time_range":[0,1],"value_range":[0,0],"value_names":null,"value_type":"continuous","color_keys":[0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],"color_vals":["0x000080","0x070783","0x0E0E86","0x151589","0x1C1C8C","0x23238F","0x2B2B92","0x323295","0x393998","0x40409B","0x47479F","0x4E4EA2","0x5656A5","0x5D5DA8","0x6464AB","0x6B6BAE","0x7272B1","0x7979B4","0x8181B8","0x8888BB","0x8F8FBE","0x9696C1","0x9D9DC4","0xA5A5C7","0xACACCA","0xB3B3CD","0xBABAD0","0xC1C1D3","0xC8C8D7","0xD0D0DA","0xD7D7DD","0xDEDEE0","0xE2DEDE","0xE3D7D7","0xE4D0D0","0xE5C8C8","0xE6C1C1","0xE7BABA","0xE7B3B3","0xE8ACAC","0xE9A5A5","0xEA9D9D","0xEB9696","0xEC8F8F","0xED8888","0xEE8181","0xEF7979","0xF07272","0xF16B6B","0xF26464","0xF35D5D","0xF35656","0xF44E4E","0xF54747","0xF64040","0xF73939","0xF83232","0xF92B2B","0xFA2323","0xFB1C1C","0xFC1515","0xFD0E0E","0xFE0707","0xFF0000"],"color_levels":64,"hard_range":[],"alias":[]},"Sphere_z":{"name":"Sphere_z","time_range":[0,1],"value_range":[0,0],"value_names":null,"value_type":"continuous","color_keys":[0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],"color_vals":["0x000080","0x070783","0x0E0E86","0x151589","0x1C1C8C","0x23238F","0x2B2B92","0x323295","0x393998","0x40409B","0x47479F","0x4E4EA2","0x5656A5","0x5D5DA8","0x6464AB","0x6B6BAE","0x7272B1","0x7979B4","0x8181B8","0x8888BB","0x8F8FBE","0x9696C1","0x9D9DC4","0xA5A5C7","0xACACCA","0xB3B3CD","0xBABAD0","0xC1C1D3","0xC8C8D7","0xD0D0DA","0xD7D7DD","0xDEDEE0","0xE2DEDE","0xE3D7D7","0xE4D0D0","0xE5C8C8","0xE6C1C1","0xE7BABA","0xE7B3B3","0xE8ACAC","0xE9A5A5","0xEA9D9D","0xEB9696","0xEC8F8F","0xED8888","0xEE8181","0xEF7979","0xF07272","0xF16B6B","0xF26464","0xF35D5D","0xF35656","0xF44E4E","0xF54747","0xF64040","0xF73939","0xF83232","0xF92B2B","0xFA2323","0xFB1C1C","0xFC1515","0xFD0E0E","0xFE0707","0xFF0000"],"color_levels":64,"hard_range":[],"alias":[]},"T1R":{"name":"T1R","time_range":[0,1],"value_range":[-71.4334613,71.4334613],"value_names":null,"value_type":"continuous","color_keys":[-71.4334613,-69.16573236984128,-66.89800343968254,-64.63027450952382,-62.36254557936508,-60.09481664920635,-57.82708771904763,-55.55935878888889,-53.29162985873016,-51.02390092857143,-48.7561719984127,-46.48844306825397,-44.22071413809524,-41.95298520793651,-39.68525627777778,-37.41752734761905,-35.14979841746032,-32.88206948730159,-30.61434055714285,-28.34661162698413,-26.0788826968254,-23.81115376666666,-21.54342483650794,-19.27569590634921,-17.00796697619047,-14.74023804603174,-12.47250911587301,-10.20478018571428,-7.937051255555552,-5.66932232539682,-3.401593395238095,-1.133864465079355,1.13386446507937,3.401593395238095,5.669322325396834,7.937051255555559,10.2047801857143,12.47250911587302,14.74023804603175,17.00796697619049,19.27569590634921,21.54342483650794,23.81115376666668,26.0788826968254,28.34661162698413,30.61434055714287,32.88206948730159,35.14979841746033,37.41752734761906,39.68525627777778,41.95298520793652,44.22071413809525,46.48844306825399,48.75617199841271,51.02390092857144,53.29162985873018,55.5593587888889,57.82708771904763,60.09481664920636,62.3625455793651,64.63027450952382,66.89800343968255,69.16573236984129,71.4334613],"color_vals":["0x000080","0x070783","0x0E0E86","0x151589","0x1C1C8C","0x23238F","0x2B2B92","0x323295","0x393998","0x40409B","0x47479F","0x4E4EA2","0x5656A5","0x5D5DA8","0x6464AB","0x6B6BAE","0x7272B1","0x7979B4","0x8181B8","0x8888BB","0x8F8FBE","0x9696C1","0x9D9DC4","0xA5A5C7","0xACACCA","0xB3B3CD","0xBABAD0","0xC1C1D3","0xC8C8D7","0xD0D0DA","0xD7D7DD","0xDEDEE0","0xE2DEDE","0xE3D7D7","0xE4D0D0","0xE5C8C8","0xE6C1C1","0xE7BABA","0xE7B3B3","0xE8ACAC","0xE9A5A5","0xEA9D9D","0xEB9696","0xEC8F8F","0xED8888","0xEE8181","0xEF7979","0xF07272","0xF16B6B","0xF26464","0xF35D5D","0xF35656","0xF44E4E","0xF54747","0xF64040","0xF73939","0xF83232","0xF92B2B","0xFA2323","0xFB1C1C","0xFC1515","0xFD0E0E","0xFE0707","0xFF0000"],"color_levels":64,"hard_range":[],"alias":[]},"T1A":{"name":"T1A","time_range":[0,1],"value_range":[-98.5,98.5],"value_names":null,"value_type":"continuous","color_keys":[-98.5,-95.37301587301587,-92.24603174603175,-89.11904761904762,-85.99206349206349,-82.86507936507937,-79.73809523809524,-76.61111111111111,-73.48412698412699,-70.35714285714286,-67.23015873015873,-64.10317460317461,-60.97619047619047,-57.84920634920635,-54.72222222222222,-51.59523809523809,-48.46825396825397,-45.34126984126984,-42.21428571428572,-39.08730158730159,-35.96031746031746,-32.83333333333333,-29.7063492063492,-26.57936507936508,-23.45238095238095,-20.32539682539682,-17.1984126984127,-14.07142857142857,-10.94444444444444,-7.817460317460316,-4.69047619047619,-1.563492063492063,1.563492063492063,4.69047619047619,7.817460317460316,10.94444444444444,14.07142857142857,17.1984126984127,20.32539682539682,23.45238095238095,26.57936507936508,29.70634920634922,32.83333333333334,35.96031746031747,39.0873015873016,42.21428571428572,45.34126984126985,48.46825396825398,51.5952380952381,54.72222222222223,57.84920634920636,60.97619047619048,64.10317460317461,67.23015873015873,70.35714285714286,73.48412698412699,76.61111111111111,79.73809523809524,82.86507936507937,85.99206349206349,89.11904761904762,92.24603174603175,95.37301587301587,98.5],"color_vals":["0x000080","0x070783","0x0E0E86","0x151589","0x1C1C8C","0x23238F","0x2B2B92","0x323295","0x393998","0x40409B","0x47479F","0x4E4EA2","0x5656A5","0x5D5DA8","0x6464AB","0x6B6BAE","0x7272B1","0x7979B4","0x8181B8","0x8888BB","0x8F8FBE","0x9696C1","0x9D9DC4","0xA5A5C7","0xACACCA","0xB3B3CD","0xBABAD0","0xC1C1D3","0xC8C8D7","0xD0D0DA","0xD7D7DD","0xDEDEE0","0xE2DEDE","0xE3D7D7","0xE4D0D0","0xE5C8C8","0xE6C1C1","0xE7BABA","0xE7B3B3","0xE8ACAC","0xE9A5A5","0xEA9D9D","0xEB9696","0xEC8F8F","0xED8888","0xEE8181","0xEF7979","0xF07272","0xF16B6B","0xF26464","0xF35D5D","0xF35656","0xF44E4E","0xF54747","0xF64040","0xF73939","0xF83232","0xF92B2B","0xFA2323","0xFB1C1C","0xFC1515","0xFD0E0E","0xFE0707","0xFF0000"],"color_levels":64,"hard_range":[],"alias":[]},"T1S":{"name":"T1S","time_range":[0,1],"value_range":[-45.74843891,45.74843891],"value_names":null,"value_type":"continuous","color_keys":[-45.74843891,-44.29610751603175,-42.84377612206349,-41.39144472809524,-39.93911333412698,-38.48678194015873,-37.03445054619047,-35.58211915222222,-34.12978775825397,-32.67745636428571,-31.22512497031746,-29.7727935763492,-28.32046218238095,-26.8681307884127,-25.41579939444444,-23.96346800047619,-22.51113660650794,-21.05880521253968,-19.60647381857143,-18.15414242460318,-16.70181103063492,-15.24947963666667,-13.79714824269841,-12.34481684873016,-10.8924854547619,-9.440154060793652,-7.987822666825394,-6.535491272857143,-5.083159878888893,-3.630828484920634,-2.178497090952384,-0.7261656969841255,0.7261656969841255,2.178497090952376,3.630828484920634,5.083159878888885,6.535491272857143,7.987822666825394,9.440154060793645,10.8924854547619,12.34481684873015,13.79714824269841,15.24947963666666,16.70181103063491,18.15414242460317,19.60647381857142,21.05880521253967,22.51113660650794,23.96346800047619,25.41579939444444,26.86813078841269,28.32046218238094,29.77279357634921,31.22512497031746,32.67745636428571,34.12978775825396,35.58211915222221,37.03445054619048,38.48678194015873,39.93911333412698,41.39144472809523,42.84377612206348,44.29610751603175,45.74843891],"color_vals":["0x000080","0x070783","0x0E0E86","0x151589","0x1C1C8C","0x23238F","0x2B2B92","0x323295","0x393998","0x40409B","0x47479F","0x4E4EA2","0x5656A5","0x5D5DA8","0x6464AB","0x6B6BAE","0x7272B1","0x7979B4","0x8181B8","0x8888BB","0x8F8FBE","0x9696C1","0x9D9DC4","0xA5A5C7","0xACACCA","0xB3B3CD","0xBABAD0","0xC1C1D3","0xC8C8D7","0xD0D0DA","0xD7D7DD","0xDEDEE0","0xE2DEDE","0xE3D7D7","0xE4D0D0","0xE5C8C8","0xE6C1C1","0xE7BABA","0xE7B3B3","0xE8ACAC","0xE9A5A5","0xEA9D9D","0xEB9696","0xEC8F8F","0xED8888","0xEE8181","0xEF7979","0xF07272","0xF16B6B","0xF26464","0xF35D5D","0xF35656","0xF44E4E","0xF54747","0xF64040","0xF73939","0xF83232","0xF92B2B","0xFA2323","0xFB1C1C","0xFC1515","0xFD0E0E","0xFE0707","0xFF0000"],"color_levels":64,"hard_range":[],"alias":[]},"MNI152_x":{"name":"MNI152_x","time_range":[0,1],"value_range":[-68.98840715,68.98840715],"value_names":null,"value_type":"continuous","color_keys":[-68.98840715,-66.79829898650793,-64.60819082301587,-62.41808265952381,-60.22797449603175,-58.03786633253969,-55.84775816904762,-53.65765000555555,-51.4675418420635,-49.27743367857143,-47.08732551507937,-44.8972173515873,-42.70710918809524,-40.51700102460318,-38.32689286111111,-36.13678469761905,-33.94667653412699,-31.75656837063492,-29.56646020714286,-27.3763520436508,-25.18624388015873,-22.99613571666667,-20.80602755317461,-18.61591938968255,-16.42581122619048,-14.23570306269841,-12.04559489920635,-9.855486735714287,-7.665378572222224,-5.475270408730161,-3.285162245238098,-1.095054081746042,1.095054081746028,3.285162245238098,5.475270408730154,7.665378572222224,9.85548673571428,12.04559489920635,14.23570306269841,16.42581122619048,18.61591938968253,20.8060275531746,22.99613571666666,25.18624388015873,27.37635204365078,29.56646020714285,31.75656837063491,33.94667653412698,36.13678469761905,38.32689286111111,40.51700102460318,42.70710918809523,44.8972173515873,47.08732551507936,49.27743367857143,51.46754184206348,53.65765000555555,55.84775816904761,58.03786633253968,60.22797449603175,62.4180826595238,64.60819082301586,66.79829898650792,68.98840715],"color_vals":["0x000080","0x070783","0x0E0E86","0x151589","0x1C1C8C","0x23238F","0x2B2B92","0x323295","0x393998","0x40409B","0x47479F","0x4E4EA2","0x5656A5","0x5D5DA8","0x6464AB","0x6B6BAE","0x7272B1","0x7979B4","0x8181B8","0x8888BB","0x8F8FBE","0x9696C1","0x9D9DC4","0xA5A5C7","0xACACCA","0xB3B3CD","0xBABAD0","0xC1C1D3","0xC8C8D7","0xD0D0DA","0xD7D7DD","0xDEDEE0","0xE2DEDE","0xE3D7D7","0xE4D0D0","0xE5C8C8","0xE6C1C1","0xE7BABA","0xE7B3B3","0xE8ACAC","0xE9A5A5","0xEA9D9D","0xEB9696","0xEC8F8F","0xED8888","0xEE8181","0xEF7979","0xF07272","0xF16B6B","0xF26464","0xF35D5D","0xF35656","0xF44E4E","0xF54747","0xF64040","0xF73939","0xF83232","0xF92B2B","0xFA2323","0xFB1C1C","0xFC1515","0xFD0E0E","0xFE0707","0xFF0000"],"color_levels":64,"hard_range":[],"alias":[]},"MNI152_y":{"name":"MNI152_y","time_range":[0,1],"value_range":[-95.54359534,95.54359534],"value_names":null,"value_type":"continuous","color_keys":[-95.54359534,-92.51046532920634,-89.4773353184127,-86.44420530761904,-83.41107529682539,-80.37794528603175,-77.34481527523809,-74.31168526444444,-71.27855525365079,-68.24542524285714,-65.2122952320635,-62.17916522126984,-59.14603521047619,-56.11290519968254,-53.07977518888889,-50.04664517809523,-47.01351516730158,-43.98038515650794,-40.94725514571428,-37.91412513492063,-34.88099512412698,-31.84786511333333,-28.81473510253969,-25.78160509174603,-22.74847508095237,-19.71534507015873,-16.68221505936508,-13.64908504857142,-10.61595503777778,-7.582825026984125,-4.549695016190469,-1.516565005396828,1.516565005396828,4.549695016190483,7.582825026984125,10.61595503777778,13.64908504857144,16.68221505936508,19.71534507015873,22.74847508095239,25.78160509174603,28.81473510253969,31.84786511333334,34.880995124127,37.91412513492062,40.94725514571428,43.98038515650794,47.01351516730159,50.04664517809525,53.0797751888889,56.11290519968253,59.14603521047619,62.17916522126984,65.2122952320635,68.24542524285715,71.27855525365081,74.31168526444444,77.34481527523809,80.37794528603175,83.4110752968254,86.44420530761906,89.47733531841271,92.51046532920634,95.54359534],"color_vals":["0x000080","0x070783","0x0E0E86","0x151589","0x1C1C8C","0x23238F","0x2B2B92","0x323295","0x393998","0x40409B","0x47479F","0x4E4EA2","0x5656A5","0x5D5DA8","0x6464AB","0x6B6BAE","0x7272B1","0x7979B4","0x8181B8","0x8888BB","0x8F8FBE","0x9696C1","0x9D9DC4","0xA5A5C7","0xACACCA","0xB3B3CD","0xBABAD0","0xC1C1D3","0xC8C8D7","0xD0D0DA","0xD7D7DD","0xDEDEE0","0xE2DEDE","0xE3D7D7","0xE4D0D0","0xE5C8C8","0xE6C1C1","0xE7BABA","0xE7B3B3","0xE8ACAC","0xE9A5A5","0xEA9D9D","0xEB9696","0xEC8F8F","0xED8888","0xEE8181","0xEF7979","0xF07272","0xF16B6B","0xF26464","0xF35D5D","0xF35656","0xF44E4E","0xF54747","0xF64040","0xF73939","0xF83232","0xF92B2B","0xFA2323","0xFB1C1C","0xFC1515","0xFD0E0E","0xFE0707","0xFF0000"],"color_levels":64,"hard_range":[],"alias":[]},"MNI152_z":{"name":"MNI152_z","time_range":[0,1],"value_range":[-45.53543098,45.53543098],"value_names":null,"value_type":"continuous","color_keys":[-45.53543098,-44.08986174253968,-42.64429250507936,-41.19872326761904,-39.75315403015873,-38.30758479269841,-36.8620155552381,-35.41644631777778,-33.97087708031746,-32.52530784285715,-31.07973860539683,-29.63416936793651,-28.18860013047619,-26.74303089301587,-25.29746165555555,-23.85189241809524,-22.40632318063492,-20.9607539431746,-19.51518470571429,-18.06961546825397,-16.62404623079365,-15.17847699333333,-13.73290775587301,-12.2873385184127,-10.84176928095238,-9.396200043492065,-7.950630806031747,-6.505061568571428,-5.059492331111109,-3.61392309365079,-2.168353856190478,-0.7227846187301594,0.7227846187301594,2.168353856190478,3.613923093650797,5.059492331111109,6.505061568571428,7.950630806031747,9.396200043492065,10.84176928095238,12.2873385184127,13.73290775587301,15.17847699333333,16.62404623079365,18.06961546825397,19.51518470571429,20.96075394317461,22.40632318063493,23.85189241809525,25.29746165555555,26.74303089301587,28.18860013047619,29.63416936793651,31.07973860539683,32.52530784285715,33.97087708031746,35.41644631777778,36.8620155552381,38.30758479269842,39.75315403015873,41.19872326761904,42.64429250507936,44.08986174253968,45.53543098],"color_vals":["0x000080","0x070783","0x0E0E86","0x151589","0x1C1C8C","0x23238F","0x2B2B92","0x323295","0x393998","0x40409B","0x47479F","0x4E4EA2","0x5656A5","0x5D5DA8","0x6464AB","0x6B6BAE","0x7272B1","0x7979B4","0x8181B8","0x8888BB","0x8F8FBE","0x9696C1","0x9D9DC4","0xA5A5C7","0xACACCA","0xB3B3CD","0xBABAD0","0xC1C1D3","0xC8C8D7","0xD0D0DA","0xD7D7DD","0xDEDEE0","0xE2DEDE","0xE3D7D7","0xE4D0D0","0xE5C8C8","0xE6C1C1","0xE7BABA","0xE7B3B3","0xE8ACAC","0xE9A5A5","0xEA9D9D","0xEB9696","0xEC8F8F","0xED8888","0xEE8181","0xEF7979","0xF07272","0xF16B6B","0xF26464","0xF35D5D","0xF35656","0xF44E4E","0xF54747","0xF64040","0xF73939","0xF83232","0xF92B2B","0xFA2323","0xFB1C1C","0xFC1515","0xFD0E0E","0xFE0707","0xFF0000"],"color_levels":64,"hard_range":[],"alias":[]},"MRVoxel_I":{"name":"MRVoxel_I","time_range":[0,1],"value_range":[-200,200],"value_names":null,"value_type":"continuous","color_keys":[-200,-193.6507936507936,-187.3015873015873,-180.952380952381,-174.6031746031746,-168.2539682539683,-161.9047619047619,-155.5555555555555,-149.2063492063492,-142.8571428571429,-136.5079365079365,-130.1587301587302,-123.8095238095238,-117.4603174603175,-111.1111111111111,-104.7619047619048,-98.41269841269842,-92.06349206349206,-85.71428571428572,-79.36507936507937,-73.01587301587303,-66.66666666666669,-60.31746031746033,-53.96825396825398,-47.61904761904762,-41.26984126984127,-34.92063492063494,-28.57142857142858,-22.22222222222223,-15.87301587301587,-9.523809523809547,-3.174603174603192,3.174603174603163,9.523809523809518,15.87301587301587,22.2222222222222,28.57142857142856,34.92063492063491,41.26984126984127,47.61904761904759,53.96825396825395,60.3174603174603,66.66666666666663,73.01587301587301,79.36507936507934,85.71428571428572,92.06349206349205,98.41269841269838,104.7619047619048,111.1111111111111,117.4603174603175,123.8095238095238,130.1587301587301,136.5079365079365,142.8571428571428,149.2063492063492,155.5555555555555,161.9047619047619,168.2539682539683,174.6031746031746,180.9523809523809,187.3015873015873,193.6507936507936,200],"color_vals":["0x000080","0x070783","0x0E0E86","0x151589","0x1C1C8C","0x23238F","0x2B2B92","0x323295","0x393998","0x40409B","0x47479F","0x4E4EA2","0x5656A5","0x5D5DA8","0x6464AB","0x6B6BAE","0x7272B1","0x7979B4","0x8181B8","0x8888BB","0x8F8FBE","0x9696C1","0x9D9DC4","0xA5A5C7","0xACACCA","0xB3B3CD","0xBABAD0","0xC1C1D3","0xC8C8D7","0xD0D0DA","0xD7D7DD","0xDEDEE0","0xE2DEDE","0xE3D7D7","0xE4D0D0","0xE5C8C8","0xE6C1C1","0xE7BABA","0xE7B3B3","0xE8ACAC","0xE9A5A5","0xEA9D9D","0xEB9696","0xEC8F8F","0xED8888","0xEE8181","0xEF7979","0xF07272","0xF16B6B","0xF26464","0xF35D5D","0xF35656","0xF44E4E","0xF54747","0xF64040","0xF73939","0xF83232","0xF92B2B","0xFA2323","0xFB1C1C","0xFC1515","0xFD0E0E","0xFE0707","0xFF0000"],"color_levels":64,"hard_range":[],"alias":[]},"MRVoxel_J":{"name":"MRVoxel_J","time_range":[0,1],"value_range":[-169,169],"value_names":null,"value_type":"continuous","color_keys":[-169,-163.6349206349206,-158.2698412698413,-152.9047619047619,-147.5396825396825,-142.1746031746032,-136.8095238095238,-131.4444444444445,-126.0793650793651,-120.7142857142857,-115.3492063492064,-109.984126984127,-104.6190476190476,-99.25396825396825,-93.8888888888889,-88.52380952380953,-83.15873015873017,-77.7936507936508,-72.42857142857143,-67.06349206349208,-61.69841269841271,-56.33333333333334,-50.96825396825398,-45.60317460317461,-40.23809523809524,-34.87301587301587,-29.50793650793651,-24.14285714285717,-18.7777777777778,-13.41269841269843,-8.047619047619065,-2.682539682539698,2.682539682539669,8.047619047619037,13.4126984126984,18.77777777777777,24.14285714285714,29.50793650793651,34.87301587301585,40.23809523809521,45.60317460317458,50.96825396825395,56.33333333333331,61.69841269841268,67.06349206349205,72.42857142857142,77.79365079365078,83.15873015873015,88.52380952380952,93.88888888888886,99.25396825396825,104.6190476190476,109.984126984127,115.3492063492063,120.7142857142857,126.0793650793651,131.4444444444444,136.8095238095238,142.1746031746031,147.5396825396825,152.9047619047619,158.2698412698413,163.6349206349206,169],"color_vals":["0x000080","0x070783","0x0E0E86","0x151589","0x1C1C8C","0x23238F","0x2B2B92","0x323295","0x393998","0x40409B","0x47479F","0x4E4EA2","0x5656A5","0x5D5DA8","0x6464AB","0x6B6BAE","0x7272B1","0x7979B4","0x8181B8","0x8888BB","0x8F8FBE","0x9696C1","0x9D9DC4","0xA5A5C7","0xACACCA","0xB3B3CD","0xBABAD0","0xC1C1D3","0xC8C8D7","0xD0D0DA","0xD7D7DD","0xDEDEE0","0xE2DEDE","0xE3D7D7","0xE4D0D0","0xE5C8C8","0xE6C1C1","0xE7BABA","0xE7B3B3","0xE8ACAC","0xE9A5A5","0xEA9D9D","0xEB9696","0xEC8F8F","0xED8888","0xEE8181","0xEF7979","0xF07272","0xF16B6B","0xF26464","0xF35D5D","0xF35656","0xF44E4E","0xF54747","0xF64040","0xF73939","0xF83232","0xF92B2B","0xFA2323","0xFB1C1C","0xFC1515","0xFD0E0E","0xFE0707","0xFF0000"],"color_levels":64,"hard_range":[],"alias":[]},"MRVoxel_K":{"name":"MRVoxel_K","time_range":[0,1],"value_range":[-197,197],"value_names":null,"value_type":"continuous","color_keys":[-197,-190.7460317460317,-184.4920634920635,-178.2380952380952,-171.984126984127,-165.7301587301587,-159.4761904761905,-153.2222222222222,-146.968253968254,-140.7142857142857,-134.4603174603175,-128.2063492063492,-121.9523809523809,-115.6984126984127,-109.4444444444444,-103.1904761904762,-96.93650793650794,-90.68253968253968,-84.42857142857143,-78.17460317460318,-71.92063492063492,-65.66666666666666,-59.4126984126984,-53.15873015873015,-46.9047619047619,-40.65079365079364,-34.39682539682539,-28.14285714285714,-21.88888888888889,-15.63492063492063,-9.38095238095238,-3.126984126984127,3.126984126984127,9.38095238095238,15.63492063492063,21.88888888888889,28.14285714285714,34.39682539682539,40.65079365079364,46.9047619047619,53.15873015873015,59.41269841269843,65.66666666666669,71.92063492063494,78.17460317460319,84.42857142857144,90.6825396825397,96.93650793650795,103.1904761904762,109.4444444444445,115.6984126984127,121.952380952381,128.2063492063492,134.4603174603175,140.7142857142857,146.968253968254,153.2222222222222,159.4761904761905,165.7301587301587,171.984126984127,178.2380952380952,184.4920634920635,190.7460317460317,197],"color_vals":["0x000080","0x070783","0x0E0E86","0x151589","0x1C1C8C","0x23238F","0x2B2B92","0x323295","0x393998","0x40409B","0x47479F","0x4E4EA2","0x5656A5","0x5D5DA8","0x6464AB","0x6B6BAE","0x7272B1","0x7979B4","0x8181B8","0x8888BB","0x8F8FBE","0x9696C1","0x9D9DC4","0xA5A5C7","0xACACCA","0xB3B3CD","0xBABAD0","0xC1C1D3","0xC8C8D7","0xD0D0DA","0xD7D7DD","0xDEDEE0","0xE2DEDE","0xE3D7D7","0xE4D0D0","0xE5C8C8","0xE6C1C1","0xE7BABA","0xE7B3B3","0xE8ACAC","0xE9A5A5","0xEA9D9D","0xEB9696","0xEC8F8F","0xED8888","0xEE8181","0xEF7979","0xF07272","0xF16B6B","0xF26464","0xF35D5D","0xF35656","0xF44E4E","0xF54747","0xF64040","0xF73939","0xF83232","0xF92B2B","0xFA2323","0xFB1C1C","0xFC1515","0xFD0E0E","0xFE0707","0xFF0000"],"color_levels":64,"hard_range":[],"alias":[]},"Epileptogenic":{"name":"Epileptogenic","time_range":[0,1],"value_range":[-1,1],"value_names":["SeizureOnset","Epileptogenic","Eloquent","Motor","None"],"value_type":"discrete","color_keys":[1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16],"color_vals":["0xFF0000","0xFF2C00","0xFF5800","0xFF8400","0xF7A300","0xD89C00","0xB99500","0x9A8E00","0x848F1F","0x78985F","0x6BA19E","0x5FA9DE","0x4989BE","0x315B7E","0x182D3F","0x000000"],"color_levels":5,"hard_range":[],"alias":[]},"Response":{"name":"Response","time_range":[0,1],"value_range":[-2.484962822794027,2.484962822794027],"value_names":null,"value_type":"continuous","color_keys":[-2.484962822794027,-2.406075114133899,-2.327187405473771,-2.248299696813643,-2.169411988153515,-2.090524279493387,-2.01163657083326,-1.932748862173132,-1.853861153513004,-1.774973444852876,-1.696085736192748,-1.61719802753262,-1.538310318872493,-1.459422610212365,-1.380534901552237,-1.301647192892109,-1.222759484231981,-1.143871775571853,-1.064984066911726,-0.9860963582515978,-0.90720864959147,-0.8283209409313421,-0.7494332322712143,-0.6705455236110864,-0.5916578149509588,-0.512770106290831,-0.4338823976307031,-0.3549946889705753,-0.2761069803104474,-0.1972192716503196,-0.1183315629901918,-0.03944385433006392,0.03944385433006392,0.1183315629901918,0.1972192716503196,0.2761069803104474,0.3549946889705753,0.4338823976307031,0.512770106290831,0.5916578149509588,0.6705455236110867,0.7494332322712145,0.8283209409313423,0.9072086495914702,0.986096358251598,1.064984066911726,1.143871775571854,1.222759484231982,1.301647192892109,1.380534901552237,1.459422610212365,1.538310318872492,1.61719802753262,1.696085736192748,1.774973444852876,1.853861153513004,1.932748862173132,2.01163657083326,2.090524279493387,2.169411988153515,2.248299696813643,2.327187405473771,2.406075114133899,2.484962822794027],"color_vals":["0x8E0152","0x960558","0x9F095F","0xA80D66","0xB0116D","0xB91574","0xC2197A","0xC72582","0xCB338A","0xCF4292","0xD35199","0xD75FA1","0xDB6EA9","0xDF7AB0","0xE284B7","0xE58EBE","0xE898C5","0xEBA3CC","0xEEACD3","0xF1B6DA","0xF3BDDD","0xF4C3E1","0xF6CAE4","0xF8D1E7","0xFAD7EB","0xFCDEEE","0xFCE2F0","0xFBE6F1","0xFAEAF2","0xF9EDF3","0xF8F1F5","0xF7F5F6","0xF5F6F3","0xF2F6ED","0xF0F6E7","0xEDF5E1","0xEAF5DB","0xE8F5D4","0xE4F4CD","0xDDF1C1","0xD5EEB6","0xCEEAAA","0xC7E79E","0xC0E492","0xB8E187","0xAFDB7C","0xA6D571","0x9DCF66","0x94CA5B","0x8BC450","0x82BE45","0x7AB83D","0x72B138","0x6AAA33","0x62A42E","0x5A9D29","0x529624","0x4B8F20","0x45881F","0x3F811E","0x39791C","0x33721B","0x2D6B1A","0x276419"],"color_levels":64,"hard_range":[],"alias":[]}},"default_colormap":"[Subject]","hide_controls":false,"control_center":[0,0,0],"camera_pos":[500,0,0],"font_magnification":1,"start_zoom":1,"show_legend":true,"render_timestamp":true,"control_presets":["subject2","surface_type2","hemisphere_material","surface_color","map_template","electrodes","voxel","animation","display_highlights"],"cache_folder":"lib/threebrain_data-0/","lib_path":"lib/","default_controllers":{"Display Data":"LabelPrefix","Subcortical Surface":"right","Right Opacity":0.1,"Voxel Type":"aparc_aseg"},"debug":false,"background":"#FFFFFF","token":null,"show_inactive_electrodes":true,"side_display":true,"control_display":true,"custom_javascript":null},"force_render":true},"evals":[],"jsHooks":[]}</script>
+<script type="application/htmlwidget-sizing" data-for="htmlwidget-7e592b91d785f15fae4a">{"viewer":{"width":"100%","height":"100vh","padding":"0px","fill":true},"browser":{"width":"100%","height":"100vh","padding":"0px","fill":false}}</script>
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+        </div>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    <script id="__config" type="application/json">{"base": "..", "features": [], "search": "../assets/javascripts/workers/search.dfff1995.min.js", "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}}</script>
+    
+    
+      <script src="../assets/javascripts/bundle.78eede0e.min.js"></script>
+      
+    
+  </body>
+</html>
