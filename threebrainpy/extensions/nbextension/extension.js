@@ -1,1 +1,65 @@
-define((()=>(()=>{"use strict";var e={d:(r,n)=>{for(var o in n)e.o(n,o)&&!e.o(r,o)&&Object.defineProperty(r,o,{enumerable:!0,get:n[o]})},o:(e,r)=>Object.prototype.hasOwnProperty.call(e,r),r:e=>{"undefined"!=typeof Symbol&&Symbol.toStringTag&&Object.defineProperty(e,Symbol.toStringTag,{value:"Module"}),Object.defineProperty(e,"__esModule",{value:!0})}},r={};function n(){}return e.r(r),e.d(r,{load_ipython_extension:()=>n}),window.require&&window.require.config({map:{"*":{threebrainpy:"nbextensions/threebrainpy/index"}}}),r})()));
+define(() => { return /******/ (() => { // webpackBootstrap
+/******/ 	"use strict";
+/******/ 	// The require scope
+/******/ 	var __webpack_require__ = {};
+/******/ 	
+/************************************************************************/
+/******/ 	/* webpack/runtime/define property getters */
+/******/ 	(() => {
+/******/ 		// define getter functions for harmony exports
+/******/ 		__webpack_require__.d = (exports, definition) => {
+/******/ 			for(var key in definition) {
+/******/ 				if(__webpack_require__.o(definition, key) && !__webpack_require__.o(exports, key)) {
+/******/ 					Object.defineProperty(exports, key, { enumerable: true, get: definition[key] });
+/******/ 				}
+/******/ 			}
+/******/ 		};
+/******/ 	})();
+/******/ 	
+/******/ 	/* webpack/runtime/hasOwnProperty shorthand */
+/******/ 	(() => {
+/******/ 		__webpack_require__.o = (obj, prop) => (Object.prototype.hasOwnProperty.call(obj, prop))
+/******/ 	})();
+/******/ 	
+/******/ 	/* webpack/runtime/make namespace object */
+/******/ 	(() => {
+/******/ 		// define __esModule on exports
+/******/ 		__webpack_require__.r = (exports) => {
+/******/ 			if(typeof Symbol !== 'undefined' && Symbol.toStringTag) {
+/******/ 				Object.defineProperty(exports, Symbol.toStringTag, { value: 'Module' });
+/******/ 			}
+/******/ 			Object.defineProperty(exports, '__esModule', { value: true });
+/******/ 		};
+/******/ 	})();
+/******/ 	
+/************************************************************************/
+var __webpack_exports__ = {};
+/*!******************************!*\
+  !*** ./src/lib/extension.js ***!
+  \******************************/
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   load_ipython_extension: () => (/* binding */ load_ipython_extension)
+/* harmony export */ });
+// This file contains the javascript that is run when the notebook is loaded.
+// It contains some requirejs configuration and the `load_ipython_extension`
+// which is required for any notebook extension.
+
+// Configure requirejs
+if (window.require) {
+    window.require.config({
+        map: {
+            "*" : {
+                "threebrainpy": "threebrainpy/nbextensions/index",
+            }
+        }
+    });
+}
+
+function load_ipython_extension() { };
+
+/******/ 	return __webpack_exports__;
+/******/ })()
+;
+});;
+//# sourceMappingURL=extension.js.map

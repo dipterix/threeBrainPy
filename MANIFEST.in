@@ -1,7 +1,7 @@
-graft threebrainpy/extensions/nbextension
 graft threebrainpy/extensions/labextension
+graft threebrainpy/extensions/nbextension
+graft threebrainpy/templates
 
-graft js
 graft tests
 prune **/node_modules
 
@@ -20,5 +20,4 @@ global-exclude *.pyc
 global-exclude *.pyo
 global-exclude .git
 global-exclude .ipynb_checkpoints
-global-exclude *.map
 global-exclude *junk*

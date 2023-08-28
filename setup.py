@@ -57,7 +57,10 @@ setup(
       },
       packages=find_packages(),  # Automatically find all packages in the project
       package_data={
-            'threebrainpy': ['templates/*'],
+            'threebrainpy': [
+                  'templates/*', 'templates/lib/*/*', 'templates/lib/threebrain_data-0/__global_data/*',
+                  'extensions/labextension/*', 'extensions/nbextension/*',
+            ],
       },
       python_requires='>=3',
       install_requires=[

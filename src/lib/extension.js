@@ -7,7 +7,7 @@ if (window.require) {
     window.require.config({
         map: {
             "*" : {
-                "threebrainpy": "nbextensions/threebrainpy/index",
+                "threebrainpy": "threebrainpy/nbextensions/index",
             }
         }
     });
