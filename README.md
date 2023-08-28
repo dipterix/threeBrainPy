@@ -4,6 +4,8 @@ The project is part of [YAEL](https://yael.wiki/).
 
 The script is under construction. See the [R package threeBrain](https://github.com/dipterix/threeBrain) or [JavaScript library three-brain-js](https://github.com/dipterix/three-brain-js)
 
+[![Check out live demo](docs/assets/images/showcase-01.png)](https://dipterix.org/threeBrainPy/showcase-viewer/)
+
 ## Installation
 
 ### Install from `pypi`:
