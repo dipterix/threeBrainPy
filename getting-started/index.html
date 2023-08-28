@@ -8,6 +8,8 @@
       
       
       
+        <link rel="canonical" href="https://dipterix.org/threebrainpy/getting-started/">
+      
       
         <link rel="prev" href="..">
       
@@ -149,6 +151,18 @@
 </div>
     
     
+      <div class="md-header__source">
+        <a href="https://github.com/dipterix/threebrainpy" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 6.4.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2023 Fonticons, Inc.--><path d="M439.55 236.05 244 40.45a28.87 28.87 0 0 0-40.81 0l-40.66 40.63 51.52 51.52c27.06-9.14 52.68 16.77 43.39 43.68l49.66 49.66c34.23-11.8 61.18 31 35.47 56.69-26.49 26.49-70.21-2.87-56-37.34L240.22 199v121.85c25.3 12.54 22.26 41.85 9.08 55a34.34 34.34 0 0 1-48.55 0c-17.57-17.6-11.07-46.91 11.25-56v-123c-20.8-8.51-24.6-30.74-18.64-45L142.57 101 8.45 235.14a28.86 28.86 0 0 0 0 40.81l195.61 195.6a28.86 28.86 0 0 0 40.8 0l194.69-194.69a28.86 28.86 0 0 0 0-40.81z"/></svg>
+  </div>
+  <div class="md-source__repository">
+    GitHub
+  </div>
+</a>
+      </div>
+    
   </nav>
   
 </header>
@@ -181,6 +195,18 @@
     </a>
     Your Advanced Electrode Localizer Viewer for Python
   </label>
+  
+    <div class="md-nav__source">
+      <a href="https://github.com/dipterix/threebrainpy" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 6.4.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2023 Fonticons, Inc.--><path d="M439.55 236.05 244 40.45a28.87 28.87 0 0 0-40.81 0l-40.66 40.63 51.52 51.52c27.06-9.14 52.68 16.77 43.39 43.68l49.66 49.66c34.23-11.8 61.18 31 35.47 56.69-26.49 26.49-70.21-2.87-56-37.34L240.22 199v121.85c25.3 12.54 22.26 41.85 9.08 55a34.34 34.34 0 0 1-48.55 0c-17.57-17.6-11.07-46.91 11.25-56v-123c-20.8-8.51-24.6-30.74-18.64-45L142.57 101 8.45 235.14a28.86 28.86 0 0 0 0 40.81l195.61 195.6a28.86 28.86 0 0 0 40.8 0l194.69-194.69a28.86 28.86 0 0 0 0-40.81z"/></svg>
+  </div>
+  <div class="md-source__repository">
+    GitHub
+  </div>
+</a>
+    </div>
   
   <ul class="md-nav__list" data-md-scrollfix>
     
@@ -541,6 +567,9 @@
                 
                   
 
+  
+  
+
 
   <h1>Getting Started</h1>
 
@@ -566,7 +595,7 @@ brain.add_surfaces(&quot;pial&quot;)
 brain.render()
 </code></pre>
 <h2 id="example-add-electrodes">Example: add electrodes</h2>
-<p>Easiest way to add electrodes is via a <code>csv</code> table. Here is <a href="/showcase-viewer/electrodes.csv" target="_blank">a toy-example table</a>. A bare-minimal table should contain at lease 5 columns:</p>
+<p>Easiest way to add electrodes is via a <code>csv</code> table. Here is <a href="https://github.com/dipterix/threeBrainPy/blob/main/docs/showcase-viewer/electrodes.csv" target="_blank">a toy-example table</a>. A bare-minimal table should contain at lease 5 columns (case-sensitive!):</p>
 <table>
 <thead>
 <tr>
@@ -579,15 +608,15 @@ brain.render()
 </thead>
 <tbody>
 <tr>
-<td>int (start from 1)</td>
-<td>float (T1 MRI R)</td>
-<td>float (T1 MRI A)</td>
-<td>float (T1 MRI S)</td>
-<td>str</td>
+<td><code>int</code> (start from 1)</td>
+<td><code>float</code> (T1 MRI R)</td>
+<td><code>float</code> (T1 MRI A)</td>
+<td><code>float</code> (T1 MRI S)</td>
+<td><code>str</code></td>
 </tr>
 </tbody>
 </table>
-<p>Other coordinate systems are also supported. See <a href="/api-core-brain/#threebrainpy.core.brain.Brain.add_electrodes" target="_blank">documentation</a> for details:</p>
+<p>Other coordinate systems are also supported. See <a href="../api-core-brain/#threebrainpy.core.brain.Brain.add_electrodes" target="_blank">documentation</a> for details:</p>
 <ul>
 <li><code>Coord_x</code>, <code>Coord_y</code>, <code>Coord_z</code>: coordinates in <code>fsaverage</code> RAS space (tkrRAS)</li>
 <li><code>T1R</code>, <code>T1A</code>, <code>T1S</code>: coordinates in <code>T1</code> MRI space (scanner RAS)</li>
@@ -606,7 +635,7 @@ table = pd.read_csv(electrode_path)
 brain.add_electrodes(table=table)
 </code></pre>
 <h2 id="example-add-ieeg-data">Example: add iEEG data</h2>
-<p>The easiest way to add iEEG data is via a <code>csv</code> table. Here is <a href="/showcase-viewer/electrodes.csv" target="_blank">a toy-example table</a>. A bare-minimal table should contain at lease 2 columns:</p>
+<p>The easiest way to add iEEG data is via a <code>csv</code> table. Here is <a href="../showcase-viewer/electrodes.csv" target="_blank">a toy-example table</a>. A bare-minimal table should contain at lease 2 columns:</p>
 <table>
 <thead>
 <tr>
@@ -616,8 +645,8 @@ brain.add_electrodes(table=table)
 </thead>
 <tbody>
 <tr>
-<td>str (electrode name)</td>
-<td>float</td>
+<td><code>int</code> (electrode name)</td>
+<td><code>float</code> or <code>str</code> (data value)</td>
 </tr>
 </tbody>
 </table>
@@ -627,15 +656,15 @@ brain.add_electrodes(table=table)
 <li>Time (used when you have animation)</li>
 </ul>
 <blockquote>
-<p>A complete <a href="/api-core-brain/#threebrainpy.core.brain.Brain.set_electrode_values" target="_blank">documentation is here</a></p>
+<p>You must add electrodes first before setting contact values. Otherwise, the values will be dropped.</p>
 </blockquote>
-<pre><code class="language-py">value_path = &quot;https://raw.githubusercontent.com/dipterix/threeBrainPy/main/docs/showcase-viewer/electrodes.csv&quot;
+<pre><code class="language-py"># brain.add_electrodes(table=table)
+value_path = &quot;https://raw.githubusercontent.com/dipterix/threeBrainPy/main/docs/showcase-viewer/electrodes.csv&quot;
 brain.set_electrode_values(value_path)
 brain.render()
 </code></pre>
-<blockquote>
-<p>You must add electrodes first before setting contact values. Otherwise, the values will be dropped.</p>
-</blockquote>
+<p>A complete <a href="../api-core-brain/#threebrainpy.core.brain.Brain.set_electrode_values" target="_blank">documentation is here</a>.</p>
+<p><img alt="Preview of rendering results" src="../assets/images/getting-started-01.png" /></p>
 
 
 
