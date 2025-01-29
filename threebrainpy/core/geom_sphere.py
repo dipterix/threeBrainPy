@@ -1,3 +1,4 @@
+from typing import Union
 import numpy as np
 from .geom_template import GeometryTemplate
 from .constants import CONSTANTS
@@ -9,7 +10,7 @@ class ElectrodeSphere(GeometryTemplate):
     '''
     Sphere geometry, to be displayed as electrode contacts in the 3D viewers.
     '''
-    def __init__(self, brain, number : int, label : str, position : list | None = None, **kwargs) -> None:
+    def __init__(self, brain, number : int, label : str, position : Union[list, None] = None, **kwargs) -> None:
         number = int(number)
         if number <= 0:
             raise ValueError("Invalid electrode number, must start from 1.")
@@ -97,7 +98,7 @@ class ElectrodeSphere(GeometryTemplate):
         Whether this geometry is a electrode. Always True for this class.
         '''
         return True
-    def set_keyframe(self, value, time = None, name : str = "value", dtype : str | None = None) -> SimpleKeyframe:
+    def set_keyframe(self, value, time = None, name : str = "value", dtype : Union[str, None] = None) -> SimpleKeyframe:
         '''
         Set the value of the keyframe.
         @param value: The value of the keyframe.
@@ -127,13 +128,13 @@ class ElectrodeSphere(GeometryTemplate):
         keyframe = SimpleKeyframe(name=name, value=value, time=time, dtype=dtype)
         self._keyframes[ keyframe.name ] = keyframe
         return keyframe
-    def get_keyframe(self, name) -> SimpleKeyframe | None:
+    def get_keyframe(self, name) -> Union[SimpleKeyframe, None]:
         '''
         Get the value of the keyframe.
         @param name: The name of the keyframe.
         '''
         return self._keyframes.get(name, None)
-    def del_keyframe(self, name) -> SimpleKeyframe | None:
+    def del_keyframe(self, name) -> Union[SimpleKeyframe, None]:
         '''
         Delete the keyframe.
         @param name: The name of the keyframe.

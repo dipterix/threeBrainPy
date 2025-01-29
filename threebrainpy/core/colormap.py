@@ -1,3 +1,4 @@
+from typing import Union
 import numpy as np
 from .keyframe import SimpleKeyframe
 from .constants import CONSTANTS
@@ -78,7 +79,7 @@ class ElectrodeColormap:
             self._value_names = self._value_names.union(keyframe.levels)
         self._initialized = True
     
-    def update_from_electrodes(self, *args) -> list[SimpleKeyframe] | None:
+    def update_from_electrodes(self, *args) -> Union[list[SimpleKeyframe], None]:
         from ..geom.sphere import ElectrodeSphere
         for contact in args:
             if isinstance(contact, ElectrodeSphere):
@@ -153,7 +154,7 @@ class ElectrodeColormap:
             return tuple()
         return tuple(self._value_names)
     
-    def set_hard_range(self, value) -> np.ndarray | None:
+    def set_hard_range(self, value) -> Union[np.ndarray, None]:
         if value is None:
             self._hard_range = None
             return None
@@ -247,7 +248,7 @@ class ElectrodeColormap:
             x = colors
         # now x is in numpy array
         self._cmap = np.array(x, dtype=float)
-    def generate_colors(self, as_hex = True, **kwargs) -> dict | None:
+    def generate_colors(self, as_hex = True, **kwargs) -> Union[dict, None]:
         assert self._initialized, "Colormap not initialized."
         vtype = self._value_type
         if self._cmap is None:

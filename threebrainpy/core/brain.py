@@ -1,3 +1,4 @@
+from typing import Union
 import os
 import re
 import numpy as np
@@ -76,7 +77,7 @@ class Brain(object):
                     # this means the matrices are all up-to-date and need no further update
                     return None
 
-    def __init__(self, subject_code : str, path : str, work_dir : str | None = None):
+    def __init__(self, subject_code : str, path : str, work_dir : Union[str, None] = None):
         '''Constructor for Brain.
         Args:
             subject_code: The subject code of the brain.
@@ -351,7 +352,7 @@ class Brain(object):
         elif not exists_ok:
             raise ValueError(f"Group {name} already exists.")
         return group
-    def get_group(self, name : str) -> GeomWrapper | None:
+    def get_group(self, name : str) -> Union[GeomWrapper, None]:
         '''
         Get a geometry group from the brain.
         Args:
@@ -381,7 +382,7 @@ class Brain(object):
         if self.has_group(name):
             return self.get_group(name)
         return self.add_group(name = name, exists_ok = True, **kwargs)
-    def set_group_data(self, name : str, value : any, is_cache : bool = False, absolute_path : str | None = None, auto_create : bool = True) -> None:
+    def set_group_data(self, name : str, value : any, is_cache : bool = False, absolute_path : Union[str, None] = None, auto_create : bool = True) -> None:
         '''
         Set group data to the brain so the JavaScript engine will have access to the data. 
             This method is a low-level function
@@ -417,7 +418,7 @@ class Brain(object):
     # endregion
     
     # region <Geometries>
-    def get_geometry(self, name : str) -> GeometryTemplate | None:
+    def get_geometry(self, name : str) -> Union[GeometryTemplate, None]:
         '''
         Get a geometry instance from the brain.
         Args:
@@ -465,7 +466,7 @@ class Brain(object):
         self._slices[name] = slice
         self._update_matrices(volume_files = [slice_path])
         return slice
-    def get_slice(self, name : str) -> VolumeSlice | None:
+    def get_slice(self, name : str) -> Union[VolumeSlice, None]:
         '''
         Get MRI slices from the brain.
         Args:
@@ -487,7 +488,7 @@ class Brain(object):
     # endregion
     
     # region <Atlases/CT/3D voxels>
-    def add_volume(self, volume_prefix : str, is_continuous : bool, name : str = None) -> dict | None:
+    def add_volume(self, volume_prefix : str, is_continuous : bool, name : str = None) -> Union[dict, None]:
         '''
         Add a (Atlas/CT/3D voxel) volume cube to the brain. The VolumeCube will be rendered in main canvas using datacube2 (JavaScript class).
         Args:
@@ -529,7 +530,7 @@ class Brain(object):
     # endregion
     
     # region <Surfaces>
-    def _surface_morph_paths(self, hemesphere : str = "both", morph_types : tuple[str] | list[str] | str | None = None) -> dict | None:
+    def _surface_morph_paths(self, hemesphere : str = "both", morph_types : Union[tuple[str], list[str], str, None] = None) -> Union[dict, None]:
         if hemesphere.lower()[0] not in ['l', 'r', 'b']:
             raise ValueError(f"Invalid hemesphere: {hemesphere}")
         hemesphere = hemesphere.lower()[0]
@@ -552,7 +553,7 @@ class Brain(object):
                 return re
         return None
 
-    def add_surfaces(self, surface_type : str, hemesphere : str = "both") -> dict | None:
+    def add_surfaces(self, surface_type : str, hemesphere : str = "both") -> Union[dict, None]:
         '''
         Add a surface to the brain. The surface will be rendered in main canvas using surface (JavaScript class).
         Args:
@@ -607,7 +608,7 @@ class Brain(object):
                     name = f"{surface.hemesphere}_primary_vertex_color", 
                     value = base_vertex_colors[surface.hemesphere], is_cache = True)
         return surface_dict
-    def get_surfaces(self, surface_type : str) -> dict | None:
+    def get_surfaces(self, surface_type : str) -> Union[dict, None]:
         '''
         Get surfaces from the brain.
         Args:
@@ -628,11 +629,11 @@ class Brain(object):
     # region <Electrode contacts>
     def add_electrode_contact(
             self, number : int, label : str, 
-            position : Vec3 | list | None = None, 
+            position : Union[Vec3, list, None] = None, 
             is_surface : bool = False, 
-            radius : float | None = None,
-            mni_position : Vec3 | list | None = None, 
-            sphere_position : Vec3 | list | None = None,
+            radius : Union[float, None] = None,
+            mni_position : Union[Vec3, list, None] = None, 
+            sphere_position : Union[Vec3, list, None] = None,
             **kwargs : dict) -> ElectrodeSphere:
         '''
         Add an electrode contact to the brain. The electrode contact will be rendered in main canvas using sphere (JavaScript class).
@@ -675,9 +676,9 @@ class Brain(object):
             contact.set_sphere_position(sphere_position)
         self._electrode_contacts[ contact.number ] = contact
         return contact
-    def set_electrode_keyframe(self, number : int, value : np.ndarray | list[float] | list[int] | list[str] | float | int | str, 
-                               time : float | list[float] | tuple[float] | np.ndarray | None = None, 
-                               name : str = "value") -> SimpleKeyframe | None:
+    def set_electrode_keyframe(self, number : int, value : Union[np.ndarray, list[float], list[int], list[str], float, int, str], 
+                               time : Union[float, list[float], tuple[float], np.ndarray, None] = None, 
+                               name : str = "value") -> Union[SimpleKeyframe, None]:
         '''
         Low-level method to set electrode contacts keyframe (values).
         Args:
@@ -692,7 +693,7 @@ class Brain(object):
         if contact is None:
             return None
         return contact.set_keyframe(value = value, time = time, name = name)
-    def get_electrode_contact(self, number : int) -> ElectrodeSphere | None:
+    def get_electrode_contact(self, number : int) -> Union[ElectrodeSphere, None]:
         '''
         Get an electrode contact from the brain.
         Args:
@@ -715,7 +716,7 @@ class Brain(object):
         for contact_name in contact_names:
             self._geoms.pop(contact_name, None)
             self._electrode_contacts.pop(contact_name, None)
-    def add_electrodes(self, table : str | DataFrame, space : str | None = 'ras') -> int:
+    def add_electrodes(self, table : Union[str, DataFrame], space : Union[str, None] = 'ras') -> int:
         '''
         Add electrodes to the brain.
         Args:
@@ -841,8 +842,8 @@ class Brain(object):
                 mni_position = mni_position, sphere_position = sphere_position,
                 hemisphere = hemisphere)
         return len(self._electrode_contacts)
-    def set_electrode_value(self, number : int, name : str, value : list[float] | list[str] | dict | float | str, 
-                            time : list[float] | float | None = None) -> SimpleKeyframe | None:
+    def set_electrode_value(self, number : int, name : str, value : Union[list[float], list[str], dict, float, str], 
+                            time : Union[list[float], float, None] = None) -> Union[SimpleKeyframe, None]:
         '''
         Set value to a electrode contact.
         Args:
@@ -857,7 +858,7 @@ class Brain(object):
         if contact is None:
             return None
         return contact.set_keyframe(value = value, time = time, name = name)
-    def set_electrode_values(self, table : str | DataFrame):
+    def set_electrode_values(self, table : Union[str, DataFrame]):
         '''
         Set single or multiple values to multiple electrode contacts.
         Args: 
@@ -921,7 +922,7 @@ class Brain(object):
                             self._electrode_cmaps[name] = colormap
                         colormap.update_from_keyframe( keyframe = keyframe )
         return 
-    def get_electrode_colormap(self, name : str) -> ElectrodeColormap | None:
+    def get_electrode_colormap(self, name : str) -> Union[ElectrodeColormap, None]:
         '''
         Get the colormap of an electrode contact.
         Args:
@@ -968,7 +969,7 @@ class Brain(object):
             "groups": group_list,
             "geoms": geom_list,
         }
-    def build(self, path : str | None = None, dry_run : bool = False):
+    def build(self, path : Union[str, None] = None, dry_run : bool = False):
         '''
         Build the brain cache. If `path` is not specified, the cache will be built under the temporary directory.
         Args:

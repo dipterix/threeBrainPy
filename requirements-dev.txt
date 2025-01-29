@@ -1,8 +1,8 @@
 matplotlib==3.7.2
 numpy==1.25.2
 pandas==2.0.3
+nibabel==5.1.0
 mkdocs==1.5.2
 mkdocs-material==9.2.3
 mkdocstrings==0.22.0
 mkdocstrings-python==1.5.2
-

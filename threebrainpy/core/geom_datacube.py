@@ -1,3 +1,4 @@
+from typing import Union
 import os
 import nibabel
 from .geom_template import GeometryTemplate
@@ -94,7 +95,7 @@ class VolumeSlice( GeometryTemplate ):
     '''
     Volume slice geometry, to be displayed as a slice in the 3D (side) viewers.
     '''
-    def __init__(self, brain, volume, name : str | None = None, group_name : str | None = None) -> None:
+    def __init__(self, brain, volume, name : Union[str, None] = None, group_name : Union[str, None] = None) -> None:
         '''
         Creates a volume (MRI) slice geometry.
         @param brain: The brain instance.
@@ -156,7 +157,7 @@ class VolumeSlice( GeometryTemplate ):
 
 class VolumeCube( GeometryTemplate ):
     def __init__(self, brain, volume, name : str, 
-                 color_format : str = "RedFormat", group_name : str | None = None) -> None:
+                 color_format : str = "RedFormat", group_name : Union[str, None] = None) -> None:
         '''
         Creates a volume (atlas, CT) cube geometry.
         @param brain: The brain instance.

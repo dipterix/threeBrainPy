@@ -1,3 +1,4 @@
+from typing import Union
 import numpy as np
 import json
 from .mat44 import Mat44
@@ -15,8 +16,8 @@ class Vec3:
             > In other situations, if space is None, the space will be "ras".
 
     '''
-    def __init__(self, x : list | tuple | np.ndarray | float | None = None, 
-                 y : float | None = None, z : float | None = None, space : str | None = None):
+    def __init__(self, x : Union[list, tuple, np.ndarray, float, None] = None, 
+                 y : Union[float, None] = None, z : Union[float, None] = None, space : Union[str, None] = None):
         self.space = "ras" if space is None else space
         if y is None or z is None or isinstance(x, Vec3):
             if x is None:

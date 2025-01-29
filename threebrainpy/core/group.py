@@ -1,3 +1,4 @@
+from typing import Union
 import os
 import re
 import numpy as np
@@ -108,7 +109,7 @@ class GeomWrapper:
             'subject_code': self.subject_code,
         }
 
-    def build(self, path : str | None = None, dry_run : bool = False):
+    def build(self, path : Union[str, None] = None, dry_run : bool = False):
         if path is None:
             path = self.cache_root
         for name, data in self._group_data.items():

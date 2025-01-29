@@ -1,3 +1,4 @@
+from typing import Union
 from .geom_template import GeometryTemplate
 from .constants import CONSTANTS
 import os
@@ -55,7 +56,7 @@ class Surface(GeometryTemplate):
 class CorticalSurface( Surface ):
 
     def __init__(self, brain, surface_type : str, surface_file: str, hemesphere : str, 
-                 file_format = "fs", name: str | None = None, group_name: str | None = None) -> None:
+                 file_format = "fs", name: Union[str, None] = None, group_name: Union[str, None] = None) -> None:
         '''
         Creates a cortical surface geometry.
         @param brain: The brain object.

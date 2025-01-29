@@ -1,12 +1,12 @@
 # defines the abstract class Geometry
-
+from typing import Union
 import numpy as np
 from .mat44 import Mat44
 from .vec3 import Vec3
 from .constants import CONSTANTS
 
 class GeometryTemplate:
-    def __init__(self, brain, name : str, group_name : str | None = None, auto_register : bool = True) -> None:
+    def __init__(self, brain, name : str, group_name : Union[str, None] = None, auto_register : bool = True) -> None:
         if brain is None:
             raise ValueError(f"Brain must be <threebrainpy.core.Brain> instance.")
         # TODO: check name

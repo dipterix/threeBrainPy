@@ -1,3 +1,4 @@
+from typing import Union
 import numpy as np
 import json
 
@@ -44,7 +45,7 @@ class Mat44(object):
             [   0.,   -1.,    0.,  128.],
             [   0.,    0.,    0.,    1.]])
     '''
-    def __init__(self, mat : np.ndarray | list | tuple | None = None, byrow : bool = True, 
+    def __init__(self, mat : Union[np.ndarray, list, tuple, None] = None, byrow : bool = True, 
                  space_from : str = 'ras', space_to : str = 'ras', 
                  modality_from : str = "T1", modality_to : str = "T1"):
         if mat is None:
