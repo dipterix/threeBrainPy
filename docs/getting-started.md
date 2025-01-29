@@ -5,9 +5,6 @@
 ```sh
 # Bare minimal
 pip install threebrainpy
-
-# If you want JupyterLab support
-pip install threebrainpy threebrainpywidget
 ```
 
 ## Simple example

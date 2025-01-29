@@ -11,9 +11,6 @@ The project is part of [YAEL](https://yael.wiki/).
 ```sh
 # Bare minimal
 pip install threebrainpy
-
-# to allow Jupyter support
-pip install threebrainpy threebrainpywidget
 ```
 
 
