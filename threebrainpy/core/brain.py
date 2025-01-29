@@ -1030,7 +1030,7 @@ class Brain(object):
         settings['cache_folder'] = "lib/threebrain_data-0/"
         settings['lib_path'] = "lib/"
         settings['default_controllers'] = []
-        settings['debug'] = True
+        settings['debug'] = False
         settings['background'] = "#FFFFFF"
         settings['token'] = None
         settings['show_inactive_electrodes'] = True

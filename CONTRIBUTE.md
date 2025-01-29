@@ -49,6 +49,7 @@ brain = Brain(os.path.basename(path), path)
 brain.add_slice("brain")
 brain.add_surfaces("pial")
 brain.render()
+
 ```
 
 You will know the module has been installed correctly. You will know if you fail as well.
