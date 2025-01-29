@@ -18,15 +18,15 @@
       
       
       <link rel="icon" href="../assets/images/favicon.png">
-      <meta name="generator" content="mkdocs-1.5.2, mkdocs-material-9.2.3">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.5.50">
     
     
       
-        <title><Class Vec3> - Your Advanced Electrode Localizer Viewer for Python</title>
+        <title><Class Vec3> - Your Advanced Brain Viewer for Python</title>
       
     
     
-      <link rel="stylesheet" href="../assets/stylesheets/main.0e669242.min.css">
+      <link rel="stylesheet" href="../assets/stylesheets/main.a40c8224.min.css">
       
       
 
@@ -47,7 +47,7 @@
     
       <link rel="stylesheet" href="../assets/_mkdocstrings.css">
     
-    <script>__md_scope=new URL("..",location),__md_hash=e=>[...e].reduce((e,_)=>(e<<5)-e+_.charCodeAt(0),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    <script>__md_scope=new URL("..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
     
       
 
@@ -59,9 +59,6 @@
   
     <body dir="ltr">
   
-    
-    
-      <script>var palette=__md_get("__palette");if(palette&&"object"==typeof palette.color)for(var key of Object.keys(palette.color))document.body.setAttribute("data-md-color-"+key,palette.color[key])</script>
     
     <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
     <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
@@ -85,20 +82,20 @@
 
 <header class="md-header md-header--shadow" data-md-component="header">
   <nav class="md-header__inner md-grid" aria-label="Header">
-    <a href=".." title="Your Advanced Electrode Localizer Viewer for Python" class="md-header__button md-logo" aria-label="Your Advanced Electrode Localizer Viewer for Python" data-md-component="logo">
+    <a href=".." title="Your Advanced Brain Viewer for Python" class="md-header__button md-logo" aria-label="Your Advanced Brain Viewer for Python" data-md-component="logo">
       
   <img src="../assets/images/favicon.png" alt="logo">
 
     </a>
     <label class="md-header__button md-icon" for="__drawer">
       
-      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3V6m0 5h18v2H3v-2m0 5h18v2H3v-2Z"/></svg>
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
     </label>
     <div class="md-header__title" data-md-component="header-title">
       <div class="md-header__ellipsis">
         <div class="md-header__topic">
           <span class="md-ellipsis">
-            Your Advanced Electrode Localizer Viewer for Python
+            Your Advanced Brain Viewer for Python
           </span>
         </div>
         <div class="md-header__topic" data-md-component="header-topic">
@@ -112,10 +109,13 @@
     </div>
     
     
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
     
       <label class="md-header__button md-icon" for="__search">
         
-        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5Z"/></svg>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
       </label>
       <div class="md-search" data-md-component="search" role="dialog">
   <label class="md-search__overlay" for="__search"></label>
@@ -124,21 +124,21 @@
       <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
       <label class="md-search__icon md-icon" for="__search">
         
-        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5Z"/></svg>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
         
-        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12Z"/></svg>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
       </label>
       <nav class="md-search__options" aria-label="Search">
         
         <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
           
-          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12 19 6.41Z"/></svg>
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
         </button>
       </nav>
       
     </form>
     <div class="md-search__output">
-      <div class="md-search__scrollwrap" data-md-scrollfix>
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
         <div class="md-search-result" data-md-component="search-result">
           <div class="md-search-result__meta">
             Initializing search
@@ -155,7 +155,7 @@
         <a href="https://github.com/dipterix/threebrainpy" title="Go to repository" class="md-source" data-md-component="source">
   <div class="md-source__icon md-icon">
     
-    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 6.4.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2023 Fonticons, Inc.--><path d="M439.55 236.05 244 40.45a28.87 28.87 0 0 0-40.81 0l-40.66 40.63 51.52 51.52c27.06-9.14 52.68 16.77 43.39 43.68l49.66 49.66c34.23-11.8 61.18 31 35.47 56.69-26.49 26.49-70.21-2.87-56-37.34L240.22 199v121.85c25.3 12.54 22.26 41.85 9.08 55a34.34 34.34 0 0 1-48.55 0c-17.57-17.6-11.07-46.91 11.25-56v-123c-20.8-8.51-24.6-30.74-18.64-45L142.57 101 8.45 235.14a28.86 28.86 0 0 0 0 40.81l195.61 195.6a28.86 28.86 0 0 0 40.8 0l194.69-194.69a28.86 28.86 0 0 0 0-40.81z"/></svg>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 6.7.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2024 Fonticons, Inc.--><path d="M439.55 236.05 244 40.45a28.87 28.87 0 0 0-40.81 0l-40.66 40.63 51.52 51.52c27.06-9.14 52.68 16.77 43.39 43.68l49.66 49.66c34.23-11.8 61.18 31 35.47 56.69-26.49 26.49-70.21-2.87-56-37.34L240.22 199v121.85c25.3 12.54 22.26 41.85 9.08 55a34.34 34.34 0 0 1-48.55 0c-17.57-17.6-11.07-46.91 11.25-56v-123c-20.8-8.51-24.6-30.74-18.64-45L142.57 101 8.45 235.14a28.86 28.86 0 0 0 0 40.81l195.61 195.6a28.86 28.86 0 0 0 40.8 0l194.69-194.69a28.86 28.86 0 0 0 0-40.81"/></svg>
   </div>
   <div class="md-source__repository">
     GitHub
@@ -188,19 +188,19 @@
 
 <nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
   <label class="md-nav__title" for="__drawer">
-    <a href=".." title="Your Advanced Electrode Localizer Viewer for Python" class="md-nav__button md-logo" aria-label="Your Advanced Electrode Localizer Viewer for Python" data-md-component="logo">
+    <a href=".." title="Your Advanced Brain Viewer for Python" class="md-nav__button md-logo" aria-label="Your Advanced Brain Viewer for Python" data-md-component="logo">
       
   <img src="../assets/images/favicon.png" alt="logo">
 
     </a>
-    Your Advanced Electrode Localizer Viewer for Python
+    Your Advanced Brain Viewer for Python
   </label>
   
     <div class="md-nav__source">
       <a href="https://github.com/dipterix/threebrainpy" title="Go to repository" class="md-source" data-md-component="source">
   <div class="md-source__icon md-icon">
     
-    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 6.4.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2023 Fonticons, Inc.--><path d="M439.55 236.05 244 40.45a28.87 28.87 0 0 0-40.81 0l-40.66 40.63 51.52 51.52c27.06-9.14 52.68 16.77 43.39 43.68l49.66 49.66c34.23-11.8 61.18 31 35.47 56.69-26.49 26.49-70.21-2.87-56-37.34L240.22 199v121.85c25.3 12.54 22.26 41.85 9.08 55a34.34 34.34 0 0 1-48.55 0c-17.57-17.6-11.07-46.91 11.25-56v-123c-20.8-8.51-24.6-30.74-18.64-45L142.57 101 8.45 235.14a28.86 28.86 0 0 0 0 40.81l195.61 195.6a28.86 28.86 0 0 0 40.8 0l194.69-194.69a28.86 28.86 0 0 0 0-40.81z"/></svg>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 6.7.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2024 Fonticons, Inc.--><path d="M439.55 236.05 244 40.45a28.87 28.87 0 0 0-40.81 0l-40.66 40.63 51.52 51.52c27.06-9.14 52.68 16.77 43.39 43.68l49.66 49.66c34.23-11.8 61.18 31 35.47 56.69-26.49 26.49-70.21-2.87-56-37.34L240.22 199v121.85c25.3 12.54 22.26 41.85 9.08 55a34.34 34.34 0 0 1-48.55 0c-17.57-17.6-11.07-46.91 11.25-56v-123c-20.8-8.51-24.6-30.74-18.64-45L142.57 101 8.45 235.14a28.86 28.86 0 0 0 0 40.81l195.61 195.6a28.86 28.86 0 0 0 40.8 0l194.69-194.69a28.86 28.86 0 0 0 0-40.81"/></svg>
   </div>
   <div class="md-source__repository">
     GitHub
@@ -212,6 +212,7 @@
     
       
       
+  
   
   
   
@@ -231,6 +232,7 @@
     
       
       
+  
   
   
   
@@ -255,6 +257,8 @@
     
   
   
+  
+    
     
     
     
@@ -262,10 +266,9 @@
       
         
         
-        
-        
         <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3" checked>
         
+          
           <label class="md-nav__link" for="__nav_3" id="__nav_3_label" tabindex="0">
             
   
@@ -291,6 +294,8 @@
     
   
   
+  
+    
     
     
     
@@ -298,10 +303,9 @@
       
         
         
-        
-        
         <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_1" checked>
         
+          
           <label class="md-nav__link" for="__nav_3_1" id="__nav_3_1_label" tabindex="0">
             
   
@@ -325,6 +329,7 @@
   
   
   
+  
     <li class="md-nav__item">
       <a href="../api-core-brain/" class="md-nav__link">
         
@@ -345,6 +350,7 @@
   
   
     
+  
   
   
     <li class="md-nav__item md-nav__item--active">
@@ -389,126 +395,162 @@
       
         <li class="md-nav__item">
   <a href="#threebrainpy.core.vec3.Vec3" class="md-nav__link">
-    Vec3
+    <span class="md-ellipsis">
+      Vec3
+    </span>
   </a>
   
 </li>
       
         <li class="md-nav__item">
   <a href="#threebrainpy.core.vec3.Vec3.x" class="md-nav__link">
-    x
+    <span class="md-ellipsis">
+      x
+    </span>
   </a>
   
 </li>
       
         <li class="md-nav__item">
   <a href="#threebrainpy.core.vec3.Vec3.y" class="md-nav__link">
-    y
+    <span class="md-ellipsis">
+      y
+    </span>
   </a>
   
 </li>
       
         <li class="md-nav__item">
   <a href="#threebrainpy.core.vec3.Vec3.z" class="md-nav__link">
-    z
+    <span class="md-ellipsis">
+      z
+    </span>
   </a>
   
 </li>
       
         <li class="md-nav__item">
   <a href="#threebrainpy.core.vec3.Vec3.add" class="md-nav__link">
-    add()
+    <span class="md-ellipsis">
+      add
+    </span>
   </a>
   
 </li>
       
         <li class="md-nav__item">
   <a href="#threebrainpy.core.vec3.Vec3.applyMat44" class="md-nav__link">
-    applyMat44()
+    <span class="md-ellipsis">
+      applyMat44
+    </span>
   </a>
   
 </li>
       
         <li class="md-nav__item">
   <a href="#threebrainpy.core.vec3.Vec3.copy" class="md-nav__link">
-    copy()
+    <span class="md-ellipsis">
+      copy
+    </span>
   </a>
   
 </li>
       
         <li class="md-nav__item">
   <a href="#threebrainpy.core.vec3.Vec3.copyFrom" class="md-nav__link">
-    copyFrom()
+    <span class="md-ellipsis">
+      copyFrom
+    </span>
   </a>
   
 </li>
       
         <li class="md-nav__item">
   <a href="#threebrainpy.core.vec3.Vec3.distanceTo" class="md-nav__link">
-    distanceTo()
+    <span class="md-ellipsis">
+      distanceTo
+    </span>
   </a>
   
 </li>
       
         <li class="md-nav__item">
   <a href="#threebrainpy.core.vec3.Vec3.distanceToSquared" class="md-nav__link">
-    distanceToSquared()
+    <span class="md-ellipsis">
+      distanceToSquared
+    </span>
   </a>
   
 </li>
       
         <li class="md-nav__item">
   <a href="#threebrainpy.core.vec3.Vec3.dot" class="md-nav__link">
-    dot()
+    <span class="md-ellipsis">
+      dot
+    </span>
   </a>
   
 </li>
       
         <li class="md-nav__item">
   <a href="#threebrainpy.core.vec3.Vec3.length" class="md-nav__link">
-    length()
+    <span class="md-ellipsis">
+      length
+    </span>
   </a>
   
 </li>
       
         <li class="md-nav__item">
   <a href="#threebrainpy.core.vec3.Vec3.multiplyScalar" class="md-nav__link">
-    multiplyScalar()
+    <span class="md-ellipsis">
+      multiplyScalar
+    </span>
   </a>
   
 </li>
       
         <li class="md-nav__item">
   <a href="#threebrainpy.core.vec3.Vec3.normalize" class="md-nav__link">
-    normalize()
+    <span class="md-ellipsis">
+      normalize
+    </span>
   </a>
   
 </li>
       
         <li class="md-nav__item">
   <a href="#threebrainpy.core.vec3.Vec3.set" class="md-nav__link">
-    set()
+    <span class="md-ellipsis">
+      set
+    </span>
   </a>
   
 </li>
       
         <li class="md-nav__item">
   <a href="#threebrainpy.core.vec3.Vec3.sub" class="md-nav__link">
-    sub()
+    <span class="md-ellipsis">
+      sub
+    </span>
   </a>
   
 </li>
       
         <li class="md-nav__item">
   <a href="#threebrainpy.core.vec3.Vec3.to_list" class="md-nav__link">
-    to_list()
+    <span class="md-ellipsis">
+      to_list
+    </span>
   </a>
   
 </li>
       
         <li class="md-nav__item">
   <a href="#threebrainpy.core.vec3.Vec3.to_tuple" class="md-nav__link">
-    to_tuple()
+    <span class="md-ellipsis">
+      to_tuple
+    </span>
   </a>
   
 </li>
@@ -524,6 +566,7 @@
             
               
                 
+  
   
   
   
@@ -552,6 +595,7 @@
             
               
                 
+  
   
   
   
@@ -603,126 +647,162 @@
       
         <li class="md-nav__item">
   <a href="#threebrainpy.core.vec3.Vec3" class="md-nav__link">
-    Vec3
+    <span class="md-ellipsis">
+      Vec3
+    </span>
   </a>
   
 </li>
       
         <li class="md-nav__item">
   <a href="#threebrainpy.core.vec3.Vec3.x" class="md-nav__link">
-    x
+    <span class="md-ellipsis">
+      x
+    </span>
   </a>
   
 </li>
       
         <li class="md-nav__item">
   <a href="#threebrainpy.core.vec3.Vec3.y" class="md-nav__link">
-    y
+    <span class="md-ellipsis">
+      y
+    </span>
   </a>
   
 </li>
       
         <li class="md-nav__item">
   <a href="#threebrainpy.core.vec3.Vec3.z" class="md-nav__link">
-    z
+    <span class="md-ellipsis">
+      z
+    </span>
   </a>
   
 </li>
       
         <li class="md-nav__item">
   <a href="#threebrainpy.core.vec3.Vec3.add" class="md-nav__link">
-    add()
+    <span class="md-ellipsis">
+      add
+    </span>
   </a>
   
 </li>
       
         <li class="md-nav__item">
   <a href="#threebrainpy.core.vec3.Vec3.applyMat44" class="md-nav__link">
-    applyMat44()
+    <span class="md-ellipsis">
+      applyMat44
+    </span>
   </a>
   
 </li>
       
         <li class="md-nav__item">
   <a href="#threebrainpy.core.vec3.Vec3.copy" class="md-nav__link">
-    copy()
+    <span class="md-ellipsis">
+      copy
+    </span>
   </a>
   
 </li>
       
         <li class="md-nav__item">
   <a href="#threebrainpy.core.vec3.Vec3.copyFrom" class="md-nav__link">
-    copyFrom()
+    <span class="md-ellipsis">
+      copyFrom
+    </span>
   </a>
   
 </li>
       
         <li class="md-nav__item">
   <a href="#threebrainpy.core.vec3.Vec3.distanceTo" class="md-nav__link">
-    distanceTo()
+    <span class="md-ellipsis">
+      distanceTo
+    </span>
   </a>
   
 </li>
       
         <li class="md-nav__item">
   <a href="#threebrainpy.core.vec3.Vec3.distanceToSquared" class="md-nav__link">
-    distanceToSquared()
+    <span class="md-ellipsis">
+      distanceToSquared
+    </span>
   </a>
   
 </li>
       
         <li class="md-nav__item">
   <a href="#threebrainpy.core.vec3.Vec3.dot" class="md-nav__link">
-    dot()
+    <span class="md-ellipsis">
+      dot
+    </span>
   </a>
   
 </li>
       
         <li class="md-nav__item">
   <a href="#threebrainpy.core.vec3.Vec3.length" class="md-nav__link">
-    length()
+    <span class="md-ellipsis">
+      length
+    </span>
   </a>
   
 </li>
       
         <li class="md-nav__item">
   <a href="#threebrainpy.core.vec3.Vec3.multiplyScalar" class="md-nav__link">
-    multiplyScalar()
+    <span class="md-ellipsis">
+      multiplyScalar
+    </span>
   </a>
   
 </li>
       
         <li class="md-nav__item">
   <a href="#threebrainpy.core.vec3.Vec3.normalize" class="md-nav__link">
-    normalize()
+    <span class="md-ellipsis">
+      normalize
+    </span>
   </a>
   
 </li>
       
         <li class="md-nav__item">
   <a href="#threebrainpy.core.vec3.Vec3.set" class="md-nav__link">
-    set()
+    <span class="md-ellipsis">
+      set
+    </span>
   </a>
   
 </li>
       
         <li class="md-nav__item">
   <a href="#threebrainpy.core.vec3.Vec3.sub" class="md-nav__link">
-    sub()
+    <span class="md-ellipsis">
+      sub
+    </span>
   </a>
   
 </li>
       
         <li class="md-nav__item">
   <a href="#threebrainpy.core.vec3.Vec3.to_list" class="md-nav__link">
-    to_list()
+    <span class="md-ellipsis">
+      to_list
+    </span>
   </a>
   
 </li>
       
         <li class="md-nav__item">
   <a href="#threebrainpy.core.vec3.Vec3.to_tuple" class="md-nav__link">
-    to_tuple()
+    <span class="md-ellipsis">
+      to_tuple
+    </span>
   </a>
   
 </li>
@@ -752,10 +832,10 @@
 
 
 <a id="threebrainpy.core.vec3.Vec3"></a>
-  <div class="doc doc-contents first">
+    <div class="doc doc-contents first">
 
-  
-      <p>Creates a 3D vector with given coordinate space.
+
+        <p>Creates a 3D vector with given coordinate space.
 Args:
     x: x coordinate or a Vec3, or a list/tuple/array of 3 numbers.
     y: y coordinate or None if x is a Vec3 or a list/tuple/array of 3 numbers.
@@ -765,10 +845,14 @@ Args:
     &gt; In other situations, if space is None, the space will be "ras".
 </code></pre>
 
-            <details class="quote">
-              <summary>Source code in <code>threebrainpy/core/vec3.py</code></summary>
-              <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">  5</span>
-<span class="normal">  6</span>
+
+
+
+
+
+              <details class="quote">
+                <summary>Source code in <code>threebrainpy/core/vec3.py</code></summary>
+                <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">  6</span>
 <span class="normal">  7</span>
 <span class="normal">  8</span>
 <span class="normal">  9</span>
@@ -1098,7 +1182,8 @@ Args:
 <span class="normal">333</span>
 <span class="normal">334</span>
 <span class="normal">335</span>
-<span class="normal">336</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">class</span> <span class="nc">Vec3</span><span class="p">:</span>
+<span class="normal">336</span>
+<span class="normal">337</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">class</span><span class="w"> </span><span class="nc">Vec3</span><span class="p">:</span>
 <span class="w">    </span><span class="sd">&#39;&#39;&#39;</span>
 <span class="sd">    Creates a 3D vector with given coordinate space.</span>
 <span class="sd">    Args:</span>
@@ -1111,8 +1196,8 @@ Args:
 <span class="sd">            &gt; In other situations, if space is None, the space will be &quot;ras&quot;.</span>
 
 <span class="sd">    &#39;&#39;&#39;</span>
-    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">x</span> <span class="p">:</span> <span class="nb">list</span> <span class="o">|</span> <span class="nb">tuple</span> <span class="o">|</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span> <span class="o">|</span> <span class="nb">float</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> 
-                 <span class="n">y</span> <span class="p">:</span> <span class="nb">float</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="n">z</span> <span class="p">:</span> <span class="nb">float</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="n">space</span> <span class="p">:</span> <span class="nb">str</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">x</span> <span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="nb">list</span><span class="p">,</span> <span class="nb">tuple</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">,</span> <span class="nb">float</span><span class="p">,</span> <span class="kc">None</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> 
+                 <span class="n">y</span> <span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="nb">float</span><span class="p">,</span> <span class="kc">None</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="n">z</span> <span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="nb">float</span><span class="p">,</span> <span class="kc">None</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="n">space</span> <span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="kc">None</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">):</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">space</span> <span class="o">=</span> <span class="s2">&quot;ras&quot;</span> <span class="k">if</span> <span class="n">space</span> <span class="ow">is</span> <span class="kc">None</span> <span class="k">else</span> <span class="n">space</span>
         <span class="k">if</span> <span class="n">y</span> <span class="ow">is</span> <span class="kc">None</span> <span class="ow">or</span> <span class="n">z</span> <span class="ow">is</span> <span class="kc">None</span> <span class="ow">or</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">Vec3</span><span class="p">):</span>
             <span class="k">if</span> <span class="n">x</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
@@ -1135,42 +1220,42 @@ Args:
             <span class="bp">self</span><span class="o">.</span><span class="n">_xyz</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">z</span><span class="p">,</span> <span class="mf">1.0</span><span class="p">],</span> <span class="n">dtype</span><span class="o">=</span><span class="nb">float</span><span class="p">)</span>
 
     <span class="nd">@property</span>
-    <span class="k">def</span> <span class="nf">x</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">x</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&#39;&#39;&#39;</span>
 <span class="sd">        Get x coordinate.</span>
 <span class="sd">        &#39;&#39;&#39;</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_xyz</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
     <span class="nd">@x</span><span class="o">.</span><span class="n">setter</span>
-    <span class="k">def</span> <span class="nf">x</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">value</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">x</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">value</span><span class="p">):</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">_xyz</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="n">value</span>
 
     <span class="nd">@property</span>
-    <span class="k">def</span> <span class="nf">y</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">y</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&#39;&#39;&#39;</span>
 <span class="sd">        Get y coordinate.</span>
 <span class="sd">        &#39;&#39;&#39;</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_xyz</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
     <span class="nd">@y</span><span class="o">.</span><span class="n">setter</span>
-    <span class="k">def</span> <span class="nf">y</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">value</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">y</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">value</span><span class="p">):</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">_xyz</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="n">value</span>
 
     <span class="nd">@property</span>
-    <span class="k">def</span> <span class="nf">z</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">z</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&#39;&#39;&#39;</span>
 <span class="sd">        Get z coordinate.</span>
 <span class="sd">        &#39;&#39;&#39;</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_xyz</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span>
     <span class="nd">@z</span><span class="o">.</span><span class="n">setter</span>
-    <span class="k">def</span> <span class="nf">z</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">value</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">z</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">value</span><span class="p">):</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">_xyz</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span> <span class="o">=</span> <span class="n">value</span>
 
-    <span class="k">def</span> <span class="fm">__str__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="fm">__str__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="k">return</span> <span class="sa">f</span><span class="s2">&quot;Vec3(</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">x</span><span class="si">}</span><span class="s2">, </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">y</span><span class="si">}</span><span class="s2">, </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">z</span><span class="si">}</span><span class="s2">) [</span><span class="si">{</span><span class="w"> </span><span class="bp">self</span><span class="o">.</span><span class="n">space</span><span class="w"> </span><span class="si">}</span><span class="s2">]&quot;</span>
 
-    <span class="k">def</span> <span class="fm">__repr__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="fm">__repr__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="k">return</span> <span class="nb">str</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span>
 
-    <span class="k">def</span> <span class="fm">__add__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">other</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="fm">__add__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">other</span><span class="p">):</span>
         <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">other</span><span class="p">,</span> <span class="n">Vec3</span><span class="p">):</span>
             <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">space</span> <span class="o">!=</span> <span class="n">other</span><span class="o">.</span><span class="n">space</span><span class="p">:</span>
                 <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Vec3 add: spaces must match, but got </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">space</span><span class="si">}</span><span class="s2"> and </span><span class="si">{</span><span class="n">other</span><span class="o">.</span><span class="n">space</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
@@ -1182,7 +1267,7 @@ Args:
             <span class="k">else</span><span class="p">:</span>
                 <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Vec3 add: other must be a Vec3 or can be converted into Vec3, but got </span><span class="si">{</span><span class="n">other</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
 
-    <span class="k">def</span> <span class="fm">__sub__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">other</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="fm">__sub__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">other</span><span class="p">):</span>
         <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">other</span><span class="p">,</span> <span class="n">Vec3</span><span class="p">):</span>
             <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">space</span> <span class="o">!=</span> <span class="n">other</span><span class="o">.</span><span class="n">space</span><span class="p">:</span>
                 <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Vec3 sub: spaces must match, but got </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">space</span><span class="si">}</span><span class="s2"> and </span><span class="si">{</span><span class="n">other</span><span class="o">.</span><span class="n">space</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
@@ -1194,7 +1279,7 @@ Args:
             <span class="k">else</span><span class="p">:</span>
                 <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Vec3 sub: other must be a Vec3 or can be converted into Vec3, but got </span><span class="si">{</span><span class="n">other</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
 
-    <span class="k">def</span> <span class="fm">__mul__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">other</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="fm">__mul__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">other</span><span class="p">):</span>
         <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">other</span><span class="p">,</span> <span class="n">Vec3</span><span class="p">):</span>
             <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">space</span> <span class="o">!=</span> <span class="n">other</span><span class="o">.</span><span class="n">space</span><span class="p">:</span>
                 <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Vec3 mul: spaces must match, but got </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">space</span><span class="si">}</span><span class="s2"> and </span><span class="si">{</span><span class="n">other</span><span class="o">.</span><span class="n">space</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
@@ -1206,7 +1291,7 @@ Args:
             <span class="k">else</span><span class="p">:</span>
                 <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Vec3 mul: other must be a Vec3 or can be converted into Vec3, but got </span><span class="si">{</span><span class="n">other</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
 
-    <span class="k">def</span> <span class="fm">__truediv__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">other</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="fm">__truediv__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">other</span><span class="p">):</span>
         <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">other</span><span class="p">,</span> <span class="n">Vec3</span><span class="p">):</span>
             <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">space</span> <span class="o">!=</span> <span class="n">other</span><span class="o">.</span><span class="n">space</span><span class="p">:</span>
                 <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Vec3 truediv: spaces must match, but got </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">space</span><span class="si">}</span><span class="s2"> and </span><span class="si">{</span><span class="n">other</span><span class="o">.</span><span class="n">space</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
@@ -1218,7 +1303,7 @@ Args:
             <span class="k">else</span><span class="p">:</span>
                 <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Vec3 truediv: other must be a Vec3 or can be converted into Vec3, but got </span><span class="si">{</span><span class="n">other</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
 
-    <span class="k">def</span> <span class="fm">__floordiv__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">other</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="fm">__floordiv__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">other</span><span class="p">):</span>
         <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">other</span><span class="p">,</span> <span class="n">Vec3</span><span class="p">):</span>
             <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">space</span> <span class="o">!=</span> <span class="n">other</span><span class="o">.</span><span class="n">space</span><span class="p">:</span>
                 <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Vec3 floordiv: spaces must match, but got </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">space</span><span class="si">}</span><span class="s2"> and </span><span class="si">{</span><span class="n">other</span><span class="o">.</span><span class="n">space</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
@@ -1230,7 +1315,7 @@ Args:
             <span class="k">else</span><span class="p">:</span>
                 <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Vec3 floordiv: other must be a Vec3 or can be converted into Vec3, but got </span><span class="si">{</span><span class="n">other</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
 
-    <span class="k">def</span> <span class="nf">to_list</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">to_list</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&#39;&#39;&#39;</span>
 <span class="sd">        Convert this vector into a list of 3 numbers.</span>
 <span class="sd">        When the point is invalid, a list of 3 `9999.0` will be returned. </span>
@@ -1240,13 +1325,13 @@ Args:
             <span class="k">return</span> <span class="p">[</span><span class="mf">9999.0</span><span class="p">,</span> <span class="mf">9999.0</span><span class="p">,</span> <span class="mf">9999.0</span><span class="p">]</span>
         <span class="k">return</span> <span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">x</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">y</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">z</span><span class="p">]</span>
 
-    <span class="k">def</span> <span class="nf">to_tuple</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">to_tuple</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&#39;&#39;&#39;</span>
 <span class="sd">        Convert this vector into a tuple of 3 numbers.</span>
 <span class="sd">        &#39;&#39;&#39;</span>
         <span class="k">return</span> <span class="nb">tuple</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_xyz</span><span class="p">[:</span><span class="mi">3</span><span class="p">])</span>
 
-    <span class="k">def</span> <span class="nf">copyFrom</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">other</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">copyFrom</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">other</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&#39;&#39;&#39;</span>
 <span class="sd">        Copy (in-place) the value of this vector from another vector or a list/tuple/array of 3 numbers.</span>
 <span class="sd">        Args:</span>
@@ -1264,7 +1349,7 @@ Args:
         <span class="bp">self</span><span class="o">.</span><span class="n">_xyz</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span> <span class="o">=</span> <span class="n">other</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span>
         <span class="k">return</span> <span class="bp">self</span>
 
-    <span class="k">def</span> <span class="nf">applyMat44</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">mat44</span> <span class="p">:</span> <span class="n">Mat44</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">applyMat44</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">mat44</span> <span class="p">:</span> <span class="n">Mat44</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&#39;&#39;&#39;</span>
 <span class="sd">        Apply a 4x4 matrix to this vector in-place.</span>
 <span class="sd">        Args:</span>
@@ -1279,7 +1364,7 @@ Args:
             <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Vec3 applyMatrix44: mat44 must be a Mat44, but got </span><span class="si">{</span><span class="n">mat44</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
         <span class="k">return</span> <span class="bp">self</span>
 
-    <span class="k">def</span> <span class="nf">add</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">vec3</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">add</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">vec3</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&#39;&#39;&#39;</span>
 <span class="sd">        Add another vector to this vector in-place.</span>
 <span class="sd">        Args:</span>
@@ -1295,7 +1380,7 @@ Args:
             <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Vec3 add: vec3 must be a Vec3, but got </span><span class="si">{</span><span class="n">vec3</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
         <span class="k">return</span> <span class="bp">self</span>
 
-    <span class="k">def</span> <span class="nf">sub</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">vec3</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">sub</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">vec3</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&#39;&#39;&#39;</span>
 <span class="sd">        Subtract another vector to this vector in-place.</span>
 <span class="sd">        Args:</span>
@@ -1311,7 +1396,7 @@ Args:
             <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Vec3 sub: vec3 must be a Vec3, but got </span><span class="si">{</span><span class="n">vec3</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
         <span class="k">return</span> <span class="bp">self</span>
 
-    <span class="k">def</span> <span class="nf">dot</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">vec3</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">float</span><span class="p">:</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">dot</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">vec3</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">float</span><span class="p">:</span>
 <span class="w">        </span><span class="sd">&#39;&#39;&#39;</span>
 <span class="sd">        Dot-product another vector to this vector.</span>
 <span class="sd">        Args:</span>
@@ -1326,7 +1411,7 @@ Args:
         <span class="k">else</span><span class="p">:</span>
             <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Vec3 dot: vec3 must be a Vec3, but got </span><span class="si">{</span><span class="n">vec3</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
 
-    <span class="k">def</span> <span class="nf">multiplyScalar</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">scalar</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">multiplyScalar</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">scalar</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&#39;&#39;&#39;</span>
 <span class="sd">        Multiply this vector by a scalar in-place.</span>
 <span class="sd">        Args:</span>
@@ -1351,7 +1436,7 @@ Args:
     <span class="c1">#         raise ValueError(f&quot;Vec3 cross: vec3 must be a Vec3, but got {vec3}&quot;)</span>
     <span class="c1">#     return self</span>
 
-    <span class="k">def</span> <span class="nf">length</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">float</span><span class="p">:</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">length</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">float</span><span class="p">:</span>
 <span class="w">        </span><span class="sd">&#39;&#39;&#39;</span>
 <span class="sd">        Get the length of this vector.</span>
 <span class="sd">        Returns:</span>
@@ -1359,7 +1444,7 @@ Args:
 <span class="sd">        &#39;&#39;&#39;</span>
         <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_xyz</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">*</span> <span class="bp">self</span><span class="o">.</span><span class="n">_xyz</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">_xyz</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">*</span> <span class="bp">self</span><span class="o">.</span><span class="n">_xyz</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">_xyz</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span> <span class="o">*</span> <span class="bp">self</span><span class="o">.</span><span class="n">_xyz</span><span class="p">[</span><span class="mi">2</span><span class="p">])</span>
 
-    <span class="k">def</span> <span class="nf">normalize</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">normalize</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&#39;&#39;&#39;</span>
 <span class="sd">        Normalize this vector in-place.</span>
 <span class="sd">        &#39;&#39;&#39;</span>
@@ -1371,7 +1456,7 @@ Args:
         <span class="bp">self</span><span class="o">.</span><span class="n">_xyz</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span> <span class="o">/=</span> <span class="n">l</span>
         <span class="k">return</span> <span class="bp">self</span>
 
-    <span class="k">def</span> <span class="nf">distanceTo</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">vec3</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">float</span><span class="p">:</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">distanceTo</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">vec3</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">float</span><span class="p">:</span>
 <span class="w">        </span><span class="sd">&#39;&#39;&#39;</span>
 <span class="sd">        Calculate the distance to another vector.</span>
 <span class="sd">        Args:</span>
@@ -1390,7 +1475,7 @@ Args:
         <span class="k">else</span><span class="p">:</span>
             <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Vec3 distanceTo: vec3 must be a Vec3, but got </span><span class="si">{</span><span class="n">vec3</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
 
-    <span class="k">def</span> <span class="nf">distanceToSquared</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">vec3</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">float</span><span class="p">:</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">distanceToSquared</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">vec3</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">float</span><span class="p">:</span>
 <span class="w">        </span><span class="sd">&#39;&#39;&#39;</span>
 <span class="sd">        Calculate the squared distance to another vector.</span>
 <span class="sd">        Args:</span>
@@ -1409,7 +1494,7 @@ Args:
         <span class="k">else</span><span class="p">:</span>
             <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Vec3 distanceToSquared: vec3 must be a Vec3, but got </span><span class="si">{</span><span class="n">vec3</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
 
-    <span class="k">def</span> <span class="nf">set</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">x</span> <span class="p">:</span> <span class="nb">float</span><span class="p">,</span> <span class="n">y</span> <span class="p">:</span> <span class="nb">float</span><span class="p">,</span> <span class="n">z</span> <span class="p">:</span> <span class="nb">float</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">set</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">x</span> <span class="p">:</span> <span class="nb">float</span><span class="p">,</span> <span class="n">y</span> <span class="p">:</span> <span class="nb">float</span><span class="p">,</span> <span class="n">z</span> <span class="p">:</span> <span class="nb">float</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&#39;&#39;&#39;</span>
 <span class="sd">        Set the value of this vector in-place.</span>
 <span class="sd">        Args:</span>
@@ -1422,18 +1507,18 @@ Args:
         <span class="bp">self</span><span class="o">.</span><span class="n">_xyz</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span> <span class="o">=</span> <span class="n">z</span>
         <span class="k">return</span> <span class="bp">self</span>
 
-    <span class="k">def</span> <span class="nf">__copy__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">__copy__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="k">return</span> <span class="n">Vec3</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_xyz</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="bp">self</span><span class="o">.</span><span class="n">_xyz</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="bp">self</span><span class="o">.</span><span class="n">_xyz</span><span class="p">[</span><span class="mi">2</span><span class="p">],</span> <span class="n">space</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">space</span><span class="p">)</span>
 
-    <span class="k">def</span> <span class="nf">copy</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">copy</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&#39;&#39;&#39;</span>
 <span class="sd">        A deep copy this vector.</span>
 <span class="sd">        &#39;&#39;&#39;</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">__copy__</span><span class="p">()</span>
 </code></pre></div></td></tr></table></div>
-            </details>
+              </details>
 
-  
+
 
   <div class="doc doc-children">
 
@@ -1447,10 +1532,9 @@ Args:
 
 
 
-
 <h2 id="threebrainpy.core.vec3.Vec3.x" class="doc doc-heading">
-          <code class="highlight language-python"><span class="n">x</span></code>
-  
+            <code class="highlight language-python"><span class="n">x</span></code>
+
   <span class="doc doc-labels">
       <small class="doc doc-label doc-label-property"><code>property</code></small>
       <small class="doc doc-label doc-label-writable"><code>writable</code></small>
@@ -1459,21 +1543,20 @@ Args:
 </h2>
 
 
-  <div class="doc doc-contents ">
-  
-      <p>Get x coordinate.</p>
-  </div>
+    <div class="doc doc-contents ">
+
+        <p>Get x coordinate.</p>
+    </div>
 
 </div>
 
 <div class="doc doc-object doc-attribute">
-
 
 
 
 <h2 id="threebrainpy.core.vec3.Vec3.y" class="doc doc-heading">
-          <code class="highlight language-python"><span class="n">y</span></code>
-  
+            <code class="highlight language-python"><span class="n">y</span></code>
+
   <span class="doc doc-labels">
       <small class="doc doc-label doc-label-property"><code>property</code></small>
       <small class="doc doc-label doc-label-writable"><code>writable</code></small>
@@ -1482,10 +1565,10 @@ Args:
 </h2>
 
 
-  <div class="doc doc-contents ">
-  
-      <p>Get y coordinate.</p>
-  </div>
+    <div class="doc doc-contents ">
+
+        <p>Get y coordinate.</p>
+    </div>
 
 </div>
 
@@ -1493,10 +1576,9 @@ Args:
 
 
 
-
 <h2 id="threebrainpy.core.vec3.Vec3.z" class="doc doc-heading">
-          <code class="highlight language-python"><span class="n">z</span></code>
-  
+            <code class="highlight language-python"><span class="n">z</span></code>
+
   <span class="doc doc-labels">
       <small class="doc doc-label doc-label-property"><code>property</code></small>
       <small class="doc doc-label doc-label-writable"><code>writable</code></small>
@@ -1505,37 +1587,33 @@ Args:
 </h2>
 
 
-  <div class="doc doc-contents ">
-  
-      <p>Get z coordinate.</p>
-  </div>
+    <div class="doc doc-contents ">
+
+        <p>Get z coordinate.</p>
+    </div>
 
 </div>
-
 
 
 
 <div class="doc doc-object doc-function">
 
 
-
-
 <h2 id="threebrainpy.core.vec3.Vec3.add" class="doc doc-heading">
-          <code class="highlight language-python"><span class="n">add</span><span class="p">(</span><span class="n">vec3</span><span class="p">)</span></code>
+            <code class="highlight language-python"><span class="n">add</span><span class="p">(</span><span class="n">vec3</span><span class="p">)</span></code>
 
 </h2>
 
 
-  <div class="doc doc-contents ">
-  
-      <p>Add another vector to this vector in-place.
+    <div class="doc doc-contents ">
+
+        <p>Add another vector to this vector in-place.
 Args:
     vec3 Vec3: Another vector.</p>
 
-          <details class="quote">
-            <summary>Source code in <code>threebrainpy/core/vec3.py</code></summary>
-            <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">186</span>
-<span class="normal">187</span>
+            <details class="quote">
+              <summary>Source code in <code>threebrainpy/core/vec3.py</code></summary>
+              <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">187</span>
 <span class="normal">188</span>
 <span class="normal">189</span>
 <span class="normal">190</span>
@@ -1548,7 +1626,8 @@ Args:
 <span class="normal">197</span>
 <span class="normal">198</span>
 <span class="normal">199</span>
-<span class="normal">200</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span> <span class="nf">add</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">vec3</span><span class="p">):</span>
+<span class="normal">200</span>
+<span class="normal">201</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span><span class="w"> </span><span class="nf">add</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">vec3</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&#39;&#39;&#39;</span>
 <span class="sd">    Add another vector to this vector in-place.</span>
 <span class="sd">    Args:</span>
@@ -1564,33 +1643,29 @@ Args:
         <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Vec3 add: vec3 must be a Vec3, but got </span><span class="si">{</span><span class="n">vec3</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
     <span class="k">return</span> <span class="bp">self</span>
 </code></pre></div></td></tr></table></div>
-          </details>
-  </div>
+            </details>
+    </div>
 
 </div>
-
 
 <div class="doc doc-object doc-function">
 
 
-
-
 <h2 id="threebrainpy.core.vec3.Vec3.applyMat44" class="doc doc-heading">
-          <code class="highlight language-python"><span class="n">applyMat44</span><span class="p">(</span><span class="n">mat44</span><span class="p">)</span></code>
+            <code class="highlight language-python"><span class="n">applyMat44</span><span class="p">(</span><span class="n">mat44</span><span class="p">)</span></code>
 
 </h2>
 
 
-  <div class="doc doc-contents ">
-  
-      <p>Apply a 4x4 matrix to this vector in-place.
+    <div class="doc doc-contents ">
+
+        <p>Apply a 4x4 matrix to this vector in-place.
 Args:
     mat44: A 4x4 matrix</p>
 
-          <details class="quote">
-            <summary>Source code in <code>threebrainpy/core/vec3.py</code></summary>
-            <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">171</span>
-<span class="normal">172</span>
+            <details class="quote">
+              <summary>Source code in <code>threebrainpy/core/vec3.py</code></summary>
+              <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">172</span>
 <span class="normal">173</span>
 <span class="normal">174</span>
 <span class="normal">175</span>
@@ -1602,7 +1677,8 @@ Args:
 <span class="normal">181</span>
 <span class="normal">182</span>
 <span class="normal">183</span>
-<span class="normal">184</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span> <span class="nf">applyMat44</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">mat44</span> <span class="p">:</span> <span class="n">Mat44</span><span class="p">):</span>
+<span class="normal">184</span>
+<span class="normal">185</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span><span class="w"> </span><span class="nf">applyMat44</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">mat44</span> <span class="p">:</span> <span class="n">Mat44</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&#39;&#39;&#39;</span>
 <span class="sd">    Apply a 4x4 matrix to this vector in-place.</span>
 <span class="sd">    Args:</span>
@@ -1617,66 +1693,59 @@ Args:
         <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Vec3 applyMatrix44: mat44 must be a Mat44, but got </span><span class="si">{</span><span class="n">mat44</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
     <span class="k">return</span> <span class="bp">self</span>
 </code></pre></div></td></tr></table></div>
-          </details>
-  </div>
+            </details>
+    </div>
 
 </div>
-
 
 <div class="doc doc-object doc-function">
 
 
-
-
 <h2 id="threebrainpy.core.vec3.Vec3.copy" class="doc doc-heading">
-          <code class="highlight language-python"><span class="n">copy</span><span class="p">()</span></code>
+            <code class="highlight language-python"><span class="n">copy</span><span class="p">()</span></code>
 
 </h2>
 
 
-  <div class="doc doc-contents ">
-  
-      <p>A deep copy this vector.</p>
+    <div class="doc doc-contents ">
 
-          <details class="quote">
-            <summary>Source code in <code>threebrainpy/core/vec3.py</code></summary>
-            <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">332</span>
-<span class="normal">333</span>
+        <p>A deep copy this vector.</p>
+
+            <details class="quote">
+              <summary>Source code in <code>threebrainpy/core/vec3.py</code></summary>
+              <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">333</span>
 <span class="normal">334</span>
 <span class="normal">335</span>
-<span class="normal">336</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span> <span class="nf">copy</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="normal">336</span>
+<span class="normal">337</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span><span class="w"> </span><span class="nf">copy</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&#39;&#39;&#39;</span>
 <span class="sd">    A deep copy this vector.</span>
 <span class="sd">    &#39;&#39;&#39;</span>
     <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">__copy__</span><span class="p">()</span>
 </code></pre></div></td></tr></table></div>
-          </details>
-  </div>
+            </details>
+    </div>
 
 </div>
-
 
 <div class="doc doc-object doc-function">
 
 
-
-
 <h2 id="threebrainpy.core.vec3.Vec3.copyFrom" class="doc doc-heading">
-          <code class="highlight language-python"><span class="n">copyFrom</span><span class="p">(</span><span class="n">other</span><span class="p">)</span></code>
+            <code class="highlight language-python"><span class="n">copyFrom</span><span class="p">(</span><span class="n">other</span><span class="p">)</span></code>
 
 </h2>
 
 
-  <div class="doc doc-contents ">
-  
-      <p>Copy (in-place) the value of this vector from another vector or a list/tuple/array of 3 numbers.
+    <div class="doc doc-contents ">
+
+        <p>Copy (in-place) the value of this vector from another vector or a list/tuple/array of 3 numbers.
 Args:
     other Vec3 | list | tuple | np.ndarray : The other vector or a list/tuple/array of 3 numbers.</p>
 
-          <details class="quote">
-            <summary>Source code in <code>threebrainpy/core/vec3.py</code></summary>
-            <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">153</span>
-<span class="normal">154</span>
+            <details class="quote">
+              <summary>Source code in <code>threebrainpy/core/vec3.py</code></summary>
+              <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">154</span>
 <span class="normal">155</span>
 <span class="normal">156</span>
 <span class="normal">157</span>
@@ -1691,7 +1760,8 @@ Args:
 <span class="normal">166</span>
 <span class="normal">167</span>
 <span class="normal">168</span>
-<span class="normal">169</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span> <span class="nf">copyFrom</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">other</span><span class="p">):</span>
+<span class="normal">169</span>
+<span class="normal">170</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span><span class="w"> </span><span class="nf">copyFrom</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">other</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&#39;&#39;&#39;</span>
 <span class="sd">    Copy (in-place) the value of this vector from another vector or a list/tuple/array of 3 numbers.</span>
 <span class="sd">    Args:</span>
@@ -1709,35 +1779,31 @@ Args:
     <span class="bp">self</span><span class="o">.</span><span class="n">_xyz</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span> <span class="o">=</span> <span class="n">other</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span>
     <span class="k">return</span> <span class="bp">self</span>
 </code></pre></div></td></tr></table></div>
-          </details>
-  </div>
+            </details>
+    </div>
 
 </div>
-
 
 <div class="doc doc-object doc-function">
 
 
-
-
 <h2 id="threebrainpy.core.vec3.Vec3.distanceTo" class="doc doc-heading">
-          <code class="highlight language-python"><span class="n">distanceTo</span><span class="p">(</span><span class="n">vec3</span><span class="p">)</span></code>
+            <code class="highlight language-python"><span class="n">distanceTo</span><span class="p">(</span><span class="n">vec3</span><span class="p">)</span></code>
 
 </h2>
 
 
-  <div class="doc doc-contents ">
-  
-      <p>Calculate the distance to another vector.
+    <div class="doc doc-contents ">
+
+        <p>Calculate the distance to another vector.
 Args:
     vec3 Vec3: Another vector.
 Returns:
     float: The L2 distance to the other vector.</p>
 
-          <details class="quote">
-            <summary>Source code in <code>threebrainpy/core/vec3.py</code></summary>
-            <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">278</span>
-<span class="normal">279</span>
+            <details class="quote">
+              <summary>Source code in <code>threebrainpy/core/vec3.py</code></summary>
+              <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">279</span>
 <span class="normal">280</span>
 <span class="normal">281</span>
 <span class="normal">282</span>
@@ -1753,7 +1819,8 @@ Returns:
 <span class="normal">292</span>
 <span class="normal">293</span>
 <span class="normal">294</span>
-<span class="normal">295</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span> <span class="nf">distanceTo</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">vec3</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">float</span><span class="p">:</span>
+<span class="normal">295</span>
+<span class="normal">296</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span><span class="w"> </span><span class="nf">distanceTo</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">vec3</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">float</span><span class="p">:</span>
 <span class="w">    </span><span class="sd">&#39;&#39;&#39;</span>
 <span class="sd">    Calculate the distance to another vector.</span>
 <span class="sd">    Args:</span>
@@ -1772,35 +1839,31 @@ Returns:
     <span class="k">else</span><span class="p">:</span>
         <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Vec3 distanceTo: vec3 must be a Vec3, but got </span><span class="si">{</span><span class="n">vec3</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
 </code></pre></div></td></tr></table></div>
-          </details>
-  </div>
+            </details>
+    </div>
 
 </div>
-
 
 <div class="doc doc-object doc-function">
 
 
-
-
 <h2 id="threebrainpy.core.vec3.Vec3.distanceToSquared" class="doc doc-heading">
-          <code class="highlight language-python"><span class="n">distanceToSquared</span><span class="p">(</span><span class="n">vec3</span><span class="p">)</span></code>
+            <code class="highlight language-python"><span class="n">distanceToSquared</span><span class="p">(</span><span class="n">vec3</span><span class="p">)</span></code>
 
 </h2>
 
 
-  <div class="doc doc-contents ">
-  
-      <p>Calculate the squared distance to another vector.
+    <div class="doc doc-contents ">
+
+        <p>Calculate the squared distance to another vector.
 Args:
     vec3 Vec3: Another vector.
 Returns:
     float: The squared L2 distance to the other vector.</p>
 
-          <details class="quote">
-            <summary>Source code in <code>threebrainpy/core/vec3.py</code></summary>
-            <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">297</span>
-<span class="normal">298</span>
+            <details class="quote">
+              <summary>Source code in <code>threebrainpy/core/vec3.py</code></summary>
+              <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">298</span>
 <span class="normal">299</span>
 <span class="normal">300</span>
 <span class="normal">301</span>
@@ -1816,7 +1879,8 @@ Returns:
 <span class="normal">311</span>
 <span class="normal">312</span>
 <span class="normal">313</span>
-<span class="normal">314</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span> <span class="nf">distanceToSquared</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">vec3</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">float</span><span class="p">:</span>
+<span class="normal">314</span>
+<span class="normal">315</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span><span class="w"> </span><span class="nf">distanceToSquared</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">vec3</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">float</span><span class="p">:</span>
 <span class="w">    </span><span class="sd">&#39;&#39;&#39;</span>
 <span class="sd">    Calculate the squared distance to another vector.</span>
 <span class="sd">    Args:</span>
@@ -1835,35 +1899,31 @@ Returns:
     <span class="k">else</span><span class="p">:</span>
         <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Vec3 distanceToSquared: vec3 must be a Vec3, but got </span><span class="si">{</span><span class="n">vec3</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
 </code></pre></div></td></tr></table></div>
-          </details>
-  </div>
+            </details>
+    </div>
 
 </div>
-
 
 <div class="doc doc-object doc-function">
 
 
-
-
 <h2 id="threebrainpy.core.vec3.Vec3.dot" class="doc doc-heading">
-          <code class="highlight language-python"><span class="n">dot</span><span class="p">(</span><span class="n">vec3</span><span class="p">)</span></code>
+            <code class="highlight language-python"><span class="n">dot</span><span class="p">(</span><span class="n">vec3</span><span class="p">)</span></code>
 
 </h2>
 
 
-  <div class="doc doc-contents ">
-  
-      <p>Dot-product another vector to this vector.
+    <div class="doc doc-contents ">
+
+        <p>Dot-product another vector to this vector.
 Args:
     vec3 Vec3: Another vector.
 Returns:
     float: The dot product of this vector and the other vector.</p>
 
-          <details class="quote">
-            <summary>Source code in <code>threebrainpy/core/vec3.py</code></summary>
-            <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">218</span>
-<span class="normal">219</span>
+            <details class="quote">
+              <summary>Source code in <code>threebrainpy/core/vec3.py</code></summary>
+              <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">219</span>
 <span class="normal">220</span>
 <span class="normal">221</span>
 <span class="normal">222</span>
@@ -1875,7 +1935,8 @@ Returns:
 <span class="normal">228</span>
 <span class="normal">229</span>
 <span class="normal">230</span>
-<span class="normal">231</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span> <span class="nf">dot</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">vec3</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">float</span><span class="p">:</span>
+<span class="normal">231</span>
+<span class="normal">232</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span><span class="w"> </span><span class="nf">dot</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">vec3</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">float</span><span class="p">:</span>
 <span class="w">    </span><span class="sd">&#39;&#39;&#39;</span>
 <span class="sd">    Dot-product another vector to this vector.</span>
 <span class="sd">    Args:</span>
@@ -1890,38 +1951,35 @@ Returns:
     <span class="k">else</span><span class="p">:</span>
         <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Vec3 dot: vec3 must be a Vec3, but got </span><span class="si">{</span><span class="n">vec3</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
 </code></pre></div></td></tr></table></div>
-          </details>
-  </div>
+            </details>
+    </div>
 
 </div>
-
 
 <div class="doc doc-object doc-function">
 
 
-
-
 <h2 id="threebrainpy.core.vec3.Vec3.length" class="doc doc-heading">
-          <code class="highlight language-python"><span class="n">length</span><span class="p">()</span></code>
+            <code class="highlight language-python"><span class="n">length</span><span class="p">()</span></code>
 
 </h2>
 
 
-  <div class="doc doc-contents ">
-  
-      <p>Get the length of this vector.
+    <div class="doc doc-contents ">
+
+        <p>Get the length of this vector.
 Returns:
     float: The length of this vector.</p>
 
-          <details class="quote">
-            <summary>Source code in <code>threebrainpy/core/vec3.py</code></summary>
-            <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">258</span>
-<span class="normal">259</span>
+            <details class="quote">
+              <summary>Source code in <code>threebrainpy/core/vec3.py</code></summary>
+              <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">259</span>
 <span class="normal">260</span>
 <span class="normal">261</span>
 <span class="normal">262</span>
 <span class="normal">263</span>
-<span class="normal">264</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span> <span class="nf">length</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">float</span><span class="p">:</span>
+<span class="normal">264</span>
+<span class="normal">265</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span><span class="w"> </span><span class="nf">length</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">float</span><span class="p">:</span>
 <span class="w">    </span><span class="sd">&#39;&#39;&#39;</span>
 <span class="sd">    Get the length of this vector.</span>
 <span class="sd">    Returns:</span>
@@ -1929,33 +1987,29 @@ Returns:
 <span class="sd">    &#39;&#39;&#39;</span>
     <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_xyz</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">*</span> <span class="bp">self</span><span class="o">.</span><span class="n">_xyz</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">_xyz</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">*</span> <span class="bp">self</span><span class="o">.</span><span class="n">_xyz</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">_xyz</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span> <span class="o">*</span> <span class="bp">self</span><span class="o">.</span><span class="n">_xyz</span><span class="p">[</span><span class="mi">2</span><span class="p">])</span>
 </code></pre></div></td></tr></table></div>
-          </details>
-  </div>
+            </details>
+    </div>
 
 </div>
-
 
 <div class="doc doc-object doc-function">
 
 
-
-
 <h2 id="threebrainpy.core.vec3.Vec3.multiplyScalar" class="doc doc-heading">
-          <code class="highlight language-python"><span class="n">multiplyScalar</span><span class="p">(</span><span class="n">scalar</span><span class="p">)</span></code>
+            <code class="highlight language-python"><span class="n">multiplyScalar</span><span class="p">(</span><span class="n">scalar</span><span class="p">)</span></code>
 
 </h2>
 
 
-  <div class="doc doc-contents ">
-  
-      <p>Multiply this vector by a scalar in-place.
+    <div class="doc doc-contents ">
+
+        <p>Multiply this vector by a scalar in-place.
 Args:
     scalar float: A scalar.</p>
 
-          <details class="quote">
-            <summary>Source code in <code>threebrainpy/core/vec3.py</code></summary>
-            <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">233</span>
-<span class="normal">234</span>
+            <details class="quote">
+              <summary>Source code in <code>threebrainpy/core/vec3.py</code></summary>
+              <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">234</span>
 <span class="normal">235</span>
 <span class="normal">236</span>
 <span class="normal">237</span>
@@ -1963,7 +2017,8 @@ Args:
 <span class="normal">239</span>
 <span class="normal">240</span>
 <span class="normal">241</span>
-<span class="normal">242</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span> <span class="nf">multiplyScalar</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">scalar</span><span class="p">):</span>
+<span class="normal">242</span>
+<span class="normal">243</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span><span class="w"> </span><span class="nf">multiplyScalar</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">scalar</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&#39;&#39;&#39;</span>
 <span class="sd">    Multiply this vector by a scalar in-place.</span>
 <span class="sd">    Args:</span>
@@ -1974,31 +2029,27 @@ Args:
     <span class="bp">self</span><span class="o">.</span><span class="n">_xyz</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span> <span class="o">*=</span> <span class="n">scalar</span>
     <span class="k">return</span> <span class="bp">self</span>
 </code></pre></div></td></tr></table></div>
-          </details>
-  </div>
+            </details>
+    </div>
 
 </div>
-
 
 <div class="doc doc-object doc-function">
 
 
-
-
 <h2 id="threebrainpy.core.vec3.Vec3.normalize" class="doc doc-heading">
-          <code class="highlight language-python"><span class="n">normalize</span><span class="p">()</span></code>
+            <code class="highlight language-python"><span class="n">normalize</span><span class="p">()</span></code>
 
 </h2>
 
 
-  <div class="doc doc-contents ">
-  
-      <p>Normalize this vector in-place.</p>
+    <div class="doc doc-contents ">
 
-          <details class="quote">
-            <summary>Source code in <code>threebrainpy/core/vec3.py</code></summary>
-            <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">266</span>
-<span class="normal">267</span>
+        <p>Normalize this vector in-place.</p>
+
+            <details class="quote">
+              <summary>Source code in <code>threebrainpy/core/vec3.py</code></summary>
+              <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">267</span>
 <span class="normal">268</span>
 <span class="normal">269</span>
 <span class="normal">270</span>
@@ -2007,7 +2058,8 @@ Args:
 <span class="normal">273</span>
 <span class="normal">274</span>
 <span class="normal">275</span>
-<span class="normal">276</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span> <span class="nf">normalize</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="normal">276</span>
+<span class="normal">277</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span><span class="w"> </span><span class="nf">normalize</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&#39;&#39;&#39;</span>
 <span class="sd">    Normalize this vector in-place.</span>
 <span class="sd">    &#39;&#39;&#39;</span>
@@ -2019,35 +2071,31 @@ Args:
     <span class="bp">self</span><span class="o">.</span><span class="n">_xyz</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span> <span class="o">/=</span> <span class="n">l</span>
     <span class="k">return</span> <span class="bp">self</span>
 </code></pre></div></td></tr></table></div>
-          </details>
-  </div>
+            </details>
+    </div>
 
 </div>
-
 
 <div class="doc doc-object doc-function">
 
 
-
-
 <h2 id="threebrainpy.core.vec3.Vec3.set" class="doc doc-heading">
-          <code class="highlight language-python"><span class="nb">set</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">z</span><span class="p">)</span></code>
+            <code class="highlight language-python"><span class="nb">set</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">z</span><span class="p">)</span></code>
 
 </h2>
 
 
-  <div class="doc doc-contents ">
-  
-      <p>Set the value of this vector in-place.
+    <div class="doc doc-contents ">
+
+        <p>Set the value of this vector in-place.
 Args:
     x: x coordinate.
     y: y coordinate.
     z: z coordinate.</p>
 
-          <details class="quote">
-            <summary>Source code in <code>threebrainpy/core/vec3.py</code></summary>
-            <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">316</span>
-<span class="normal">317</span>
+            <details class="quote">
+              <summary>Source code in <code>threebrainpy/core/vec3.py</code></summary>
+              <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">317</span>
 <span class="normal">318</span>
 <span class="normal">319</span>
 <span class="normal">320</span>
@@ -2057,7 +2105,8 @@ Args:
 <span class="normal">324</span>
 <span class="normal">325</span>
 <span class="normal">326</span>
-<span class="normal">327</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span> <span class="nf">set</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">x</span> <span class="p">:</span> <span class="nb">float</span><span class="p">,</span> <span class="n">y</span> <span class="p">:</span> <span class="nb">float</span><span class="p">,</span> <span class="n">z</span> <span class="p">:</span> <span class="nb">float</span><span class="p">):</span>
+<span class="normal">327</span>
+<span class="normal">328</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span><span class="w"> </span><span class="nf">set</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">x</span> <span class="p">:</span> <span class="nb">float</span><span class="p">,</span> <span class="n">y</span> <span class="p">:</span> <span class="nb">float</span><span class="p">,</span> <span class="n">z</span> <span class="p">:</span> <span class="nb">float</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&#39;&#39;&#39;</span>
 <span class="sd">    Set the value of this vector in-place.</span>
 <span class="sd">    Args:</span>
@@ -2070,33 +2119,29 @@ Args:
     <span class="bp">self</span><span class="o">.</span><span class="n">_xyz</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span> <span class="o">=</span> <span class="n">z</span>
     <span class="k">return</span> <span class="bp">self</span>
 </code></pre></div></td></tr></table></div>
-          </details>
-  </div>
+            </details>
+    </div>
 
 </div>
-
 
 <div class="doc doc-object doc-function">
 
 
-
-
 <h2 id="threebrainpy.core.vec3.Vec3.sub" class="doc doc-heading">
-          <code class="highlight language-python"><span class="n">sub</span><span class="p">(</span><span class="n">vec3</span><span class="p">)</span></code>
+            <code class="highlight language-python"><span class="n">sub</span><span class="p">(</span><span class="n">vec3</span><span class="p">)</span></code>
 
 </h2>
 
 
-  <div class="doc doc-contents ">
-  
-      <p>Subtract another vector to this vector in-place.
+    <div class="doc doc-contents ">
+
+        <p>Subtract another vector to this vector in-place.
 Args:
     vec3 Vec3: Another vector.</p>
 
-          <details class="quote">
-            <summary>Source code in <code>threebrainpy/core/vec3.py</code></summary>
-            <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">202</span>
-<span class="normal">203</span>
+            <details class="quote">
+              <summary>Source code in <code>threebrainpy/core/vec3.py</code></summary>
+              <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">203</span>
 <span class="normal">204</span>
 <span class="normal">205</span>
 <span class="normal">206</span>
@@ -2109,7 +2154,8 @@ Args:
 <span class="normal">213</span>
 <span class="normal">214</span>
 <span class="normal">215</span>
-<span class="normal">216</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span> <span class="nf">sub</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">vec3</span><span class="p">):</span>
+<span class="normal">216</span>
+<span class="normal">217</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span><span class="w"> </span><span class="nf">sub</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">vec3</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&#39;&#39;&#39;</span>
 <span class="sd">    Subtract another vector to this vector in-place.</span>
 <span class="sd">    Args:</span>
@@ -2125,40 +2171,37 @@ Args:
         <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Vec3 sub: vec3 must be a Vec3, but got </span><span class="si">{</span><span class="n">vec3</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
     <span class="k">return</span> <span class="bp">self</span>
 </code></pre></div></td></tr></table></div>
-          </details>
-  </div>
+            </details>
+    </div>
 
 </div>
-
 
 <div class="doc doc-object doc-function">
 
 
-
-
 <h2 id="threebrainpy.core.vec3.Vec3.to_list" class="doc doc-heading">
-          <code class="highlight language-python"><span class="n">to_list</span><span class="p">()</span></code>
+            <code class="highlight language-python"><span class="n">to_list</span><span class="p">()</span></code>
 
 </h2>
 
 
-  <div class="doc doc-contents ">
-  
-      <p>Convert this vector into a list of 3 numbers.
+    <div class="doc doc-contents ">
+
+        <p>Convert this vector into a list of 3 numbers.
 When the point is invalid, a list of 3 <code>9999.0</code> will be returned. 
 Points that far will be be rendered in the viewer</p>
 
-          <details class="quote">
-            <summary>Source code in <code>threebrainpy/core/vec3.py</code></summary>
-            <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">137</span>
-<span class="normal">138</span>
+            <details class="quote">
+              <summary>Source code in <code>threebrainpy/core/vec3.py</code></summary>
+              <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">138</span>
 <span class="normal">139</span>
 <span class="normal">140</span>
 <span class="normal">141</span>
 <span class="normal">142</span>
 <span class="normal">143</span>
 <span class="normal">144</span>
-<span class="normal">145</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span> <span class="nf">to_list</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="normal">145</span>
+<span class="normal">146</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span><span class="w"> </span><span class="nf">to_list</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&#39;&#39;&#39;</span>
 <span class="sd">    Convert this vector into a list of 3 numbers.</span>
 <span class="sd">    When the point is invalid, a list of 3 `9999.0` will be returned. </span>
@@ -2168,41 +2211,38 @@ Points that far will be be rendered in the viewer</p>
         <span class="k">return</span> <span class="p">[</span><span class="mf">9999.0</span><span class="p">,</span> <span class="mf">9999.0</span><span class="p">,</span> <span class="mf">9999.0</span><span class="p">]</span>
     <span class="k">return</span> <span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">x</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">y</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">z</span><span class="p">]</span>
 </code></pre></div></td></tr></table></div>
-          </details>
-  </div>
+            </details>
+    </div>
 
 </div>
-
 
 <div class="doc doc-object doc-function">
 
 
-
-
 <h2 id="threebrainpy.core.vec3.Vec3.to_tuple" class="doc doc-heading">
-          <code class="highlight language-python"><span class="n">to_tuple</span><span class="p">()</span></code>
+            <code class="highlight language-python"><span class="n">to_tuple</span><span class="p">()</span></code>
 
 </h2>
 
 
-  <div class="doc doc-contents ">
-  
-      <p>Convert this vector into a tuple of 3 numbers.</p>
+    <div class="doc doc-contents ">
 
-          <details class="quote">
-            <summary>Source code in <code>threebrainpy/core/vec3.py</code></summary>
-            <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">147</span>
-<span class="normal">148</span>
+        <p>Convert this vector into a tuple of 3 numbers.</p>
+
+            <details class="quote">
+              <summary>Source code in <code>threebrainpy/core/vec3.py</code></summary>
+              <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">148</span>
 <span class="normal">149</span>
 <span class="normal">150</span>
-<span class="normal">151</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span> <span class="nf">to_tuple</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="normal">151</span>
+<span class="normal">152</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span><span class="w"> </span><span class="nf">to_tuple</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&#39;&#39;&#39;</span>
 <span class="sd">    Convert this vector into a tuple of 3 numbers.</span>
 <span class="sd">    &#39;&#39;&#39;</span>
     <span class="k">return</span> <span class="nb">tuple</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_xyz</span><span class="p">[:</span><span class="mi">3</span><span class="p">])</span>
 </code></pre></div></td></tr></table></div>
-          </details>
-  </div>
+            </details>
+    </div>
 
 </div>
 
@@ -2210,9 +2250,16 @@ Points that far will be be rendered in the viewer</p>
 
   </div>
 
-  </div>
+    </div>
 
 </div>
+
+
+
+
+
+
+
 
 
 
@@ -2223,6 +2270,7 @@ Points that far will be be rendered in the viewer</p>
             </div>
           
           
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
         </div>
         
       </main>
@@ -2250,10 +2298,11 @@ Points that far will be be rendered in the viewer</p>
       <div class="md-dialog__inner md-typeset"></div>
     </div>
     
-    <script id="__config" type="application/json">{"base": "..", "features": [], "search": "../assets/javascripts/workers/search.dfff1995.min.js", "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}}</script>
+    
+    <script id="__config" type="application/json">{"base": "..", "features": [], "search": "../assets/javascripts/workers/search.f8cc74c7.min.js", "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}}</script>
     
     
-      <script src="../assets/javascripts/bundle.78eede0e.min.js"></script>
+      <script src="../assets/javascripts/bundle.60a45f97.min.js"></script>
       
     
   </body>
