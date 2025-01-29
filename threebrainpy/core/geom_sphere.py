@@ -91,7 +91,7 @@ class ElectrodeSphere(GeometryTemplate):
         return self._sphere_position.copy()
     @property
     def type(self):
-        return "sphere"
+        return "electrode"
     @property
     def is_electrode(self):
         '''
