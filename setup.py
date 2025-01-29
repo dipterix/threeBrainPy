@@ -20,7 +20,7 @@ def get_version(rel_path: str) -> str:
 setup(
       name='threebrainpy',
       version=get_version("threebrainpy/_version.py"),
-      description='Your Advanced Electrode Localizer Viewer for Python',
+      description='Your Advanced Brain Viewer for Python',
       long_description=long_description,
       long_description_content_type="text/markdown; charset=UTF-8; variant=GFM",
       url='https://github.com/dipterix/threeBrainPy',

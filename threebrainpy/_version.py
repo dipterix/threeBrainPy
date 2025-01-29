@@ -1,3 +1,3 @@
-__version__='0.1.1'
+__version__='0.1.2'
 __author__='Zhengjia Wang'
-NPM_PACKAGE_RANGE='^0.1.1'
+NPM_PACKAGE_RANGE='^0.1.2'
