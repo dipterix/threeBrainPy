@@ -65,3 +65,17 @@ mkdocs gh-deploy
 ## Why not `conda`
 
 I don't know how to set up `.vscode` preferences for conda. If you know how to, please help :)
+
+<!--
+
+Note for myself:
+
+To update the package on `testpypi`, run the following commands:
+
+```sh
+python3 -m pip install --upgrade build twine
+python3 -m build
+python3 -m twine upload --repository testpypi dist/*
+```
+
+-->
